@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pollygram Control · Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin-dashboard.css">
+</head>
+<body class="adm-body">
+  <!-- Login -->
+  <section class="adm-login" id="loginScreen">
+    <div class="adm-login-card">
+      <div class="adm-login-brand">POLLYGRAM</div>
+      <div class="adm-login-sub">Sports supply · Admin</div>
+      <div class="adm-field">
+        <label class="adm-label" for="adminEmail">Admin email</label>
+        <input id="adminEmail" class="adm-input" type="email" autocomplete="username" placeholder="you@organisation.com">
+      </div>
+      <div class="adm-field">
+        <label class="adm-label" for="adminPassword">Password</label>
+        <input id="adminPassword" class="adm-input" type="password" autocomplete="current-password" placeholder="Supabase Auth password">
+      </div>
+      <button id="loginBtn" type="button" class="adm-btn adm-btn-primary" style="width:100%;margin-top:8px;">Sign in with Supabase</button>
+      <div id="loginError" class="adm-login-error"></div>
+      <p id="loginHint" class="adm-note">
+        No passwords are stored in this file. Create an admin user in Supabase Auth and grant authenticated access to <code>site_content</code> and <code>leads</code> (run <code>supabase/leads_schema.sql</code> for the Leads &amp; Sales CRM).
+      </p>
+      <button type="button" id="demoContinueBtn" class="adm-btn adm-btn-ghost" style="width:100%;margin-top:12px;">Continue in offline demo</button>
+    </div>
+  </section>
+
+  <div class="adm-app adm-hidden" id="adminApp">
+    <aside class="adm-sidebar" id="admSidebar" aria-label="Main navigation">
+      <div class="adm-sidebar-brand">
+        <div class="adm-sidebar-brand-line">Pollygram</div>
+        <div class="adm-sidebar-brand-sub">Control centre</div>
+      </div>
+      <div class="adm-nav-section-label">Menu</div>
+      <button type="button" class="adm-nav-btn active" data-tab="dashboard">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9M10 19V5M16 19v-6M22 19V12"/></svg>
+        Dashboard
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="homepage">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+        Homepage
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="products">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="16"/><rect x="14" y="4" width="7" height="10"/></svg>
+        Products
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="categories">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        Categories
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="testimonials">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4z"/></svg>
+        Testimonials
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="promotions">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17.8 5.7 21l2.3-7-6-4.6h7.6L12 2z"/></svg>
+        Promotions
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="leads">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11V6a3 3 0 016 0v5M5 10h14v10a2 2 0 01-2 2H7a2 2 0 01-2-2V10z"/></svg>
+        Leads &amp; Sales
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="contact">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Contact Info
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="seo">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        SEO &amp; Social
+      </button>
+      <button type="button" class="adm-nav-btn" data-tab="settings">
+        <svg class="adm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        Settings
+      </button>
+    </aside>
+
+    <header class="adm-topbar">
+      <button type="button" class="adm-sidebar-toggle" id="admSidebarToggle" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="adm-topbar-title" id="admTopbarTitle">Dashboard</div>
+      <div class="adm-topbar-actions">
+        <span id="admDemoPill" class="adm-demo-pill adm-hidden">Demo</span>
+        <a class="adm-btn adm-btn-ghost" href="index.html" target="_blank" rel="noopener">Live site</a>
+        <button type="button" class="adm-btn adm-btn-ghost" id="logoutBtn">Log out</button>
+      </div>
+    </header>
+
+    <main class="adm-main" id="admMain">
+      <div id="demoAlert" class="adm-alert adm-hidden">Offline demo — Supabase not configured. Saves are simulated for this browser session only.</div>
+
+      <!-- Dashboard -->
+      <section class="adm-panel active" id="tab-dashboard" data-panel-title="Dashboard">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Overview</h1>
+          <p class="adm-page-desc">Quick snapshot of your catalogue, campaigns, and inbound interest.</p>
+        </div>
+        <div class="adm-metrics">
+          <div class="adm-metric">
+            <div class="adm-metric-label">Catalogue products</div>
+            <div class="adm-metric-value" id="metricProducts">—</div>
+            <div class="adm-metric-hint">Managed in Products</div>
+          </div>
+          <div class="adm-metric">
+            <div class="adm-metric-label">WhatsApp enquiries</div>
+            <div class="adm-metric-value" id="metricLeads">—</div>
+            <div class="adm-metric-hint">Rows loaded from Supabase</div>
+          </div>
+          <div class="adm-metric">
+            <div class="adm-metric-label">Active promotions</div>
+            <div class="adm-metric-value" id="metricPromos">—</div>
+            <div class="adm-metric-hint">Flagged campaigns</div>
+          </div>
+          <div class="adm-metric">
+            <div class="adm-metric-label">Last updated</div>
+            <div class="adm-metric-value" style="font-size:1.1rem;" id="metricSaved">—</div>
+            <div class="adm-metric-hint">Last successful save</div>
+          </div>
+          <div class="adm-metric">
+            <div class="adm-metric-label">Featured category</div>
+            <div class="adm-metric-value" style="font-size:1.15rem;" id="metricFeatCat">—</div>
+            <div class="adm-metric-hint">First tab after “All”</div>
+          </div>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">WhatsApp quick replies</div>
+          <p class="adm-note" style="margin-bottom:12px;">Opens WhatsApp with your configured business line (after save / sync).</p>
+          <div class="adm-wa-quick" id="waQuickRow"></div>
+        </div>
+      </section>
+
+      <!-- Homepage -->
+      <section class="adm-panel" id="tab-homepage" data-panel-title="Homepage">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Homepage</h1>
+          <p class="adm-page-desc">Hero story, calls-to-action, and trust strip shown above the fold.</p>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Brand</div>
+          <div class="adm-field"><label class="adm-label" for="inp-business_name">Business name</label><input id="inp-business_name" class="adm-input content-input" data-key="business_name" autocomplete="off"></div>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Hero</div>
+          <div class="adm-field"><label class="adm-label">Hero headline</label><textarea class="adm-textarea content-input" data-key="hero_headline" rows="3" placeholder="Plain text, line breaks OK"></textarea></div>
+          <div class="adm-field"><label class="adm-label">Hero subtitle</label><textarea class="adm-textarea content-input" data-key="hero_subtitle" rows="3"></textarea></div>
+          <div class="adm-grid-2">
+            <div class="adm-field"><label class="adm-label">Primary CTA label</label><input class="adm-input content-input" data-key="hero_cta_primary"></div>
+            <div class="adm-field"><label class="adm-label">WhatsApp button label</label><input class="adm-input content-input" data-key="hero_wa_label" placeholder="WhatsApp Order"></div>
+          </div>
+          <div class="adm-field"><label class="adm-label">Trust line (below subtitle)</label><input class="adm-input content-input" data-key="hero_trust_line" placeholder="Nationwide delivery · …"></div>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Trust strip (4 items)</div>
+          <div class="adm-grid-2">
+            <div class="adm-field"><label class="adm-label">Line 1</label><input class="adm-input content-input" data-key="trust_strip_1"></div>
+            <div class="adm-field"><label class="adm-label">Line 2</label><input class="adm-input content-input" data-key="trust_strip_2"></div>
+            <div class="adm-field"><label class="adm-label">Line 3</label><input class="adm-input content-input" data-key="trust_strip_3"></div>
+            <div class="adm-field"><label class="adm-label">Line 4</label><input class="adm-input content-input" data-key="trust_strip_4"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products -->
+      <section class="adm-panel" id="tab-products" data-panel-title="Products">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Product catalogue</h1>
+          <p class="adm-page-desc">Products are grouped by category for faster editing. Order in each list matches your live catalogue (first items sync to featured slots).</p>
+        </div>
+        <div class="adm-product-toolbar">
+          <button type="button" class="adm-btn adm-btn-primary adm-btn-xs" id="admAddProduct">+ Add product</button>
+          <p class="adm-product-toolbar-hint">Use category sections below — add from a section header to pre-fill that category.</p>
+        </div>
+        <div class="adm-product-filters" id="admProductFilters">
+          <label class="adm-product-search-label">
+            <span class="adm-label adm-product-search-label__text">Search products</span>
+            <input type="search" id="admProductSearch" class="adm-input adm-product-search" placeholder="Search by name or category…" autocomplete="off">
+          </label>
+          <div class="adm-product-filter-pills" id="admProductFilterPills" role="tablist" aria-label="Filter by category"></div>
+        </div>
+        <div class="adm-product-inventory" id="admProductInventory">
+          <div id="admProductList" class="adm-product-list adm-product-list--by-category"></div>
+        </div>
+      </section>
+
+      <!-- Categories -->
+      <section class="adm-panel" id="tab-categories" data-panel-title="Categories">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Categories</h1>
+          <p class="adm-page-desc">Filters on the shop grid and tab bar. Slug must match product <code>category</code> values.</p>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Category tabs</div>
+          <div id="admCategoryList"></div>
+          <button type="button" class="adm-btn adm-btn-primary adm-btn-xs" id="admAddCategory" style="margin-top:14px;">+ Add category</button>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="adm-panel" id="tab-testimonials" data-panel-title="Testimonials">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Testimonials</h1>
+          <p class="adm-page-desc">Shown on the homepage. Map to elements <code>t1-quote</code> … <code>t3</code>.</p>
+        </div>
+        <div class="adm-grid-3">
+          <div class="adm-card">
+            <div class="adm-card-title">Quote 1</div>
+            <textarea class="adm-textarea content-input" data-key="t1_quote" rows="4"></textarea>
+            <div class="adm-field"><label class="adm-label">Attribution</label><input class="adm-input content-input" data-key="t1_attrib"></div>
+          </div>
+          <div class="adm-card">
+            <div class="adm-card-title">Quote 2</div>
+            <textarea class="adm-textarea content-input" data-key="t2_quote" rows="4"></textarea>
+            <div class="adm-field"><label class="adm-label">Attribution</label><input class="adm-input content-input" data-key="t2_attrib"></div>
+          </div>
+          <div class="adm-card">
+            <div class="adm-card-title">Quote 3</div>
+            <textarea class="adm-textarea content-input" data-key="t3_quote" rows="4"></textarea>
+            <div class="adm-field"><label class="adm-label">Attribution</label><input class="adm-input content-input" data-key="t3_attrib"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Promotions -->
+      <section class="adm-panel" id="tab-promotions" data-panel-title="Promotions">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Promotions</h1>
+          <p class="adm-page-desc">Site-wide promo strip plus optional campaign cards for seasonal pushes.</p>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Promo bar (sticky top)</div>
+          <div class="adm-field"><label class="adm-label">Promo bar text</label><input class="adm-input content-input" data-key="promo_bar_text"></div>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Campaign highlights</div>
+          <div id="admPromoCampaigns"></div>
+          <button type="button" class="adm-btn adm-btn-primary adm-btn-xs" id="admAddPromo" style="margin-top:12px;">+ Add campaign</button>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">WhatsApp default intro</div>
+          <textarea class="adm-textarea content-input" data-key="wa_default_intro" rows="5" placeholder="Prefilled intro for WhatsApp links when set"></textarea>
+        </div>
+      </section>
+
+      <!-- Leads & Sales CRM -->
+      <section class="adm-panel" id="tab-leads" data-panel-title="Leads & Sales">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Leads &amp; sales</h1>
+          <p class="adm-page-desc">Institutional inquiries, WhatsApp intents, and quotation pipeline — synced from Supabase <code>leads</code>.</p>
+        </div>
+        <div id="admLeadNotifs" class="adm-lead-notifs adm-hidden" role="status" aria-live="polite"></div>
+        <div class="adm-sales-metrics">
+          <div class="adm-metric adm-metric--sales">
+            <div class="adm-metric-label">Total leads</div>
+            <div class="adm-metric-value" id="salesMetricTotal">—</div>
+          </div>
+          <div class="adm-metric adm-metric--sales">
+            <div class="adm-metric-label">New leads</div>
+            <div class="adm-metric-value" id="salesMetricNew">—</div>
+          </div>
+          <div class="adm-metric adm-metric--sales">
+            <div class="adm-metric-label">Quote sent</div>
+            <div class="adm-metric-value" id="salesMetricQuote">—</div>
+          </div>
+          <div class="adm-metric adm-metric--sales">
+            <div class="adm-metric-label">Negotiating</div>
+            <div class="adm-metric-value" id="salesMetricNeg">—</div>
+          </div>
+          <div class="adm-metric adm-metric--sales">
+            <div class="adm-metric-label">Won</div>
+            <div class="adm-metric-value" id="salesMetricWon">—</div>
+          </div>
+          <div class="adm-metric adm-metric--sales">
+            <div class="adm-metric-label">Lost</div>
+            <div class="adm-metric-value" id="salesMetricLost">—</div>
+          </div>
+        </div>
+        <div class="adm-leads-toolbar">
+          <div class="adm-leads-view-toggle" role="group" aria-label="View mode">
+            <button type="button" class="adm-btn adm-btn-xs adm-leads-view-btn active" data-leads-view="table">Table</button>
+            <button type="button" class="adm-btn adm-btn-xs adm-leads-view-btn" data-leads-view="kanban">Pipeline</button>
+          </div>
+          <div class="adm-leads-filters">
+            <label class="adm-filter-field"><span class="adm-filter-label">Status</span>
+              <select id="leadFilterStatus" class="adm-input adm-input--sm">
+                <option value="">All statuses</option>
+                <option value="new">New Lead</option>
+                <option value="contacted">Contacted</option>
+                <option value="quote_sent">Quote Sent</option>
+                <option value="negotiating">Negotiating</option>
+                <option value="won">Won</option>
+                <option value="lost">Lost</option>
+              </select>
+            </label>
+            <label class="adm-filter-field"><span class="adm-filter-label">Source</span>
+              <select id="leadFilterSource" class="adm-input adm-input--sm">
+                <option value="">All sources</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="institutional">Institutional form</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label class="adm-filter-field"><span class="adm-filter-label">Category</span>
+              <input type="search" id="leadFilterCategory" class="adm-input adm-input--sm" placeholder="e.g. football">
+            </label>
+            <label class="adm-filter-field"><span class="adm-filter-label">From</span>
+              <input type="date" id="leadFilterFrom" class="adm-input adm-input--sm">
+            </label>
+            <label class="adm-filter-field"><span class="adm-filter-label">To</span>
+              <input type="date" id="leadFilterTo" class="adm-input adm-input--sm">
+            </label>
+            <label class="adm-filter-field adm-filter-field--grow"><span class="adm-filter-label">Search</span>
+              <input type="search" class="adm-input adm-input--sm" id="leadSearch" placeholder="Name, institution, phone, products…">
+            </label>
+          </div>
+        </div>
+        <div class="adm-card adm-analytics-card">
+          <div class="adm-card-title">Product demand</div>
+          <div class="adm-analytics-grid">
+            <div>
+              <div class="adm-analytics-subtitle">Top requested products (from lead text)</div>
+              <ul class="adm-analytics-list" id="admTopProducts"></ul>
+            </div>
+            <div>
+              <div class="adm-analytics-subtitle">Categories</div>
+              <ul class="adm-analytics-list" id="admTopCategories"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="adm-revenue-grid">
+          <div class="adm-metric adm-metric--revenue">
+            <div class="adm-metric-label">Estimated pipeline (open)</div>
+            <div class="adm-metric-value" id="salesMetricEstOpen">—</div>
+          </div>
+          <div class="adm-metric adm-metric--revenue">
+            <div class="adm-metric-label">Won revenue (est.)</div>
+            <div class="adm-metric-value" id="salesMetricWonRev">—</div>
+          </div>
+          <div class="adm-metric adm-metric--revenue">
+            <div class="adm-metric-label">Pending quotations</div>
+            <div class="adm-metric-value" id="salesMetricPendingQuote">—</div>
+          </div>
+        </div>
+        <div id="admLeadsTableWrap" class="adm-table-wrap adm-leads-table-wrap">
+          <table class="adm-table adm-table--leads" id="admLeadsTable">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Institution</th>
+                <th>Products</th>
+                <th>Status</th>
+                <th>Value</th>
+                <th>Source</th>
+                <th>Date</th>
+                <th class="adm-th-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admLeadsBody"></tbody>
+          </table>
+        </div>
+        <div id="admLeadsKanbanWrap" class="adm-kanban-wrap adm-hidden" aria-label="Sales pipeline"></div>
+        <p id="leadsLoadMsg" class="adm-note" style="margin-top:12px;"></p>
+      </section>
+
+      <!-- Contact -->
+      <section class="adm-panel" id="tab-contact" data-panel-title="Contact Info">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Contact</h1>
+          <p class="adm-page-desc">Phone, WhatsApp number, and footer lines.</p>
+        </div>
+        <div class="adm-card">
+          <div class="adm-grid-2">
+            <div class="adm-field"><label class="adm-label">WhatsApp number (digits)</label><input class="adm-input content-input" data-key="whatsapp_number" placeholder="2547XXXXXXXX"></div>
+            <div class="adm-field"><label class="adm-label">Display phone</label><input class="adm-input content-input" data-key="phone"></div>
+            <div class="adm-field"><label class="adm-label">Address</label><input class="adm-input content-input" data-key="address"></div>
+            <div class="adm-field"><label class="adm-label">Hours</label><input class="adm-input content-input" data-key="hours"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO -->
+      <section class="adm-panel" id="tab-seo" data-panel-title="SEO & Social">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">SEO &amp; social</h1>
+          <p class="adm-page-desc">Meta tags and sharing previews. Bots may cache — redeploy and re-share after changes.</p>
+        </div>
+        <div class="adm-card">
+          <div class="adm-grid-2">
+            <div class="adm-field"><label class="adm-label">Meta title</label><input class="adm-input content-input" data-key="meta_title"></div>
+            <div class="adm-field"><label class="adm-label">Meta description</label><input class="adm-input content-input" data-key="meta_description"></div>
+            <div class="adm-field"><label class="adm-label">OG / page title</label><input class="adm-input content-input" data-key="og_title"></div>
+            <div class="adm-field"><label class="adm-label">OG description</label><input class="adm-input content-input" data-key="og_description"></div>
+            <div class="adm-field"><label class="adm-label">Canonical / OG URL</label><input class="adm-input content-input" data-key="og_url"></div>
+            <div class="adm-field"><label class="adm-label">OG image URL</label><input class="adm-input content-input" data-key="og_image_url"></div>
+          </div>
+          <div class="adm-seo-preview" id="seoPreview">
+            <div class="adm-seo-preview-url" id="seoPrevUrl">yoursite.com</div>
+            <div class="adm-seo-preview-title" id="seoPrevTitle">Page title</div>
+            <div class="adm-seo-preview-desc" id="seoPrevDesc">Description preview for search and social cards.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <section class="adm-panel" id="tab-settings" data-panel-title="Settings">
+        <div class="adm-page-head">
+          <h1 class="adm-page-title">Settings</h1>
+          <p class="adm-page-desc">Wholesale copy and database notes.</p>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Wholesale / institutional</div>
+          <textarea class="adm-textarea content-input" data-key="wholesale_description" rows="6"></textarea>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Leads table (Supabase)</div>
+          <p class="adm-note">Apply the full CRM schema from <code>supabase/leads_schema.sql</code> (pipeline stages, revenue fields, JSON timelines). Policies: public <code>insert</code> for storefront capture; authenticated <code>select</code> / <code>update</code> / <code>delete</code> for this admin.</p>
+          <pre style="font-size:11px;overflow:auto;background:#f1f5f9;color:#334155;padding:14px;border-radius:12px;border:1px solid #e2e8f0;margin-top:10px;line-height:1.45;">-- See supabase/leads_schema.sql in the repo for the complete script.</pre>
+        </div>
+      </section>
+    </main>
+
+    <div class="adm-sidebar-overlay" id="admSidebarOverlay" aria-hidden="true"></div>
+
+    <div class="adm-save-float">
+      <div class="adm-save-status" id="admSaveStatus">Saved</div>
+      <button type="button" class="adm-fab-save" id="admSaveFab" aria-label="Save all changes" title="Save all changes">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+      </button>
+    </div>
+
+    <!-- Product add/edit modal -->
+    <div id="productModal" class="adm-modal-root" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+      <div class="adm-modal-backdrop" id="productModalBackdrop" tabindex="-1"></div>
+      <div class="adm-modal">
+        <div class="adm-modal__header">
+          <div class="adm-modal__header-text">
+            <h2 id="productModalTitle" class="adm-modal__title">Add New Product</h2>
+            <p id="productModalSubtitle" class="adm-modal__subtitle">Fields sync to your storefront after you save the dashboard.</p>
+          </div>
+          <button type="button" class="adm-modal__close" id="productModalClose" aria-label="Close dialog">&times;</button>
+        </div>
+        <div class="adm-modal__body">
+          <p id="pmNameError" class="adm-field-error adm-hidden" role="alert">Product name is required.</p>
+          <div class="adm-field">
+            <label class="adm-label" for="pmName">Product name <span class="adm-req">*</span></label>
+            <input type="text" id="pmName" class="adm-input" autocomplete="off" placeholder="e.g. Match Football Size 5">
+          </div>
+          <div class="adm-modal-grid-2">
+            <div class="adm-field">
+              <label class="adm-label" for="pmCategory">Category</label>
+              <input type="text" id="pmCategory" class="adm-input" placeholder="football, gym, …" list="pmCategorySuggestions">
+              <datalist id="pmCategorySuggestions"></datalist>
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="pmPrice">Price</label>
+              <input type="text" id="pmPrice" class="adm-input" placeholder="KES 1,200">
+            </div>
+          </div>
+          <div class="adm-modal-grid-2">
+            <div class="adm-field">
+              <label class="adm-label" for="pmBadge">Badge</label>
+              <input type="text" id="pmBadge" class="adm-input" placeholder="Popular, New, …">
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="pmMoq">MOQ / unit</label>
+              <input type="text" id="pmMoq" class="adm-input" placeholder="Min 1">
+            </div>
+          </div>
+          <div class="adm-field">
+            <label class="adm-label" for="pmDesc">Description</label>
+            <textarea id="pmDesc" class="adm-textarea" rows="3" placeholder="Short catalogue description"></textarea>
+          </div>
+          <div class="adm-modal-grid-2">
+            <div class="adm-field">
+              <label class="adm-label" for="pmSku">SKU</label>
+              <input type="text" id="pmSku" class="adm-input" placeholder="Usually matches product id">
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="pmStock">Stock status</label>
+              <select id="pmStock" class="adm-input">
+                <option value="in_stock">In stock</option>
+                <option value="low_stock">Low stock</option>
+                <option value="out_of_stock">Out of stock</option>
+              </select>
+            </div>
+          </div>
+          <div class="adm-modal-grid-2">
+            <div class="adm-field">
+              <label class="adm-label" for="pmTags">Tags</label>
+              <input type="text" id="pmTags" class="adm-input" placeholder="school, training, league (comma-separated)">
+            </div>
+            <div class="adm-field adm-field--inline-check">
+              <label class="adm-label adm-label--checkbox" for="pmFeatured">
+                <input type="checkbox" id="pmFeatured"> Featured (storefront filter)
+              </label>
+            </div>
+          </div>
+          <div class="adm-modal-image-section">
+            <label class="adm-label">Image preview</label>
+            <div class="adm-modal-image-row">
+              <div id="pmImagePreview" class="adm-modal-preview" aria-live="polite">
+                <span class="adm-modal-preview-placeholder">Paste an image URL to preview</span>
+              </div>
+              <div class="adm-modal-image-fields">
+                <div class="adm-field">
+                  <label class="adm-label" for="pmImgUrl">Product image URL</label>
+                  <input type="url" id="pmImgUrl" class="adm-input" placeholder="https://… or /assets/…">
+                </div>
+                <div class="adm-field">
+                  <label class="adm-label" for="pmWebp">WebP URL (optional)</label>
+                  <input type="url" id="pmWebp" class="adm-input" placeholder="Optional WebP for faster loads">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="adm-field">
+            <label class="adm-label" for="pmWaPreset">WhatsApp preset message</label>
+            <textarea id="pmWaPreset" class="adm-textarea" rows="3" placeholder="Optional full message when customers tap WhatsApp on this product"></textarea>
+          </div>
+        </div>
+        <div class="adm-modal__footer">
+          <button type="button" class="adm-btn adm-btn-ghost" id="productModalCancel">Cancel</button>
+          <button type="button" class="adm-btn adm-btn-primary" id="productModalSave">Save product</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lead detail / edit (CRM) -->
+    <div id="leadDetailModal" class="adm-modal-root adm-modal-root--lead" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="leadDetailTitle">
+      <div class="adm-modal-backdrop" id="leadDetailBackdrop" tabindex="-1"></div>
+      <div class="adm-modal adm-modal--wide">
+        <div class="adm-modal__header">
+          <div class="adm-modal__header-text">
+            <h2 id="leadDetailTitle" class="adm-modal__title">Lead detail</h2>
+            <p class="adm-modal__subtitle" id="leadDetailSubtitle">Review inquiry and update pipeline stage.</p>
+          </div>
+          <button type="button" class="adm-modal__close" id="leadDetailClose" aria-label="Close">&times;</button>
+        </div>
+        <div class="adm-modal__body">
+          <input type="hidden" id="ldId">
+          <div class="adm-modal-grid-2">
+            <div class="adm-field">
+              <label class="adm-label" for="ldName">Contact name</label>
+              <input type="text" id="ldName" class="adm-input" readonly>
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="ldOrg">Institution</label>
+              <input type="text" id="ldOrg" class="adm-input" readonly>
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="ldPhone">Phone</label>
+              <input type="text" id="ldPhone" class="adm-input" readonly>
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="ldEmail">Email</label>
+              <input type="text" id="ldEmail" class="adm-input" readonly>
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="ldStatus">Pipeline status</label>
+              <select id="ldStatus" class="adm-input">
+                <option value="new">New Lead</option>
+                <option value="contacted">Contacted</option>
+                <option value="quote_sent">Quote Sent</option>
+                <option value="negotiating">Negotiating</option>
+                <option value="won">Won</option>
+                <option value="lost">Lost</option>
+              </select>
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="ldValue">Estimated value (KES)</label>
+              <input type="number" id="ldValue" class="adm-input" min="0" step="1" placeholder="0">
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="ldAssigned">Assigned to</label>
+              <input type="text" id="ldAssigned" class="adm-input" placeholder="Team member">
+            </div>
+            <div class="adm-field">
+              <label class="adm-label" for="ldCategory">Category</label>
+              <input type="text" id="ldCategory" class="adm-input" readonly>
+            </div>
+          </div>
+          <div class="adm-field">
+            <label class="adm-label" for="ldProducts">Products / scope</label>
+            <textarea id="ldProducts" class="adm-textarea" rows="2" readonly></textarea>
+          </div>
+          <div class="adm-field">
+            <label class="adm-label" for="ldMessage">Customer message</label>
+            <textarea id="ldMessage" class="adm-textarea" rows="2" readonly></textarea>
+          </div>
+          <div class="adm-field">
+            <label class="adm-label" for="ldNotes">Internal notes</label>
+            <textarea id="ldNotes" class="adm-textarea" rows="3" placeholder="Call notes, next step…"></textarea>
+          </div>
+          <div class="adm-field">
+            <label class="adm-label">Timeline</label>
+            <ul id="ldTimeline" class="adm-timeline"></ul>
+          </div>
+        </div>
+        <div class="adm-modal__footer adm-modal__footer--split">
+          <button type="button" class="adm-btn adm-btn-ghost adm-btn-danger-text" id="leadDetailDelete">Delete lead</button>
+          <div class="adm-modal__footer-right">
+            <a class="adm-btn adm-btn-primary adm-btn-xs" id="leadDetailWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+            <button type="button" class="adm-btn adm-btn-ghost" id="leadDetailCancel">Close</button>
+            <button type="button" class="adm-btn adm-btn-primary" id="leadDetailSave">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="assets/js/catalog-data.js"></script>
+  <script>
+(function () {
+  const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
+  const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const isDemoMode = SUPABASE_URL === 'YOUR_SUPABASE_PROJECT_URL';
+
+  const DEFAULT_CATEGORIES = (function () {
+    try {
+      if (typeof POLLYGRAM_CATEGORIES !== 'undefined' && Array.isArray(POLLYGRAM_CATEGORIES))
+        return JSON.parse(JSON.stringify(POLLYGRAM_CATEGORIES));
+    } catch (e) {}
+    return [
+      { slug: 'football', label: 'Football', order: 0 },
+      { slug: 'athletics', label: 'Athletics', order: 1 },
+      { slug: 'fitness', label: 'Fitness & PE', order: 2 },
+      { slug: 'uniforms', label: 'School uniforms', order: 3 },
+      { slug: 'wholesale', label: 'Bundles', order: 4 }
+    ];
+  })();
+
+  const INITIAL_PRODUCTS = (function () {
+    try {
+      if (
+        typeof POLLYGRAM_CATALOG !== 'undefined' &&
+        Array.isArray(POLLYGRAM_CATALOG) &&
+        POLLYGRAM_CATALOG.length
+      )
+        return JSON.parse(JSON.stringify(POLLYGRAM_CATALOG));
+    } catch (e) {}
+    return [
+      {
+        id: 'seed-1',
+        name: 'Match Football Size 5',
+        category: 'football',
+        category_label: 'Football',
+        price: 'KES 1,200',
+        badge: 'Popular',
+        desc: 'Durable PU stitched ball for school leagues and club training.',
+        moq: 'Min 1',
+        image_url: 'assets/images/products/kenya-grassroots-football-match.jpg',
+        image_webp: 'assets/images/products/kenya-grassroots-football-match.webp',
+        wa_preset: ''
+      },
+      {
+        id: 'seed-2',
+        name: 'Team Kit Set',
+        category: 'football',
+        category_label: 'Football',
+        price: 'KES 2,800',
+        badge: 'Custom',
+        desc: 'Jersey, shorts and socks with custom branding and numbering.',
+        moq: 'Min 10',
+        image_url: 'assets/images/products/east-africa-academy-football-team-kits.jpg',
+        image_webp: 'assets/images/products/east-africa-academy-football-team-kits.webp',
+        wa_preset: ''
+      }
+    ];
+  })();
+
+  const DEMO_LEADS = [
+    {
+      id: 'demo-1',
+      full_name: 'Jane Wanjiru',
+      organisation: 'Kiambu High School',
+      phone: '+254 712 000 001',
+      email: 'procurement@kiambuhigh.ac.ke',
+      products: 'Track spikes × 12; hurdles',
+      message: 'County athletics week — delivery before March.',
+      source: 'institutional_quote_form',
+      status: 'new',
+      estimated_value: 85000,
+      lead_category: 'athletics',
+      created_at: new Date(Date.now() - 3600000).toISOString(),
+      updated_at: new Date(Date.now() - 3600000).toISOString(),
+      timeline: [{ at: new Date(Date.now() - 3600000).toISOString(), note: 'Submitted institutional form', type: 'form' }]
+    },
+    {
+      id: 'demo-2',
+      full_name: 'Coach Otieno',
+      organisation: 'Nairobi Youth Academy',
+      phone: '+254 733 000 002',
+      products: 'Team kits — 24 sets',
+      source: 'whatsapp_quick_view',
+      status: 'quote_sent',
+      estimated_value: 120000,
+      lead_category: 'football',
+      created_at: new Date(Date.now() - 86400000).toISOString(),
+      timeline: []
+    },
+    {
+      id: 'demo-3',
+      full_name: 'Mary Akinyi',
+      organisation: 'Mombasa Girls Secondary',
+      phone: '+254 722 000 003',
+      products: 'Gym mats × 40',
+      source: 'whatsapp_enquiry_cart',
+      status: 'negotiating',
+      estimated_value: 210000,
+      lead_category: 'fitness',
+      created_at: new Date(Date.now() - 172800000).toISOString(),
+      timeline: []
+    },
+    {
+      id: 'demo-4',
+      full_name: 'David Kimani',
+      organisation: 'Kiambu County Sports',
+      phone: '+254 711 000 004',
+      products: 'Footballs crate + cones',
+      source: 'whatsapp_product_card',
+      status: 'won',
+      estimated_value: 95000,
+      lead_category: 'football',
+      created_at: new Date(Date.now() - 259200000).toISOString(),
+      timeline: []
+    },
+    {
+      id: 'demo-5',
+      full_name: 'Grace Njeri',
+      organisation: 'Westlands Academy',
+      phone: '+254 788 000 005',
+      products: 'Consultation only',
+      source: 'lead_form',
+      status: 'lost',
+      estimated_value: 0,
+      created_at: new Date(Date.now() - 604800000).toISOString(),
+      timeline: []
+    }
+  ];
+
+  const DEMO_DATA = {
+    business_name: 'Pollygram & General Supplies',
+    hero_headline: "Kenya's Institutional Sports Supplier — Schools & County Programmes",
+    hero_subtitle:
+      'High schools, academies, colleges, clubs and PE departments — full-programme equipment supply.',
+    hero_cta_primary: 'View Catalogue',
+    hero_wa_label: 'WhatsApp Order',
+    hero_trust_line: 'Nationwide delivery · Bulk school orders · Institutional supply',
+    trust_strip_1: 'Nationwide Delivery',
+    trust_strip_2: 'Bulk School Orders',
+    trust_strip_3: 'WhatsApp Ordering',
+    trust_strip_4: 'Institutional Quotes',
+    meta_title: '',
+    meta_description: '',
+    promo_bar_text: '⚡ Bulk orders get special pricing — schools & clubs ordering now for the new term',
+    wa_default_intro: '',
+    og_title: '',
+    og_description: '',
+    og_url: '',
+    og_image_url: '',
+    t1_quote: '', t1_attrib: '',
+    t2_quote: '', t2_attrib: '',
+    t3_quote: '', t3_attrib: '',
+    whatsapp_number: '254700000000',
+    phone: '+254 700 000 000',
+    wholesale_description:
+      'We outfit PE departments, sports departments and county programmes across Kenya — from balls and track gear to gym loads and team kits. Ask for an institutional quote or LPO workflow.',
+    address: 'Nairobi, Kenya',
+    hours: 'Mon–Sat 8am–7pm',
+    products_catalog: '',
+    categories_config: '',
+    promo_campaigns: '',
+    last_saved_at: '',
+    p1_name: '', p1_price: '', p2_name: '', p2_price: '', p3_name: '', p3_price: '',
+    p4_name: '', p4_price: '', p5_name: '', p5_price: '', p6_name: '', p6_price: ''
+  };
+
+  let workingData = {};
+  let productsState = [];
+  /** Products tab: search / category pill filter / per-category accordion memory */
+  let admProductSearchQuery = '';
+  let admProductFilterSlug = 'all';
+  let admCategoryExpanded = {};
+  let productModalEditingId = null;
+  let categoriesState = [];
+  let promoCampaignsState = [];
+  let leadsCache = [];
+  let leadsViewMode = 'table';
+  let dirty = false;
+
+  var LEAD_STATUS_LABELS = {
+    new: 'New Lead',
+    contacted: 'Contacted',
+    quote_sent: 'Quote Sent',
+    negotiating: 'Negotiating',
+    won: 'Won',
+    lost: 'Lost'
+  };
+
+  function normalizeLeadRecord(r) {
+    if (!r) return null;
+    var o = Object.assign({}, r);
+    if (!o.status || String(o.status).trim() === '') o.status = 'new';
+    o.status = String(o.status).toLowerCase().replace(/\s+/g, '_');
+    if (!LEAD_STATUS_LABELS[o.status]) o.status = 'new';
+    if (o.estimated_value == null || o.estimated_value === '') o.estimated_value = 0;
+    o.estimated_value = Number(o.estimated_value) || 0;
+    return o;
+  }
+
+  function formatKes(n) {
+    var v = Number(n) || 0;
+    if (!v) return '—';
+    try {
+      return 'KES ' + v.toLocaleString('en-KE');
+    } catch (e) {
+      return 'KES ' + v;
+    }
+  }
+
+  function parseTimeline(r) {
+    var t = r.timeline;
+    if (Array.isArray(t)) return t;
+    if (typeof t === 'string') {
+      try {
+        var p = JSON.parse(t);
+        return Array.isArray(p) ? p : [];
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  }
+
+  function sourceBucket(src) {
+    var s = String(src || '').toLowerCase();
+    if (s.indexOf('whatsapp') !== -1) return 'whatsapp';
+    if (s.indexOf('institutional') !== -1 || s.indexOf('quote_form') !== -1) return 'institutional';
+    return 'other';
+  }
+
+  function leadPassesFilters(r) {
+    var q = (document.getElementById('leadSearch') && document.getElementById('leadSearch').value) || '';
+    var qq = q.trim().toLowerCase();
+    var fs = document.getElementById('leadFilterStatus') && document.getElementById('leadFilterStatus').value;
+    var fsrc = document.getElementById('leadFilterSource') && document.getElementById('leadFilterSource').value;
+    var fcat = (document.getElementById('leadFilterCategory') && document.getElementById('leadFilterCategory').value || '').trim().toLowerCase();
+    var d0 = document.getElementById('leadFilterFrom') && document.getElementById('leadFilterFrom').value;
+    var d1 = document.getElementById('leadFilterTo') && document.getElementById('leadFilterTo').value;
+    var nl = normalizeLeadRecord(r);
+    if (fs && nl.status !== fs) return false;
+    if (fsrc && sourceBucket(nl.source) !== fsrc) return false;
+    if (fcat && String(nl.lead_category || '').toLowerCase().indexOf(fcat) === -1) return false;
+    if (d0) {
+      var t0 = new Date(r.created_at || 0).getTime();
+      if (t0 < new Date(d0).getTime()) return false;
+    }
+    if (d1) {
+      var t1 = new Date(r.created_at || 0).getTime();
+      var end = new Date(d1);
+      end.setHours(23, 59, 59, 999);
+      if (t1 > end.getTime()) return false;
+    }
+    if (!qq) return true;
+    var blob = [
+      nl.full_name,
+      nl.organisation,
+      nl.phone,
+      nl.email,
+      nl.products,
+      nl.message,
+      nl.source,
+      nl.lead_category
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+    return blob.indexOf(qq) !== -1;
+  }
+
+  function visibleLeadsList() {
+    return leadsCache.filter(leadPassesFilters);
+  }
+
+  function renderLeadSalesMetrics() {
+    var rows = leadsCache;
+    var c = { new: 0, contacted: 0, quote_sent: 0, negotiating: 0, won: 0, lost: 0 };
+    rows.forEach(function (r) {
+      var s = normalizeLeadRecord(r).status;
+      if (c[s] !== undefined) c[s]++;
+    });
+    function set(id, v) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = String(v);
+    }
+    set('salesMetricTotal', rows.length);
+    set('salesMetricNew', c.new);
+    set('salesMetricQuote', c.quote_sent);
+    set('salesMetricNeg', c.negotiating);
+    set('salesMetricWon', c.won);
+    set('salesMetricLost', c.lost);
+  }
+
+  function renderLeadRevenueBlocks() {
+    var openSum = 0;
+    var wonSum = 0;
+    var pending = 0;
+    leadsCache.forEach(function (r) {
+      var nl = normalizeLeadRecord(r);
+      var ev = nl.estimated_value || 0;
+      if (nl.status === 'won') wonSum += ev;
+      else if (nl.status !== 'lost') openSum += ev;
+      if (nl.status === 'new' || nl.status === 'contacted' || nl.status === 'negotiating') pending++;
+    });
+    var a = document.getElementById('salesMetricEstOpen');
+    var b = document.getElementById('salesMetricWonRev');
+    var c = document.getElementById('salesMetricPendingQuote');
+    if (a) a.textContent = formatKes(openSum);
+    if (b) b.textContent = formatKes(wonSum);
+    if (c) c.textContent = String(pending);
+  }
+
+  function renderLeadAnalyticsBlocks() {
+    var prodCounts = {};
+    var catCounts = {};
+    leadsCache.forEach(function (r) {
+      String(r.products || '')
+        .split(/[,;]+/)
+        .map(function (x) {
+          return x.trim();
+        })
+        .filter(function (x) {
+          return x.length > 2;
+        })
+        .slice(0, 6)
+        .forEach(function (seg) {
+          prodCounts[seg] = (prodCounts[seg] || 0) + 1;
+        });
+      var cat = String(r.lead_category || '').trim();
+      if (cat) catCounts[cat] = (catCounts[cat] || 0) + 1;
+    });
+    function topN(obj, n) {
+      return Object.keys(obj)
+        .sort(function (a, b) {
+          return obj[b] - obj[a];
+        })
+        .slice(0, n);
+    }
+    var pu = document.getElementById('admTopProducts');
+    var cu = document.getElementById('admTopCategories');
+    if (pu) {
+      pu.innerHTML = '';
+      topN(prodCounts, 8).forEach(function (k) {
+        var li = document.createElement('li');
+        li.textContent = k + ' · ' + prodCounts[k] + ' mentions';
+        pu.appendChild(li);
+      });
+      if (!pu.children.length) pu.innerHTML = '<li class="adm-analytics-empty">No product text yet</li>';
+    }
+    if (cu) {
+      cu.innerHTML = '';
+      topN(catCounts, 8).forEach(function (k) {
+        var li = document.createElement('li');
+        li.textContent = k + ' · ' + catCounts[k];
+        cu.appendChild(li);
+      });
+      if (!cu.children.length) cu.innerHTML = '<li class="adm-analytics-empty">No categories logged</li>';
+    }
+  }
+
+  function renderLeadNotificationsStrip() {
+    var bar = document.getElementById('admLeadNotifs');
+    if (!bar) return;
+    var day = Date.now() - 86400000;
+    var nNew = leadsCache.filter(function (r) {
+      var nl = normalizeLeadRecord(r);
+      return nl.status === 'new' && new Date(r.created_at || 0).getTime() > day;
+    }).length;
+    var nWa = leadsCache.filter(function (r) {
+      return sourceBucket(r.source) === 'whatsapp' && new Date(r.created_at || 0).getTime() > day;
+    }).length;
+    if (!nNew && !nWa) {
+      bar.classList.add('adm-hidden');
+      bar.innerHTML = '';
+      return;
+    }
+    bar.classList.remove('adm-hidden');
+    bar.innerHTML =
+      '<span class="adm-lead-notifs__item">' +
+      (nNew ? '<strong>' + nNew + '</strong> new institutional / pipeline leads (24h)' : '') +
+      '</span>' +
+      (nWa
+        ? '<span class="adm-lead-notifs__item">' + nWa + ' WhatsApp-tagged intents (24h)</span>'
+        : '');
+  }
+
+  function statusBadgeEl(status) {
+    var sp = document.createElement('span');
+    var s = normalizeLeadRecord({ status: status }).status;
+    sp.className = 'adm-status-badge adm-status-badge--' + s;
+    sp.textContent = LEAD_STATUS_LABELS[s] || s;
+    return sp;
+  }
+
+  function renderLeadsKanban() {
+    var wrap = document.getElementById('admLeadsKanbanWrap');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    var list = visibleLeadsList();
+    var cols = ['new', 'contacted', 'quote_sent', 'negotiating', 'won', 'lost'];
+    cols.forEach(function (st) {
+      var col = document.createElement('div');
+      col.className = 'adm-kanban-col';
+      col.dataset.kanbanStatus = st;
+      var head = document.createElement('div');
+      head.className = 'adm-kanban-col-head';
+      head.textContent = LEAD_STATUS_LABELS[st];
+      var body = document.createElement('div');
+      body.className = 'adm-kanban-col-body';
+      body.dataset.dropzone = '1';
+      list
+        .filter(function (r) {
+          return normalizeLeadRecord(r).status === st;
+        })
+        .forEach(function (r) {
+          var card = document.createElement('div');
+          card.className = 'adm-kanban-card';
+          card.draggable = true;
+          card.dataset.leadId = r.id;
+          card.innerHTML =
+            '<div class="adm-kanban-card-title">' +
+            (r.organisation || r.full_name || 'Lead') +
+            '</div>' +
+            '<div class="adm-kanban-card-meta">' +
+            (r.products || '').slice(0, 80) +
+            (String(r.products || '').length > 80 ? '…' : '') +
+            '</div>';
+          card.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('text/lead-id', String(r.id));
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          body.appendChild(card);
+        });
+      col.appendChild(head);
+      col.appendChild(body);
+      wrap.appendChild(col);
+    });
+    wrap.querySelectorAll('[data-dropzone]').forEach(function (zone) {
+      zone.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+      });
+      zone.addEventListener('drop', function (e) {
+        e.preventDefault();
+        var id = e.dataTransfer.getData('text/lead-id');
+        var col = zone.closest('.adm-kanban-col');
+        var ns = col && col.dataset ? col.dataset.kanbanStatus : '';
+        if (!id || !ns) return;
+        updateLeadStatusById(id, ns);
+      });
+    });
+  }
+
+  async function updateLeadStatusById(id, newStatus) {
+    var ix = leadsCache.findIndex(function (x) {
+      return String(x.id) === String(id);
+    });
+    if (ix === -1) return;
+    var prev = leadsCache[ix];
+    var tl = parseTimeline(prev).concat([
+      {
+        at: new Date().toISOString(),
+        note: 'Stage → ' + (LEAD_STATUS_LABELS[newStatus] || newStatus),
+        type: 'pipeline'
+      }
+    ]);
+    var patch = {
+      status: newStatus,
+      updated_at: new Date().toISOString(),
+      timeline: tl
+    };
+    if (isDemoMode) {
+      leadsCache[ix] = Object.assign({}, prev, patch);
+      hydrateLeadsCrm(leadsCache);
+      return;
+    }
+    var client = getClient();
+    if (!client) return;
+    try {
+      var res = await client.from('leads').update(patch).eq('id', id);
+      if (res.error) throw res.error;
+      leadsCache[ix] = Object.assign({}, prev, patch);
+      hydrateLeadsCrm(leadsCache);
+    } catch (err) {
+      alert('Could not update stage: ' + (err.message || err));
+    }
+  }
+
+  async function deleteLeadById(id) {
+    if (!confirm('Delete this lead permanently?')) return;
+    if (isDemoMode) {
+      leadsCache = leadsCache.filter(function (x) {
+        return String(x.id) !== String(id);
+      });
+      hydrateLeadsCrm(leadsCache);
+      closeLeadDetailModal();
+      return;
+    }
+    var client = getClient();
+    if (!client) return;
+    try {
+      var res = await client.from('leads').delete().eq('id', id);
+      if (res.error) throw res.error;
+      leadsCache = leadsCache.filter(function (x) {
+        return String(x.id) !== String(id);
+      });
+      hydrateLeadsCrm(leadsCache);
+      closeLeadDetailModal();
+    } catch (err) {
+      alert('Delete failed: ' + (err.message || err));
+    }
+  }
+
+  function openLeadDetailModal(id) {
+    var r = leadsCache.find(function (x) {
+      return String(x.id) === String(id);
+    });
+    if (!r) return;
+    var nl = normalizeLeadRecord(r);
+    var root = document.getElementById('leadDetailModal');
+    if (!root) return;
+    document.getElementById('ldId').value = r.id;
+    document.getElementById('ldName').value = nl.full_name || '';
+    document.getElementById('ldOrg').value = nl.organisation || '';
+    document.getElementById('ldPhone').value = nl.phone || '';
+    document.getElementById('ldEmail').value = nl.email || '';
+    document.getElementById('ldStatus').value = nl.status;
+    document.getElementById('ldValue').value = nl.estimated_value || 0;
+    document.getElementById('ldAssigned').value = nl.assigned_to || '';
+    document.getElementById('ldCategory').value = nl.lead_category || '';
+    document.getElementById('ldProducts').value = nl.products || '';
+    document.getElementById('ldMessage').value = nl.message || '';
+    document.getElementById('ldNotes').value = nl.internal_notes || '';
+    var tl = document.getElementById('ldTimeline');
+    if (tl) {
+      tl.innerHTML = '';
+      parseTimeline(nl).forEach(function (ev) {
+        var li = document.createElement('li');
+        li.className = 'adm-timeline-item';
+        li.innerHTML =
+          '<span class="adm-timeline-time">' +
+          (ev.at ? new Date(ev.at).toLocaleString() : '') +
+          '</span>' +
+          '<span class="adm-timeline-note">' +
+          (ev.note || '') +
+          '</span>';
+        tl.appendChild(li);
+      });
+      if (!tl.children.length) {
+        var empty = document.createElement('li');
+        empty.className = 'adm-timeline-empty';
+        empty.textContent = 'No timeline entries yet.';
+        tl.appendChild(empty);
+      }
+    }
+    var wa = document.getElementById('leadDetailWa');
+    if (wa) {
+      var digits = String(nl.phone || '').replace(/\D/g, '');
+      if (digits.length < 10) digits = (workingData.whatsapp_number || '').replace(/\D/g, '');
+      wa.href =
+        'https://wa.me/' +
+        digits +
+        '?text=' +
+        encodeURIComponent(
+          'Hello ' + (nl.full_name || 'there') + ', following up on your enquiry from ' + (nl.organisation || 'your institution') + '.'
+        );
+    }
+    root.classList.add('is-open');
+    root.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeLeadDetailModal() {
+    var root = document.getElementById('leadDetailModal');
+    if (!root) return;
+    root.classList.remove('is-open');
+    root.setAttribute('aria-hidden', 'true');
+  }
+
+  async function saveLeadDetailModal() {
+    var id = document.getElementById('ldId').value;
+    var ix = leadsCache.findIndex(function (x) {
+      return String(x.id) === String(id);
+    });
+    if (ix === -1) return;
+    var prev = leadsCache[ix];
+    var notes = document.getElementById('ldNotes').value.trim();
+    var tl = parseTimeline(prev);
+    if (notes && notes !== (prev.internal_notes || '')) {
+      tl.push({
+        at: new Date().toISOString(),
+        note: 'Internal note updated',
+        type: 'note'
+      });
+    }
+    var patch = {
+      status: document.getElementById('ldStatus').value,
+      estimated_value: Number(document.getElementById('ldValue').value) || 0,
+      assigned_to: document.getElementById('ldAssigned').value.trim(),
+      internal_notes: notes,
+      timeline: tl,
+      updated_at: new Date().toISOString()
+    };
+    if (isDemoMode) {
+      leadsCache[ix] = Object.assign({}, prev, patch);
+      hydrateLeadsCrm(leadsCache);
+      closeLeadDetailModal();
+      return;
+    }
+    var client = getClient();
+    if (!client) return;
+    try {
+      var res = await client.from('leads').update(patch).eq('id', id);
+      if (res.error) throw res.error;
+      leadsCache[ix] = Object.assign({}, prev, patch);
+      hydrateLeadsCrm(leadsCache);
+      closeLeadDetailModal();
+    } catch (err) {
+      alert('Save failed: ' + (err.message || err));
+    }
+  }
+
+  function hydrateLeadsCrm(rows) {
+    leadsCache = (rows || []).map(normalizeLeadRecord);
+    refreshDashboardMetrics();
+    renderLeadSalesMetrics();
+    renderLeadRevenueBlocks();
+    renderLeadAnalyticsBlocks();
+    renderLeadNotificationsStrip();
+    renderLeadsTableRows();
+    renderLeadsKanban();
+  }
+
+  function renderLeadsTableRows() {
+    var tbody = document.getElementById('admLeadsBody');
+    var msg = document.getElementById('leadsLoadMsg');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    var vis = visibleLeadsList();
+    vis.forEach(function (r) {
+      var nl = normalizeLeadRecord(r);
+      var tr = document.createElement('tr');
+      tr.dataset.search = [
+        nl.full_name,
+        nl.organisation,
+        nl.phone,
+        nl.products,
+        nl.source,
+        nl.message
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      function td(content, cls) {
+        var d = document.createElement('td');
+        if (cls) d.className = cls;
+        if (typeof content === 'string' || typeof content === 'number') d.textContent = content == null || content === '' ? '—' : String(content);
+        else d.appendChild(content);
+        return d;
+      }
+      tr.appendChild(td(nl.full_name || '—'));
+      tr.appendChild(td(nl.organisation || '—'));
+      tr.appendChild(td(nl.products || '—', 'adm-td-clip'));
+      tr.appendChild(td(statusBadgeEl(nl.status)));
+      tr.appendChild(td(formatKes(nl.estimated_value)));
+      tr.appendChild(td(nl.source || '—'));
+      var dt = r.created_at ? new Date(r.created_at) : null;
+      tr.appendChild(td(dt ? dt.toLocaleString() : '—'));
+      var act = document.createElement('td');
+      act.className = 'adm-td-actions';
+      var viewBtn = document.createElement('button');
+      viewBtn.type = 'button';
+      viewBtn.className = 'adm-btn adm-btn-xs adm-btn-ghost';
+      viewBtn.textContent = 'View';
+      viewBtn.addEventListener('click', function () {
+        openLeadDetailModal(r.id);
+      });
+      var wa = document.createElement('a');
+      wa.className = 'adm-btn adm-btn-primary adm-btn-xs';
+      wa.textContent = 'WA';
+      var phone = String(nl.phone || '').replace(/\D/g, '');
+      if (phone.length < 10) phone = (workingData.whatsapp_number || '').replace(/\D/g, '');
+      wa.href =
+        'https://wa.me/' +
+        phone +
+        '?text=' +
+        encodeURIComponent('Hello ' + (nl.full_name || '') + ', following up on your enquiry.');
+      wa.target = '_blank';
+      wa.rel = 'noopener';
+      var stBtn = document.createElement('button');
+      stBtn.type = 'button';
+      stBtn.className = 'adm-btn adm-btn-xs adm-btn-ghost';
+      stBtn.textContent = 'Stage';
+      stBtn.addEventListener('click', function () {
+        var next = prompt('New status: new | contacted | quote_sent | negotiating | won | lost', nl.status);
+        if (!next) return;
+        updateLeadStatusById(r.id, next.trim().toLowerCase());
+      });
+      act.appendChild(viewBtn);
+      act.appendChild(stBtn);
+      act.appendChild(wa);
+      tr.appendChild(act);
+      tbody.appendChild(tr);
+    });
+    if (msg) msg.textContent = leadsCache.length ? (vis.length ? '' : 'No leads match filters.') : 'No leads found.';
+  }
+
+  function applyLeadFiltersUI() {
+    renderLeadsTableRows();
+    renderLeadsKanban();
+  }
+
+  function setupLeadsCrmUi() {
+    document.querySelectorAll('.adm-leads-view-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        leadsViewMode = btn.getAttribute('data-leads-view') || 'table';
+        document.querySelectorAll('.adm-leads-view-btn').forEach(function (b) {
+          b.classList.toggle('active', b === btn);
+        });
+        var tw = document.getElementById('admLeadsTableWrap');
+        var kw = document.getElementById('admLeadsKanbanWrap');
+        if (tw) tw.classList.toggle('adm-hidden', leadsViewMode !== 'table');
+        if (kw) kw.classList.toggle('adm-hidden', leadsViewMode !== 'kanban');
+        hydrateLeadsCrm(leadsCache);
+      });
+    });
+    ['leadFilterStatus', 'leadFilterSource', 'leadFilterCategory', 'leadFilterFrom', 'leadFilterTo'].forEach(function (id) {
+      document.getElementById(id)?.addEventListener('input', applyLeadFiltersUI);
+      document.getElementById(id)?.addEventListener('change', applyLeadFiltersUI);
+    });
+    document.getElementById('leadDetailClose')?.addEventListener('click', closeLeadDetailModal);
+    document.getElementById('leadDetailCancel')?.addEventListener('click', closeLeadDetailModal);
+    document.getElementById('leadDetailBackdrop')?.addEventListener('click', closeLeadDetailModal);
+    document.getElementById('leadDetailSave')?.addEventListener('click', saveLeadDetailModal);
+    document.getElementById('leadDetailDelete')?.addEventListener('click', function () {
+      var id = document.getElementById('ldId').value;
+      if (id) deleteLeadById(id);
+    });
+  }
+
+  const admSaveStatus = document.getElementById('admSaveStatus');
+  const saveBtn = document.getElementById('admSaveFab');
+
+  function setDirty(v) {
+    dirty = v;
+    if (!admSaveStatus) return;
+    admSaveStatus.classList.remove('is-dirty', 'is-saving', 'is-ok');
+    if (v) {
+      admSaveStatus.textContent = 'Unsaved changes';
+      admSaveStatus.classList.add('is-dirty');
+    } else {
+      admSaveStatus.textContent = 'Saved';
+      admSaveStatus.classList.add('is-ok');
+    }
+  }
+
+  function touchDirty() {
+    setDirty(true);
+  }
+
+  function uid() {
+    return 'p-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+  }
+
+  function getClient() {
+    if (isDemoMode || !window.supabase) return null;
+    return window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+
+  function legacySixKeys(list) {
+    var o = {};
+    for (var i = 0; i < 6; i++) {
+      var p = list[i];
+      o['p' + (i + 1) + '_name'] = p && p.name ? p.name : '';
+      o['p' + (i + 1) + '_price'] = p && p.price ? p.price : '';
+    }
+    return o;
+  }
+
+  function parseJson(str, fallback) {
+    try {
+      var x = JSON.parse(str || '');
+      return Array.isArray(x) ? x : fallback;
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function normalizeAdminProduct(p) {
+    var n = p ? JSON.parse(JSON.stringify(p)) : {};
+    if (!n.sku && n.id != null) n.sku = String(n.id);
+    var st = String(n.stock_status || 'in_stock')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '_');
+    if (['low_stock', 'out_of_stock', 'in_stock'].indexOf(st) === -1) st = 'in_stock';
+    n.stock_status = st;
+    n.featured = n.featured === true || n.featured === 'true';
+    if (!Array.isArray(n.tags)) {
+      n.tags =
+        typeof n.tags === 'string' && n.tags.trim()
+          ? n.tags.split(/[,;]+/).map(function (t) {
+              return t.trim();
+            }).filter(Boolean)
+          : [];
+    }
+    return n;
+  }
+
+  function hydrateStateFromWorkingData() {
+    productsState = parseJson(workingData.products_catalog, []).map(normalizeAdminProduct);
+    if (!productsState.length) productsState = JSON.parse(JSON.stringify(INITIAL_PRODUCTS)).map(normalizeAdminProduct);
+
+    categoriesState = parseJson(workingData.categories_config, []);
+    if (!categoriesState.length) categoriesState = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+    categoriesState.sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+
+    promoCampaignsState = parseJson(workingData.promo_campaigns, []);
+    if (!promoCampaignsState.length) {
+      promoCampaignsState = [
+        { title: 'Back to school', tagline: 'PE kits & balls for the new term', active: true },
+        { title: 'Football kits', tagline: 'Club & academy bundles', active: true },
+        { title: 'School reopening', tagline: 'Institutional quotes & LPOs', active: false }
+      ];
+    }
+
+    renderProductList();
+    renderCategoryEditors();
+    renderPromoCampaigns();
+    updateSeoPreview();
+    refreshDashboardMetrics();
+  }
+
+  function fillContentInputs(data) {
+    document.querySelectorAll('.content-input').forEach(function (el) {
+      var k = el.dataset.key;
+      if (!k) return;
+      el.value = data[k] != null ? String(data[k]) : '';
+    });
+  }
+
+  function collectContentInputs() {
+    var out = {};
+    document.querySelectorAll('.content-input').forEach(function (el) {
+      var k = el.dataset.key;
+      if (!k) return;
+      out[k] = el.value.trim();
+    });
+    return out;
+  }
+
+  function collectData() {
+    return Object.assign({}, workingData, collectContentInputs(), legacySixKeys(productsState), {
+      products_catalog: JSON.stringify(productsState),
+      categories_config: JSON.stringify(categoriesState),
+      promo_campaigns: JSON.stringify(promoCampaignsState)
+    });
+  }
+
+  function admDefaultCategorySectionExpanded() {
+    try {
+      return !window.matchMedia('(max-width: 768px)').matches;
+    } catch (e) {
+      return true;
+    }
+  }
+
+  function normalizeProductCategory(c) {
+    return String(c || '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function formatSlugLabel(slug) {
+    if (!slug) return 'Uncategorized';
+    return String(slug)
+      .split(/[-_\s]+/)
+      .filter(Boolean)
+      .map(function (w) {
+        return w.charAt(0).toUpperCase() + w.slice(1);
+      })
+      .join(' ');
+  }
+
+  function productMatchesInventorySearch(p, q) {
+    if (!q) return true;
+    var slug = normalizeProductCategory(p.category);
+    var label = String(p.category_label || '')
+      .trim()
+      .toLowerCase();
+    var name = String(p.name || '')
+      .trim()
+      .toLowerCase();
+    var blob = slug + ' ' + label + ' ' + name;
+    return blob.indexOf(q) !== -1;
+  }
+
+  function labelForCategorySlug(slug) {
+    if (slug === '__uncategorized') return 'Uncategorized';
+    for (var i = 0; i < categoriesState.length; i++) {
+      if (categoriesState[i].slug === slug) return categoriesState[i].label || slug;
+    }
+    var sample = productsState.find(function (p) {
+      return normalizeProductCategory(p.category) === slug;
+    });
+    if (sample && sample.category_label && String(sample.category_label).trim())
+      return String(sample.category_label).trim();
+    return formatSlugLabel(slug);
+  }
+
+  function renderProductFilterPills() {
+    var wrap = document.getElementById('admProductFilterPills');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    function pill(slug, label, count) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'adm-product-pill';
+      b.setAttribute('data-filter-slug', slug);
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', admProductFilterSlug === slug ? 'true' : 'false');
+      if (admProductFilterSlug === slug) b.classList.add('adm-product-pill--active');
+      var span = document.createElement('span');
+      span.textContent = label;
+      b.appendChild(span);
+      if (typeof count === 'number') {
+        var badge = document.createElement('span');
+        badge.className = 'adm-product-pill__count';
+        badge.textContent = String(count);
+        b.appendChild(badge);
+      }
+      wrap.appendChild(b);
+    }
+    pill('all', 'All', productsState.length);
+    categoriesState.forEach(function (c) {
+      var s = c.slug || '';
+      if (!s) return;
+      var n = productsState.filter(function (p) {
+        return normalizeProductCategory(p.category) === s;
+      }).length;
+      pill(s, c.label || formatSlugLabel(s), n);
+    });
+  }
+
+  function renderProductList() {
+    var box = document.getElementById('admProductList');
+    if (!box) return;
+    box.innerHTML = '';
+    renderProductFilterPills();
+
+    if (!productsState.length) {
+      var empty = document.createElement('div');
+      empty.className = 'adm-product-empty';
+      empty.innerHTML =
+        '<p class="adm-product-empty__title">No products in catalogue</p><p class="adm-note adm-product-empty__hint">Click <strong>+ Add product</strong> to open the form and create your first SKU.</p>';
+      box.appendChild(empty);
+      return;
+    }
+
+    var q = admProductSearchQuery;
+    var filterSlug = admProductFilterSlug;
+
+    var filteredItems = [];
+    productsState.forEach(function (p, index) {
+      if (!productMatchesInventorySearch(p, q)) return;
+      if (filterSlug !== 'all' && normalizeProductCategory(p.category) !== filterSlug) return;
+      filteredItems.push({ p: p, index: index });
+    });
+
+    var groups = {};
+    filteredItems.forEach(function (item) {
+      var raw = normalizeProductCategory(item.p.category);
+      var key = raw || '__uncategorized';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(item);
+    });
+
+    var knownSlugMap = {};
+    categoriesState.forEach(function (c) {
+      if (c.slug) knownSlugMap[c.slug] = true;
+    });
+
+    var extraSlugs = {};
+    productsState.forEach(function (p) {
+      var s = normalizeProductCategory(p.category);
+      if (!s) return;
+      if (!knownSlugMap[s]) extraSlugs[s] = true;
+    });
+
+    var sections = [];
+
+    if (filterSlug !== 'all') {
+      sections.push({
+        slug: filterSlug,
+        label: labelForCategorySlug(filterSlug)
+      });
+    } else if (!q) {
+      categoriesState.forEach(function (c) {
+        if (!c.slug) return;
+        sections.push({ slug: c.slug, label: c.label || formatSlugLabel(c.slug) });
+      });
+      Object.keys(extraSlugs)
+        .sort()
+        .forEach(function (s) {
+          sections.push({
+            slug: s,
+            label: labelForCategorySlug(s),
+            orphan: true
+          });
+        });
+      if (
+        productsState.some(function (p) {
+          return !normalizeProductCategory(p.category);
+        })
+      ) {
+        sections.push({ slug: '__uncategorized', label: 'Uncategorized' });
+      }
+    } else {
+      categoriesState.forEach(function (c) {
+        if (!c.slug) return;
+        if (groups[c.slug] && groups[c.slug].length) {
+          sections.push({ slug: c.slug, label: c.label || formatSlugLabel(c.slug) });
+        }
+      });
+      Object.keys(extraSlugs).forEach(function (s) {
+        if (groups[s] && groups[s].length) {
+          sections.push({
+            slug: s,
+            label: labelForCategorySlug(s),
+            orphan: true
+          });
+        }
+      });
+      if (groups['__uncategorized'] && groups['__uncategorized'].length) {
+        sections.push({ slug: '__uncategorized', label: 'Uncategorized' });
+      }
+    }
+
+    if (!filteredItems.length) {
+      var noHit = document.createElement('div');
+      noHit.className = 'adm-product-empty';
+      noHit.innerHTML =
+        '<p class="adm-product-empty__title">No matching products</p><p class="adm-note adm-product-empty__hint">Try another search term or pick <strong>All</strong> categories.</p>';
+      box.appendChild(noHit);
+      return;
+    }
+
+    sections.forEach(function (sec) {
+      var slug = sec.slug;
+      var items = groups[slug] || [];
+      var sectionEl = document.createElement('section');
+      sectionEl.className = 'adm-product-cat';
+      sectionEl.setAttribute('data-category-slug', slug);
+
+      var expanded =
+        admCategoryExpanded[slug] !== undefined
+          ? admCategoryExpanded[slug]
+          : admDefaultCategorySectionExpanded();
+      if (!expanded) sectionEl.classList.add('adm-product-cat--collapsed');
+
+      var header = document.createElement('div');
+      header.className = 'adm-product-cat__header';
+
+      var toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'adm-product-cat__toggle';
+      toggle.setAttribute('data-adm-cat-toggle', '');
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+      var chev = document.createElement('span');
+      chev.className = 'adm-product-cat__chev';
+      chev.setAttribute('aria-hidden', 'true');
+      chev.innerHTML =
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>';
+
+      var titleRow = document.createElement('span');
+      titleRow.className = 'adm-product-cat__title-row';
+
+      var title = document.createElement('span');
+      title.className = 'adm-product-cat__title';
+      title.textContent = sec.label;
+
+      var countBadge = document.createElement('span');
+      countBadge.className = 'adm-product-cat__count';
+      var totalInCat = productsState.filter(function (p) {
+        var k = normalizeProductCategory(p.category) || '__uncategorized';
+        return k === slug;
+      }).length;
+      countBadge.textContent =
+        totalInCat === 1 ? '1 product' : totalInCat + ' products';
+
+      titleRow.appendChild(title);
+      titleRow.appendChild(countBadge);
+
+      toggle.appendChild(chev);
+      toggle.appendChild(titleRow);
+
+      var addIn = document.createElement('button');
+      addIn.type = 'button';
+      addIn.className = 'adm-btn adm-btn-ghost adm-btn-xs adm-product-cat__add';
+      addIn.setAttribute(
+        'data-adm-add-in-category',
+        slug === '__uncategorized' ? '' : slug
+      );
+      addIn.textContent = '+ Add';
+
+      header.appendChild(toggle);
+      header.appendChild(addIn);
+
+      var body = document.createElement('div');
+      body.className = 'adm-product-cat__body';
+
+      if (!items.length) {
+        var emptyCat = document.createElement('div');
+        emptyCat.className = 'adm-product-cat__empty';
+        emptyCat.textContent = 'No products in this category';
+        body.appendChild(emptyCat);
+      } else {
+        var listHead = document.createElement('div');
+        listHead.className = 'adm-product-list-head adm-product-list-head--section';
+        listHead.setAttribute('aria-hidden', 'true');
+        listHead.innerHTML =
+          '<span class="adm-product-list-head__cell adm-product-list-head__thumb"></span>' +
+          '<span class="adm-product-list-head__cell">Product</span>' +
+          '<span class="adm-product-list-head__cell">Price</span>' +
+          '<span class="adm-product-list-head__cell">Badge</span>' +
+          '<span class="adm-product-list-head__cell adm-product-list-head__actions">Actions</span>';
+        body.appendChild(listHead);
+        items.forEach(function (it) {
+          body.appendChild(createProductRow(it.p, it.index, { inCategorySection: true }));
+        });
+      }
+
+      sectionEl.appendChild(header);
+      sectionEl.appendChild(body);
+      box.appendChild(sectionEl);
+    });
+  }
+
+  function createProductRow(p, index, rowOpts) {
+    rowOpts = rowOpts || {};
+    var row = document.createElement('div');
+    row.className = 'adm-product-row';
+    if (rowOpts.inCategorySection) row.classList.add('adm-product-row--in-section');
+    row.dataset.id = p.id;
+    row.setAttribute('draggable', 'true');
+    row.addEventListener('dragstart', function (e) {
+      e.dataTransfer.setData('text/plain', String(p.id));
+      e.dataTransfer.effectAllowed = 'move';
+      row.classList.add('adm-product-row--dragging');
+    });
+    row.addEventListener('dragend', function () {
+      row.classList.remove('adm-product-row--dragging');
+    });
+
+    var thumb = document.createElement('div');
+    thumb.className = 'adm-product-row__thumb';
+    var imgSrc = (p.image_url || '').trim();
+    if (imgSrc) {
+      var im = document.createElement('img');
+      im.src = imgSrc;
+      im.alt = '';
+      im.loading = 'lazy';
+      im.referrerPolicy = 'no-referrer';
+      im.onerror = function () {
+        thumb.innerHTML = '<span class="adm-product-row__thumb-fallback" aria-hidden="true">?</span>';
+      };
+      thumb.appendChild(im);
+    } else {
+      thumb.innerHTML = '<span class="adm-product-row__thumb-fallback" aria-hidden="true">—</span>';
+    }
+
+    var main = document.createElement('div');
+    main.className = 'adm-product-row__main';
+    var title = document.createElement('div');
+    title.className = 'adm-product-row__title';
+    title.textContent = p.name || 'Untitled product';
+    var sub = document.createElement('div');
+    sub.className = 'adm-product-row__sub';
+    var d = (p.desc || '').trim();
+    sub.textContent = d ? (d.length > 72 ? d.slice(0, 72) + '…' : d) : 'No description';
+    main.appendChild(title);
+    main.appendChild(sub);
+
+    var cat = null;
+    if (!rowOpts.inCategorySection) {
+      cat = document.createElement('span');
+      cat.className = 'adm-product-row__cell adm-product-row__cell--category';
+      var catSlug = normalizeProductCategory(p.category);
+      var catShow = '';
+      if (catSlug) {
+        catShow =
+          (p.category_label && String(p.category_label).trim()) || formatSlugLabel(catSlug);
+      } else {
+        catShow = '—';
+      }
+      cat.textContent = catShow;
+    }
+
+    var price = document.createElement('span');
+    price.className = 'adm-product-row__cell adm-product-row__cell--price';
+    price.textContent = (p.price || '').trim() || '—';
+
+    var badge = document.createElement('span');
+    badge.className = 'adm-product-row__badge';
+    if ((p.badge || '').trim()) {
+      badge.textContent = p.badge.trim();
+    } else {
+      badge.classList.add('adm-product-row__badge--empty');
+      badge.textContent = '—';
+    }
+
+    var actions = document.createElement('div');
+    actions.className = 'adm-product-row__actions';
+    ['Edit', 'Duplicate', 'Delete'].forEach(function (label) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'adm-btn adm-btn-ghost adm-btn-xs';
+      b.textContent = label;
+      b.dataset.action = label.toLowerCase();
+      actions.appendChild(b);
+    });
+
+    actions.addEventListener('click', function (e) {
+      var btn = e.target.closest('button');
+      if (!btn || !btn.dataset.action) return;
+      var act = btn.dataset.action;
+      var id = p.id;
+      if (act === 'edit') {
+        openProductModal('edit', id);
+        return;
+      }
+      if (act === 'delete') {
+        productsState = productsState.filter(function (x) { return x.id !== id; });
+        touchDirty();
+        renderProductList();
+        refreshDashboardMetrics();
+        return;
+      }
+      if (act === 'duplicate') {
+        var copy = JSON.parse(JSON.stringify(p));
+        copy.id = uid();
+        productsState.splice(index + 1, 0, copy);
+        touchDirty();
+        renderProductList();
+        refreshDashboardMetrics();
+      }
+    });
+
+    row.appendChild(thumb);
+    row.appendChild(main);
+    if (cat) {
+      row.appendChild(cat);
+    }
+    row.appendChild(price);
+    row.appendChild(badge);
+    row.appendChild(actions);
+    return row;
+  }
+
+  function refreshCategoryDatalist() {
+    var dl = document.getElementById('pmCategorySuggestions');
+    if (!dl) return;
+    dl.innerHTML = '';
+    categoriesState.forEach(function (c) {
+      var opt = document.createElement('option');
+      opt.value = c.slug || '';
+      dl.appendChild(opt);
+    });
+  }
+
+  function fillProductForm(p) {
+    document.getElementById('pmName').value = p.name || '';
+    document.getElementById('pmCategory').value = p.category || '';
+    document.getElementById('pmPrice').value = p.price || '';
+    document.getElementById('pmBadge').value = p.badge || '';
+    document.getElementById('pmDesc').value = p.desc || '';
+    document.getElementById('pmMoq').value = p.moq || '';
+    document.getElementById('pmImgUrl').value = p.image_url || '';
+    document.getElementById('pmWebp').value = p.image_webp || '';
+    document.getElementById('pmWaPreset').value = p.wa_preset || '';
+    document.getElementById('pmSku').value = p.sku != null ? String(p.sku) : '';
+    document.getElementById('pmStock').value =
+      p.stock_status === 'low_stock' || p.stock_status === 'out_of_stock' ? p.stock_status : 'in_stock';
+    document.getElementById('pmTags').value = Array.isArray(p.tags) ? p.tags.join(', ') : '';
+    document.getElementById('pmFeatured').checked = !!p.featured;
+    updateImagePreview((p.image_url || '').trim());
+  }
+
+  function readProductForm() {
+    var tagStr = document.getElementById('pmTags').value.trim();
+    var tags = tagStr
+      ? tagStr.split(/[,;]+/).map(function (t) {
+          return t.trim();
+        }).filter(Boolean)
+      : [];
+    return {
+      name: document.getElementById('pmName').value.trim(),
+      category: document.getElementById('pmCategory').value.trim(),
+      price: document.getElementById('pmPrice').value.trim(),
+      badge: document.getElementById('pmBadge').value.trim(),
+      desc: document.getElementById('pmDesc').value.trim(),
+      moq: document.getElementById('pmMoq').value.trim(),
+      image_url: document.getElementById('pmImgUrl').value.trim(),
+      image_webp: document.getElementById('pmWebp').value.trim(),
+      wa_preset: document.getElementById('pmWaPreset').value.trim(),
+      sku: document.getElementById('pmSku').value.trim(),
+      stock_status: document.getElementById('pmStock').value || 'in_stock',
+      tags: tags,
+      featured: document.getElementById('pmFeatured').checked
+    };
+  }
+
+  function clearProductFormValidation() {
+    var err = document.getElementById('pmNameError');
+    var inp = document.getElementById('pmName');
+    if (err) err.classList.add('adm-hidden');
+    if (inp) inp.classList.remove('adm-input--error');
+  }
+
+  function showProductFormValidation() {
+    var err = document.getElementById('pmNameError');
+    var inp = document.getElementById('pmName');
+    if (err) err.classList.remove('adm-hidden');
+    if (inp) {
+      inp.classList.add('adm-input--error');
+      inp.focus();
+    }
+  }
+
+  function updateImagePreview(url) {
+    var box = document.getElementById('pmImagePreview');
+    if (!box) return;
+    box.innerHTML = '';
+    if (url) {
+      var im = document.createElement('img');
+      im.src = url;
+      im.alt = 'Preview';
+      im.referrerPolicy = 'no-referrer';
+      im.onerror = function () {
+        box.innerHTML =
+          '<span class="adm-modal-preview-placeholder adm-modal-preview-placeholder--error">Could not load image — check URL</span>';
+      };
+      box.appendChild(im);
+    } else {
+      var ph = document.createElement('span');
+      ph.className = 'adm-modal-preview-placeholder';
+      ph.textContent = 'Paste an image URL to preview';
+      box.appendChild(ph);
+    }
+  }
+
+  function openProductModal(mode, productId, options) {
+    options = options || {};
+    var root = document.getElementById('productModal');
+    var titleEl = document.getElementById('productModalTitle');
+    var subEl = document.getElementById('productModalSubtitle');
+    if (!root) return;
+    refreshCategoryDatalist();
+    clearProductFormValidation();
+    productModalEditingId = mode === 'edit' && productId ? productId : null;
+
+    if (mode === 'add') {
+      if (titleEl) titleEl.textContent = 'Add New Product';
+      if (subEl) subEl.textContent = 'Create a SKU. Save here first, then use the floating save to sync to your site.';
+      var defaultCat =
+        categoriesState[0] && categoriesState[0].slug ? categoriesState[0].slug : 'football';
+      var presetCat = defaultCat;
+      if (Object.prototype.hasOwnProperty.call(options, 'presetCategory')) {
+        presetCat =
+          options.presetCategory == null ? '' : String(options.presetCategory).trim();
+      }
+      fillProductForm({
+        name: '',
+        category: presetCat,
+        price: '',
+        badge: '',
+        desc: '',
+        moq: 'Min 1',
+        image_url: '',
+        image_webp: '',
+        wa_preset: '',
+        sku: '',
+        stock_status: 'in_stock',
+        tags: [],
+        featured: false
+      });
+    } else {
+      var found = productsState.find(function (x) {
+        return x.id === productId;
+      });
+      if (!found) return;
+      if (titleEl) titleEl.textContent = 'Edit Product';
+      if (subEl) subEl.textContent = 'Update details and save. Floating save pushes to Supabase like before.';
+      fillProductForm(found);
+    }
+
+    root.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('adm-modal-open');
+    requestAnimationFrame(function () {
+      root.classList.add('is-open');
+    });
+    setTimeout(function () {
+      var n = document.getElementById('pmName');
+      if (n) n.focus();
+    }, 100);
+  }
+
+  function closeProductModal() {
+    var root = document.getElementById('productModal');
+    if (!root) return;
+    root.classList.remove('is-open');
+    document.body.classList.remove('adm-modal-open');
+    setTimeout(function () {
+      root.setAttribute('aria-hidden', 'true');
+      productModalEditingId = null;
+    }, 280);
+  }
+
+  function saveProductModal() {
+    var data = readProductForm();
+    if (!data.name) {
+      showProductFormValidation();
+      return;
+    }
+    clearProductFormValidation();
+    if (productModalEditingId) {
+      var ix = productsState.findIndex(function (x) {
+        return x.id === productModalEditingId;
+      });
+      if (ix === -1) return;
+      productsState[ix] = normalizeAdminProduct(
+        Object.assign({}, productsState[ix], data, { id: productModalEditingId })
+      );
+      if (!productsState[ix].sku) productsState[ix].sku = String(productModalEditingId);
+    } else {
+      var newId = uid();
+      var row = Object.assign({}, data, { id: newId });
+      if (!row.sku) row.sku = String(newId);
+      productsState.push(normalizeAdminProduct(row));
+    }
+    touchDirty();
+    renderProductList();
+    refreshDashboardMetrics();
+    closeProductModal();
+  }
+
+  function setupProductModal() {
+    var root = document.getElementById('productModal');
+    var bd = document.getElementById('productModalBackdrop');
+    var imgUrl = document.getElementById('pmImgUrl');
+
+    if (bd) {
+      bd.addEventListener('click', function (e) {
+        if (e.target === bd) closeProductModal();
+      });
+    }
+    document.getElementById('productModalClose')?.addEventListener('click', closeProductModal);
+    document.getElementById('productModalCancel')?.addEventListener('click', closeProductModal);
+    document.getElementById('productModalSave')?.addEventListener('click', saveProductModal);
+    if (imgUrl) {
+      imgUrl.addEventListener('input', function () {
+        updateImagePreview(imgUrl.value.trim());
+      });
+    }
+    document.getElementById('pmName')?.addEventListener('input', clearProductFormValidation);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (!root || !root.classList.contains('is-open')) return;
+      e.preventDefault();
+      closeProductModal();
+    });
+  }
+
+  function renderCategoryEditors() {
+    var box = document.getElementById('admCategoryList');
+    if (!box) return;
+    box.innerHTML = '';
+    categoriesState.forEach(function (c, idx) {
+      var row = document.createElement('div');
+      row.className = 'adm-cat-row';
+      var slug = document.createElement('input');
+      slug.className = 'adm-input';
+      slug.value = c.slug;
+      slug.addEventListener('input', function () {
+        c.slug = slug.value.trim().toLowerCase().replace(/\s+/g, '-');
+        touchDirty();
+        renderProductList();
+      });
+      var label = document.createElement('input');
+      label.className = 'adm-input';
+      label.value = c.label;
+      label.addEventListener('input', function () {
+        c.label = label.value;
+        touchDirty();
+        renderProductList();
+      });
+      var up = document.createElement('button');
+      up.type = 'button';
+      up.className = 'adm-btn adm-btn-ghost adm-btn-xs';
+      up.textContent = '↑';
+      up.addEventListener('click', function () {
+        if (idx <= 0) return;
+        var t = categoriesState[idx - 1];
+        categoriesState[idx - 1] = categoriesState[idx];
+        categoriesState[idx] = t;
+        categoriesState.forEach(function (x, i) { x.order = i; });
+        touchDirty();
+        renderCategoryEditors();
+      });
+      var down = document.createElement('button');
+      down.type = 'button';
+      down.className = 'adm-btn adm-btn-ghost adm-btn-xs';
+      down.textContent = '↓';
+      down.addEventListener('click', function () {
+        if (idx >= categoriesState.length - 1) return;
+        var t = categoriesState[idx + 1];
+        categoriesState[idx + 1] = categoriesState[idx];
+        categoriesState[idx] = t;
+        categoriesState.forEach(function (x, i) { x.order = i; });
+        touchDirty();
+        renderCategoryEditors();
+      });
+      row.appendChild(slug);
+      row.appendChild(label);
+      row.appendChild(up);
+      row.appendChild(down);
+      box.appendChild(row);
+    });
+    renderProductList();
+  }
+
+  function renderPromoCampaigns() {
+    var box = document.getElementById('admPromoCampaigns');
+    if (!box) return;
+    box.innerHTML = '';
+    promoCampaignsState.forEach(function (camp, idx) {
+      var card = document.createElement('div');
+      card.className = 'adm-card';
+      card.style.marginBottom = '10px';
+      var head = document.createElement('div');
+      head.style.display = 'flex';
+      head.style.justifyContent = 'space-between';
+      head.style.alignItems = 'center';
+      head.innerHTML = '<span class="adm-card-title" style="margin:0;">Campaign ' + (idx + 1) + '</span>';
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'adm-btn adm-btn-ghost adm-btn-xs';
+      del.textContent = 'Remove';
+      del.addEventListener('click', function () {
+        promoCampaignsState.splice(idx, 1);
+        touchDirty();
+        renderPromoCampaigns();
+        refreshDashboardMetrics();
+      });
+      head.appendChild(del);
+      card.appendChild(head);
+      var t1 = document.createElement('input');
+      t1.className = 'adm-input';
+      t1.placeholder = 'Title';
+      t1.value = camp.title || '';
+      t1.style.marginBottom = '8px';
+      t1.addEventListener('input', function () { camp.title = t1.value; touchDirty(); updateSeoPreview(); });
+      var t2 = document.createElement('input');
+      t2.className = 'adm-input';
+      t2.placeholder = 'Tagline';
+      t2.value = camp.tagline || '';
+      t2.style.marginBottom = '8px';
+      t2.addEventListener('input', function () { camp.tagline = t2.value; touchDirty(); });
+      var chk = document.createElement('label');
+      chk.style.display = 'flex';
+      chk.style.alignItems = 'center';
+      chk.style.gap = '8px';
+      chk.style.fontSize = '13px';
+      chk.innerHTML = '<input type="checkbox"> Active';
+      chk.querySelector('input').checked = !!camp.active;
+      chk.querySelector('input').addEventListener('change', function () {
+        camp.active = chk.querySelector('input').checked;
+        touchDirty();
+        refreshDashboardMetrics();
+      });
+      card.appendChild(t1);
+      card.appendChild(t2);
+      card.appendChild(chk);
+      box.appendChild(card);
+    });
+  }
+
+  function updateSeoPreview() {
+    var mt = document.querySelector('.content-input[data-key="meta_title"]');
+    var md = document.querySelector('.content-input[data-key="meta_description"]');
+    var ou = document.querySelector('.content-input[data-key="og_url"]');
+    var og = document.querySelector('.content-input[data-key="og_title"]');
+    var od = document.querySelector('.content-input[data-key="og_description"]');
+    var pt = document.getElementById('seoPrevTitle');
+    var pd = document.getElementById('seoPrevDesc');
+    var pu = document.getElementById('seoPrevUrl');
+    if (pt) pt.textContent = (mt && mt.value) ? mt.value : (og && og.value ? og.value : 'Page title');
+    if (pd) pd.textContent = (md && md.value) ? md.value : (od && od.value ? od.value : 'Description preview.');
+    if (pu) pu.textContent = (ou && ou.value) ? ou.value.replace(/^https?:\/\//, '') : 'yoursite.com · polish URL in SEO tab';
+  }
+
+  function refreshDashboardMetrics() {
+    var mp = document.getElementById('metricProducts');
+    var ml = document.getElementById('metricLeads');
+    var mpr = document.getElementById('metricPromos');
+    var ms = document.getElementById('metricSaved');
+    var mf = document.getElementById('metricFeatCat');
+    if (mp) mp.textContent = String(productsState.length);
+    if (ml) ml.textContent = String(leadsCache.length);
+    var activePromos = promoCampaignsState.filter(function (p) { return p.active; }).length;
+    if (mpr) mpr.textContent = String(activePromos);
+    if (ms) ms.textContent = workingData.last_saved_at ? workingData.last_saved_at : '—';
+    if (mf) mf.textContent = categoriesState[0] ? categoriesState[0].label : '—';
+  }
+
+  function buildWaQuick() {
+    var row = document.getElementById('waQuickRow');
+    if (!row) return;
+    row.innerHTML = '';
+    var digits = (collectContentInputs().whatsapp_number || workingData.whatsapp_number || '').replace(/\D/g, '') || '254700000000';
+    var presets = [
+      { label: 'Send quote', text: 'Hello Pollygram, please send a formal quote for our school order.' },
+      { label: 'Stock check', text: 'Hello, can you confirm stock availability for the items on your catalogue?' },
+      { label: 'More details', text: 'Hello, we need more details on MOQs and delivery timelines for institutional supply.' }
+    ];
+    presets.forEach(function (pr) {
+      var a = document.createElement('a');
+      a.className = 'adm-btn adm-btn-ghost adm-btn-xs';
+      a.href = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(pr.text);
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = pr.label;
+      row.appendChild(a);
+    });
+  }
+
+  function renderLeadsTable(rows) {
+    hydrateLeadsCrm(rows || []);
+  }
+
+  async function loadLeads() {
+    var msg = document.getElementById('leadsLoadMsg');
+    if (isDemoMode) {
+      renderLeadsTable(DEMO_LEADS);
+      if (msg) msg.textContent = 'Demo data — connect Supabase to load real leads.';
+      return;
+    }
+    var client = getClient();
+    if (!client) {
+      renderLeadsTable([]);
+      if (msg) msg.textContent = 'Supabase client unavailable.';
+      return;
+    }
+    try {
+      var res = await client.from('leads').select('*').order('created_at', { ascending: false }).limit(200);
+      if (res.error) throw res.error;
+      var rows = res.data || [];
+      renderLeadsTable(rows);
+      if (msg) msg.textContent = rows.length ? '' : 'No rows returned — check RLS select policy for authenticated users.';
+    } catch (e) {
+      renderLeadsTable([]);
+      if (msg) msg.textContent = 'Could not load leads: ' + (e.message || e);
+    }
+  }
+
+  function filterLeads() {
+    applyLeadFiltersUI();
+  }
+
+  async function loadData() {
+    workingData = Object.assign({}, DEMO_DATA);
+
+    if (isDemoMode) {
+      fillContentInputs(workingData);
+      hydrateStateFromWorkingData();
+      setDirty(false);
+      if (admSaveStatus) admSaveStatus.textContent = 'Demo mode';
+      return;
+    }
+
+    try {
+      var client = getClient();
+      if (!client) throw new Error('no client');
+      var res = await client.from('site_content').select('key,value');
+      if (res.error) throw res.error;
+      var db = {};
+      (res.data || []).forEach(function (row) { db[row.key] = row.value; });
+      workingData = Object.assign({}, DEMO_DATA, db);
+      fillContentInputs(workingData);
+      hydrateStateFromWorkingData();
+      setDirty(false);
+    } catch (e) {
+      workingData = Object.assign({}, DEMO_DATA);
+      fillContentInputs(workingData);
+      hydrateStateFromWorkingData();
+      if (admSaveStatus) admSaveStatus.textContent = 'Load issue — edit locally';
+    }
+  }
+
+  async function saveAll() {
+    if (saveBtn) {
+      saveBtn.disabled = true;
+    }
+    if (admSaveStatus) {
+      admSaveStatus.classList.remove('is-dirty', 'is-ok');
+      admSaveStatus.classList.add('is-saving');
+      admSaveStatus.textContent = 'Saving…';
+    }
+
+    workingData = collectData();
+    workingData.last_saved_at = new Date().toLocaleString();
+
+    if (isDemoMode) {
+      await new Promise(function (r) { setTimeout(r, 600); });
+      setDirty(false);
+      if (admSaveStatus) {
+        admSaveStatus.textContent = 'Saved (demo)';
+        admSaveStatus.classList.add('is-ok');
+      }
+      if (saveBtn) saveBtn.disabled = false;
+      refreshDashboardMetrics();
+      buildWaQuick();
+      return;
+    }
+
+    try {
+      var client = getClient();
+      if (!client) throw new Error('No client');
+      var payload = Object.keys(workingData).map(function (key) {
+        return { key: key, value: String(workingData[key] != null ? workingData[key] : '') };
+      });
+      var up = await client.from('site_content').upsert(payload, { onConflict: 'key' });
+      if (up.error) throw up.error;
+      setDirty(false);
+      if (admSaveStatus) {
+        admSaveStatus.textContent = 'Saved · live on site';
+        admSaveStatus.classList.add('is-ok');
+      }
+      refreshDashboardMetrics();
+      buildWaQuick();
+    } catch (e) {
+      if (admSaveStatus) {
+        admSaveStatus.textContent = 'Save failed';
+        admSaveStatus.classList.remove('is-saving');
+      }
+      alert('Save failed: ' + (e && e.message ? e.message : e));
+    } finally {
+      if (saveBtn) saveBtn.disabled = false;
+    }
+  }
+
+  function showApp() {
+    document.getElementById('loginScreen').classList.add('adm-hidden');
+    document.getElementById('adminApp').classList.remove('adm-hidden');
+    var pill = document.getElementById('admDemoPill');
+    var alert = document.getElementById('demoAlert');
+    if (isDemoMode) {
+      if (pill) pill.classList.remove('adm-hidden');
+      if (alert) alert.classList.remove('adm-hidden');
+    } else {
+      if (pill) pill.classList.add('adm-hidden');
+      if (alert) alert.classList.add('adm-hidden');
+    }
+  }
+
+  function setupTabs() {
+    document.querySelectorAll('.adm-nav-btn[data-tab]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.adm-nav-btn[data-tab]').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var tab = btn.dataset.tab;
+        document.querySelectorAll('.adm-panel').forEach(function (p) { p.classList.remove('active'); });
+        var panel = document.getElementById('tab-' + tab);
+        if (panel) panel.classList.add('active');
+        var title = document.getElementById('admTopbarTitle');
+        if (title && panel && panel.dataset.panelTitle) title.textContent = panel.dataset.panelTitle;
+        document.getElementById('admSidebar')?.classList.remove('is-open');
+        document.getElementById('admSidebarOverlay')?.classList.remove('is-visible');
+
+        if (tab === 'leads') loadLeads();
+        if (tab === 'dashboard') {
+          refreshDashboardMetrics();
+          buildWaQuick();
+        }
+      });
+    });
+  }
+
+  function setupMobileNav() {
+    var side = document.getElementById('admSidebar');
+    var ov = document.getElementById('admSidebarOverlay');
+    var tg = document.getElementById('admSidebarToggle');
+    function close() {
+      side?.classList.remove('is-open');
+      ov?.classList.remove('is-visible');
+    }
+    function open() {
+      side?.classList.add('is-open');
+      ov?.classList.add('is-visible');
+    }
+    tg?.addEventListener('click', function () {
+      if (side?.classList.contains('is-open')) close();
+      else open();
+    });
+    ov?.addEventListener('click', close);
+  }
+
+  async function setupAuth() {
+    var loginBtn = document.getElementById('loginBtn');
+    var loginError = document.getElementById('loginError');
+    var emailInput = document.getElementById('adminEmail');
+    var passwordInput = document.getElementById('adminPassword');
+    var demoBtn = document.getElementById('demoContinueBtn');
+
+    if (isDemoMode) {
+      var hint = document.getElementById('loginHint');
+      if (hint) hint.textContent = 'Supabase URLs are placeholders — continue in offline demo. No cloud saves.';
+      if (loginBtn) loginBtn.disabled = true;
+    } else if (demoBtn) {
+      demoBtn.style.display = 'none';
+    }
+
+    async function submit() {
+      if (loginError) loginError.textContent = '';
+      var client = getClient();
+      if (!client) {
+        if (loginError) loginError.textContent = 'Supabase SDK unavailable';
+        return;
+      }
+      var email = (emailInput.value || '').trim();
+      var pw = passwordInput.value || '';
+      if (!email || !pw) {
+        if (loginError) loginError.textContent = 'Enter email and password';
+        return;
+      }
+      if (loginBtn) {
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Signing in…';
+      }
+      var res = await client.auth.signInWithPassword({ email: email, password: pw });
+      if (loginBtn) {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Sign in with Supabase';
+      }
+      if (res.error) {
+        if (loginError) loginError.textContent = res.error.message || 'Authentication failed';
+        return;
+      }
+      showApp();
+      await loadData();
+      await loadLeads();
+      buildWaQuick();
+    }
+
+    loginBtn?.addEventListener('click', submit);
+    passwordInput?.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+    emailInput?.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+
+    demoBtn?.addEventListener('click', async function () {
+      if (loginError) loginError.textContent = '';
+      showApp();
+      await loadData();
+      await loadLeads();
+      buildWaQuick();
+    });
+
+    if (!isDemoMode) {
+      var client = getClient();
+      if (client) {
+        var sess = await client.auth.getSession();
+        if (sess.data.session) {
+          showApp();
+          await loadData();
+          await loadLeads();
+          buildWaQuick();
+        }
+      }
+    }
+  }
+
+  document.getElementById('logoutBtn')?.addEventListener('click', async function () {
+    var c = getClient();
+    if (!isDemoMode && c) await c.auth.signOut();
+    window.location.reload();
+  });
+
+  saveBtn?.addEventListener('click', saveAll);
+
+  document.addEventListener('input', function (e) {
+    if (e.target.classList && e.target.classList.contains('content-input')) {
+      touchDirty();
+      updateSeoPreview();
+    }
+  });
+
+  document.getElementById('leadSearch')?.addEventListener('input', function () {
+    filterLeads();
+  });
+
+  document.getElementById('admAddProduct')?.addEventListener('click', function () {
+    openProductModal('add');
+  });
+
+  document.getElementById('admAddCategory')?.addEventListener('click', function () {
+    categoriesState.push({ slug: 'new-category', label: 'New category', order: categoriesState.length });
+    touchDirty();
+    renderCategoryEditors();
+  });
+
+  document.getElementById('admAddPromo')?.addEventListener('click', function () {
+    promoCampaignsState.push({ title: 'Campaign', tagline: '', active: true });
+    touchDirty();
+    renderPromoCampaigns();
+    refreshDashboardMetrics();
+  });
+
+  function setupProductsInventoryChrome() {
+    var search = document.getElementById('admProductSearch');
+    if (search) {
+      search.addEventListener('input', function () {
+        admProductSearchQuery = search.value.trim().toLowerCase();
+        renderProductList();
+      });
+    }
+    document.getElementById('admProductFilterPills')?.addEventListener('click', function (e) {
+      var pill = e.target.closest('[data-filter-slug]');
+      if (!pill) return;
+      admProductFilterSlug = pill.getAttribute('data-filter-slug') || 'all';
+      renderProductList();
+    });
+    document.getElementById('admProductInventory')?.addEventListener('click', function (e) {
+      var toggler = e.target.closest('[data-adm-cat-toggle]');
+      if (toggler) {
+        var sec = toggler.closest('.adm-product-cat');
+        if (!sec) return;
+        var slug = sec.getAttribute('data-category-slug');
+        var collapsed = sec.classList.toggle('adm-product-cat--collapsed');
+        toggler.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        if (slug) admCategoryExpanded[slug] = !collapsed;
+        return;
+      }
+      var addBtn = e.target.closest('[data-adm-add-in-category]');
+      if (addBtn) {
+        var raw = addBtn.getAttribute('data-adm-add-in-category');
+        openProductModal('add', null, {
+          presetCategory: raw == null ? '' : raw
+        });
+      }
+    });
+
+    var plist = document.getElementById('admProductList');
+    if (plist && !plist.dataset.dragWired) {
+      plist.dataset.dragWired = '1';
+      plist.addEventListener('dragover', function (e) {
+        if (e.target.closest('.adm-product-row')) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+        }
+      });
+      plist.addEventListener('drop', function (e) {
+        var targetRow = e.target.closest('.adm-product-row');
+        if (!targetRow) return;
+        e.preventDefault();
+        var dragId = e.dataTransfer.getData('text/plain');
+        var targetId = targetRow.dataset.id;
+        if (!dragId || !targetId || dragId === targetId) return;
+        var fromIx = productsState.findIndex(function (x) {
+          return String(x.id) === String(dragId);
+        });
+        if (fromIx === -1) return;
+        var item = productsState.splice(fromIx, 1)[0];
+        var toIx = productsState.findIndex(function (x) {
+          return String(x.id) === String(targetId);
+        });
+        if (toIx === -1) {
+          productsState.splice(fromIx, 0, item);
+          return;
+        }
+        productsState.splice(toIx, 0, item);
+        touchDirty();
+        renderProductList();
+        refreshDashboardMetrics();
+      });
+    }
+  }
+
+  setupProductsInventoryChrome();
+  setupProductModal();
+  setupLeadsCrmUi();
+  setupAuth().catch(function () {});
+  setupTabs();
+  setupMobileNav();
+})();
+  </script>
+</body>
+</html>

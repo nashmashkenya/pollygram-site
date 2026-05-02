@@ -1,0 +1,10 @@
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log
+
+# Optional local tooling
+node_modules/
+.env
+.env.*

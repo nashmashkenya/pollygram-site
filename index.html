@@ -1,0 +1,3207 @@
+<!DOCTYPE html>
+<!--
+  =============================================================================
+  DEPLOYMENT — before going live, complete these steps:
+  1. Replace https://yourdomain.com and https://yourdomain.com/preview.jpg in
+     Open Graph / Twitter meta tags below (keep paths consistent with your host).
+  2. Upload preview.jpg to the site root (same folder as index.html) so social
+     crawlers can fetch https://yourdomain.com/preview.jpg (1200×630px works well).
+  3. Set SUPABASE_URL and SUPABASE_ANON_KEY in the CONFIG SECTION of the script
+     (or leave placeholders to run in static fallback mode).
+  4. Set the WhatsApp number in admin.html / site_content (whatsapp_number).
+  5. Product & hero images: see assets/images/IMAGE_NAMING.txt; regenerate via
+     python scripts/build_site_images.py. Add compressed assets/videos/sports-hero.mp4 for video hero.
+  6. Create Supabase Auth user(s) for admin — no passwords live in frontend code.
+  7. (Optional) Set window.GA_MEASUREMENT_ID and window.META_PIXEL_ID before track.js loads,
+     or edit assets/js/track.js defaults.
+  =============================================================================
+-->
+<html lang="en" data-theme="elite">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Institutional sports supplier for Kenyan high schools, academies, colleges and county programmes — football to aquatics, PE equipment and school kits. Bulk quotes, nationwide delivery — Pollygram &amp; General Supplies.">
+  <meta id="pg-theme-color" name="theme-color" content="#050505">
+  <title>Pollygram &amp; General Supplies | Institutional Sports Supply — Kenya Schools</title>
+
+  <!-- Open Graph: static defaults; IDs allow optional runtime sync from CMS (re-share after deploy for fresh cache) -->
+  <meta property="og:type" content="website">
+  <meta id="pg-meta-og-title" property="og:title" content="Pollygram &amp; General Supplies | Sports Equipment &amp; Uniforms">
+  <meta id="pg-meta-og-desc" property="og:description" content="Kenya institutional sports supplier — high schools, academies, colleges, PE departments &amp; county programmes. Equipment across football, athletics, courts, aquatics &amp; more.">
+  <meta id="pg-meta-og-url" property="og:url" content="https://yourdomain.com">
+  <meta id="pg-meta-og-image" property="og:image" content="https://yourdomain.com/preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta id="pg-meta-tw-title" name="twitter:title" content="Pollygram &amp; General Supplies | Sports Equipment &amp; Uniforms">
+  <meta id="pg-meta-tw-desc" name="twitter:description" content="Kenya institutional sports supplier — schools, academies, colleges, PE departments &amp; county programmes. Full-range equipment catalogue.">
+  <meta id="pg-meta-tw-image" name="twitter:image" content="https://yourdomain.com/preview.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Pollygram & General Supplies",
+    "description": "Institutional sports equipment for Kenyan high schools, academies, colleges, clubs, PE departments and county sports programmes — full-range supply.",
+    "url": "https://yourdomain.com",
+    "telephone": "+254-700-000000",
+    "address": {"@type": "PostalAddress", "addressLocality": "Nairobi", "addressCountry": "KE"},
+    "areaServed": "KE",
+    "priceRange": "KES"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site-premium.css">
+
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to catalogue</a>
+  <div class="sticky-top-bundle" id="stickyTopBundle" role="banner">
+    <div class="promo-bar" id="promoBar" role="region" aria-label="Promotion">
+      <span class="promo-msg" id="promoBarText">⚡ Bulk orders get special pricing — schools &amp; clubs ordering now for the new term</span>
+      <button type="button" class="promo-close" id="promoClose" aria-label="Dismiss promotion banner">×</button>
+    </div>
+    <div class="utility">
+      <div><strong>📧</strong> <span>info@pollygram.co.ke</span> &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp; <strong>📞</strong> <span id="utilityPhone">+254 700 000 000</span></div>
+      <div><span id="utilityHoursSnippet">Mon–Sat 8am–7pm</span> · <span id="utilityAddressSnippet">Nairobi</span></div>
+    </div>
+
+  <header class="nav" id="nav">
+    <a href="#" class="brand-block brand-lockup" aria-label="Pollygram &amp; General Supplies — home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg class="brand-mark-svg" viewBox="0 0 48 52" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path class="brand-mark-shield" stroke="currentColor" stroke-width="1" stroke-linejoin="round" d="M24 3L44 13v21c0 9-10 17-20 21-10-4-20-12-20-21V13L24 3z"/>
+          <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="round" d="M19 17h7.2c4.1 0 6 2.9 6 6 0 3.9-2.4 6-7 6H21v11"/>
+          <path fill="none" stroke="currentColor" stroke-opacity=".38" stroke-width="1.2" d="M21 29h12"/>
+        </svg>
+      </span>
+      <span class="brand-text-stack">
+        <span id="brandBusiness" class="brand-org-title"><span class="brand-line-main">Pollygram</span><span class="brand-second-row"><span class="brand-line-join">&amp;</span><span class="brand-line-sub">General Supplies</span></span></span>
+        <span class="brand-tagline">Sports Equipment &amp; Uniforms</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a class="link active" href="#">Home</a>
+      <a class="link" href="#products">Catalogue</a>
+      <a class="link" href="#bundles">Packages</a>
+      <a class="link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="nav-drawer-trigger" id="navDrawerTrigger" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="theme-bar" role="group" aria-label="Theme switcher">
+        <button type="button" class="theme-btn" data-theme-set="elite" aria-pressed="true" title="Night Performance">Night</button>
+        <button type="button" class="theme-btn" data-theme-set="promo" title="Luxury Athletics">Luxe</button>
+        <button type="button" class="theme-btn" data-theme-set="marketplace" title="Future Sport Tech">Apex</button>
+      </div>
+      <button type="button" class="quote-btn" id="navLeadBtn">Get a quote</button>
+    </div>
+  </header>
+  </div>
+
+  <div class="nav-drawer-backdrop" id="navDrawerBackdrop" aria-hidden="true" tabindex="-1"></div>
+  <div class="nav-mobile-sheet" id="navMobile" role="dialog" aria-modal="true" aria-label="Site navigation" aria-hidden="true">
+    <div class="nav-mobile-sheet__header">
+      <span class="nav-mobile-sheet__title">Menu</span>
+      <button type="button" class="nav-mobile-sheet__close" id="navDrawerClose" aria-label="Close menu">×</button>
+    </div>
+    <nav class="nav-mobile-sheet__nav" aria-label="Primary">
+      <a class="mobile-link active" href="#">Home</a>
+      <a class="mobile-link" href="#products">Catalogue</a>
+      <a class="mobile-link" href="#bundles">Packages</a>
+      <a class="mobile-link" href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <main id="main-content">
+  <section class="hero hero--cinema hero--conversion hero-animate" id="top">
+    <div class="hero-media" aria-hidden="true">
+      <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/hero/kenya-nairobi-night-football-hero.jpg" aria-hidden="true">
+        <source src="assets/videos/sports-hero.mp4" type="video/mp4">
+      </video>
+      <picture class="hero-video-fallback pg-hero-pic">
+        <source type="image/webp" srcset="assets/images/hero/kenya-nairobi-night-football-hero.webp">
+        <img
+          src="assets/images/hero/kenya-nairobi-night-football-hero.jpg"
+          alt=""
+          width="1600"
+          height="900"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          data-fallback-src="assets/images/placeholder.svg"
+          onerror="typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)">
+      </picture>
+    </div>
+    <div class="hero-gradient"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-stage hero-stage--single">
+        <div class="hero-copy">
+          <h1 class="hero-title hero-motion" id="heroHeadline">Kenya&apos;s Institutional Sports Supplier — Schools &amp; County Programmes</h1>
+          <p class="hero-sub hero-motion" id="heroSubtitle">High schools, academies, colleges, clubs and PE departments — full-programme equipment supply.</p>
+          <p class="hero-trust-line hero-motion" id="heroTrustLine">Nationwide delivery · Bulk school orders · Institutional supply</p>
+          <div class="hero-cta hero-motion">
+            <a class="btn-primary" id="heroCtaPrimary" href="#catalogue-shop">View Catalogue</a>
+            <a class="btn-ghost" id="heroWa" href="#" target="_blank" rel="noopener" data-track="whatsapp_click" data-track-source="hero_message_link">WhatsApp Order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discovery: compact sticky categories + filter entry (search lives above grid in #products) -->
+  <div class="pg-discovery reveal visible" id="catalogue-shop">
+    <div class="pg-discovery__inner">
+      <div class="pg-discovery__head">
+        <span class="pg-discovery__eyebrow">Shop sports equipment</span>
+        <p class="pg-discovery__title">Find stock by category or search the full catalogue</p>
+      </div>
+      <div class="pg-discovery__toolbar">
+        <button type="button" class="pg-filter-sheet-trigger mobile-filter-btn" id="pgFilterOpen" aria-expanded="false" aria-controls="pgFilterSheet">
+          <span class="pg-filter-sheet-trigger__label">Filters</span>
+          <span class="pg-filter-sheet-trigger__badge" id="pgFilterBadge" hidden aria-hidden="true">0</span>
+        </button>
+        <div class="pg-mega pg-mega--toolbar" id="pgMegaNav">
+        <nav class="tabs-wrap tabs-wrap--discovery pg-discovery__categories category-scroll" aria-label="Sports categories">
+          <div class="tabs-inner tabs-inner--pills">
+            <button type="button" class="tab tab--pill active" data-filter="all" role="tab">All</button>
+          </div>
+        </nav>
+        <div
+          class="pg-mega__panel"
+          id="pgMegaPanel"
+          role="region"
+          aria-label="Products in category"
+          aria-hidden="true"
+          hidden>
+          <div class="pg-mega__panel-inner">
+            <div class="pg-mega__top">
+              <div class="pg-mega__top-main">
+                <p class="pg-mega__eyebrow" id="pgMegaEyebrow">Browse</p>
+                <p class="pg-mega__title" id="pgMegaTitle">Category</p>
+              </div>
+              <div class="pg-mega__top-actions">
+                <button type="button" class="pg-mega__close" id="pgMegaCloseBtn" aria-label="Close">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+                <a href="#products" class="pg-mega__link-all" id="pgMegaViewAll">View all →</a>
+              </div>
+            </div>
+            <div class="pg-mega__grid" id="pgMegaGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters: sheet / modal — stock, price, featured, tags (non-blocking) -->
+  <div class="pg-filter-sheet" id="pgFilterSheet" aria-hidden="true" inert>
+    <div class="pg-filter-sheet__backdrop" id="pgFilterBackdrop" tabindex="-1" aria-hidden="true"></div>
+    <div class="pg-filter-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="pgFilterSheetTitle" id="pgFilterPanel">
+      <div class="pg-filter-sheet__head">
+        <h2 class="pg-filter-sheet__title" id="pgFilterSheetTitle">Filters</h2>
+        <div class="pg-filter-sheet__head-actions">
+          <button type="button" class="pg-refine__reset pg-filter-sheet__clear" id="pgRefineReset">Clear all</button>
+          <button type="button" class="pg-filter-sheet__close" id="pgFilterClose" aria-label="Close filters">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="pg-filter-sheet__body">
+        <div class="pg-refine pg-refine--sheet" id="pgRefineBar" aria-label="Refine catalogue">
+          <div class="pg-refine__groups">
+            <div class="pg-refine-group" role="group" aria-label="Featured">
+              <span class="pg-refine-group__label">Highlight</span>
+              <div class="pg-refine-pills">
+                <button type="button" class="pg-refine-pill filter-pill active" data-pg-refine-key="featured" data-pg-refine-val="off">All products</button>
+                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="featured" data-pg-refine-val="on">Featured only</button>
+              </div>
+            </div>
+            <div class="pg-refine-group" role="group" aria-label="Availability">
+              <span class="pg-refine-group__label">Stock</span>
+              <div class="pg-refine-pills" id="pgRefineStockPills">
+                <button type="button" class="pg-refine-pill filter-pill active" data-pg-refine-key="stock" data-pg-refine-val="all">Any</button>
+                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="stock" data-pg-refine-val="in_stock">In stock</button>
+                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="stock" data-pg-refine-val="low_stock">Low stock</button>
+                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="stock" data-pg-refine-val="out_of_stock">Out of stock</button>
+              </div>
+            </div>
+            <div class="pg-refine-group" role="group" aria-label="Price band">
+              <span class="pg-refine-group__label">Price</span>
+              <div class="pg-refine-pills">
+                <button type="button" class="pg-refine-pill filter-pill active" data-pg-refine-key="price" data-pg-refine-val="all">Any</button>
+                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="price" data-pg-refine-val="under5k">Under KES 5,000</button>
+                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="price" data-pg-refine-val="over5k">KES 5,000+</button>
+              </div>
+            </div>
+            <div class="pg-refine-group pg-refine-group--tags" role="group" aria-label="Tags" id="pgRefineTagGroup" hidden>
+              <span class="pg-refine-group__label">Tags</span>
+              <div class="pg-refine-pills" id="pgRefineTagPills"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="trust-strip reveal" id="trust-strip" aria-label="Service highlights">
+    <div class="trust-strip-inner">
+      <span class="trust-strip-item"><span class="trust-strip-mark">✓</span> Nationwide Delivery</span>
+      <span class="trust-strip-item"><span class="trust-strip-mark">✓</span> Bulk School Orders</span>
+      <span class="trust-strip-item"><span class="trust-strip-mark">✓</span> WhatsApp Ordering</span>
+      <span class="trust-strip-item"><span class="trust-strip-mark">✓</span> Institutional Quotes</span>
+    </div>
+  </section>
+
+  <section class="section section--compact reveal" id="featured">
+    <div class="section-head section-head--tight">
+      <h2 class="section-title section-title--sm">Featured picks</h2>
+    </div>
+    <div class="grid grid-featured">
+      <article class="card" data-category="football">
+        <div class="media">
+          <picture class="pg-product-pic">
+            <source type="image/webp" srcset="assets/images/products/kenya-grassroots-football-match.webp">
+            <img loading="lazy" src="assets/images/products/kenya-grassroots-football-match.jpg" width="800" height="600" alt="Match football — soccer ball on grass (product-style close-up)" decoding="async" data-fallback-src="assets/images/placeholder.svg" onerror="typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)">
+          </picture>
+        </div>
+        <div class="body"><div class="cat">Featured</div><div class="name feat-name" data-feat-slot="1">Match Football Size 5</div><div class="desc">Premium touch, FIFA-style construction for leagues.</div><div class="meta"><span class="price feat-price" data-feat-slot="1">KES 1,200</span><span class="moq">Min 1</span></div></div>
+      </article>
+      <article class="card" data-category="football">
+        <div class="media">
+          <picture class="pg-product-pic">
+            <source type="image/webp" srcset="assets/images/products/kenya-grassroots-football-match.webp">
+            <img loading="lazy" src="assets/images/products/kenya-grassroots-football-match.jpg" width="800" height="600" alt="Training football — school and academy use" decoding="async" data-fallback-src="assets/images/placeholder.svg" onerror="typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)">
+          </picture>
+        </div>
+        <div class="body"><div class="cat">Featured</div><div class="name feat-name" data-feat-slot="2">Training Football</div><div class="desc">Hard-wearing balls for daily PE and after-school training.</div><div class="meta"><span class="price feat-price" data-feat-slot="2">KES 950</span><span class="moq">Min 12</span></div></div>
+      </article>
+      <article class="card" data-category="football">
+        <div class="media">
+          <picture class="pg-product-pic">
+            <source type="image/webp" srcset="assets/images/products/grassroots-portable-football-goals.webp">
+            <img loading="lazy" src="assets/images/products/grassroots-portable-football-goals.jpg" width="800" height="600" alt="Goal nets and posts — school football pitch" decoding="async" data-fallback-src="assets/images/placeholder.svg" onerror="typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)">
+          </picture>
+          <span class="badge">Institutional</span>
+        </div>
+        <div class="body"><div class="cat">Featured</div><div class="name feat-name" data-feat-slot="3">Goal Nets</div><div class="desc">Full-size school pitch nets — UV-treated, competition ready.</div><div class="meta"><span class="price feat-price" data-feat-slot="3">KES 4,500</span><span class="moq">Per set</span></div></div>
+      </article>
+    </div>
+  </section>
+
+  <template id="pgCatalogCardProto">
+    <article class="card reveal" data-category="football">
+      <div class="media">
+        <span class="stock-badge stock-badge--in-stock js-stock-badge" data-stock-role="badge">In Stock</span>
+        <picture class="pg-product-pic">
+          <source type="image/webp" srcset="assets/images/products/kenya-grassroots-football-match.webp">
+          <img loading="lazy" src="assets/images/products/kenya-grassroots-football-match.jpg" width="900" height="900" alt="" decoding="async" data-fallback-src="assets/images/placeholder.svg" onerror="typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)">
+        </picture>
+        <div class="card-actions">
+          <button type="button" class="qv-card js-quick-view">Quick view</button>
+          <button type="button" class="enq">+ Enquiry</button>
+          <button type="button" class="wa-card js-wa-one">WhatsApp buy</button>
+        </div>
+      </div>
+      <div class="body">
+        <div class="cat">Football</div>
+        <h3 class="name">Product</h3>
+        <p class="desc">Description</p>
+        <div class="meta"><span class="price">—</span><span class="moq">—</span></div>
+        <button type="button" class="quote-btn js-quote-product">Request institutional quote</button>
+      </div>
+    </article>
+  </template>
+
+  <section class="section catalogue-section section--compact" id="products">
+    <div class="catalogue-head catalogue-head--split section-head section-head--tight reveal">
+      <div class="catalogue-head__copy">
+        <h2 class="section-title section-title--sm">Full school sports catalogue</h2>
+        <p class="catalogue-head__lead">Procurement-grade listings with stock visibility — request an institutional quote for LPOs and bulk programmes.</p>
+      </div>
+      <button type="button" class="btn-inst-quote" id="btnInstitutionalQuote">Request institutional quote</button>
+    </div>
+    <div class="pg-products-search-wrap">
+      <div class="pg-search-shell">
+        <form class="catalogue-search hero-search pg-search pg-search--premium" id="productSearchForm" role="search" aria-label="Search catalogue" onsubmit="return false;">
+          <span class="pg-search__icon-wrap" aria-hidden="true">
+            <svg class="pg-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="M21 21l-4.2-4.2"/>
+            </svg>
+          </span>
+          <input type="search" class="pg-search__input" id="productSearch" name="q" placeholder="Search sports equipment..." autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-label="Search products" aria-expanded="false" aria-controls="productSearchSuggest" aria-autocomplete="list" inputmode="search">
+          <button type="button" class="pg-search__clear" id="productSearchClear" hidden aria-label="Clear search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+          <button type="submit" class="pg-search__submit">Search</button>
+        </form>
+        <div id="productSearchSuggest" class="pg-search__dropdown" hidden role="listbox" aria-label="Product suggestions"></div>
+      </div>
+    </div>
+    <div class="grid catalogue-grid" id="productGrid"></div>
+    <div class="catalog-search-empty empty-state" id="catalogSearchEmpty" hidden role="status" aria-live="polite" aria-atomic="true">
+      <p class="catalog-search-empty__title">No matching products found</p>
+      <p class="catalog-search-empty__hint">Try a different word, clear the search, adjust filters, or pick “All” categories.</p>
+    </div>
+  </section>
+
+  <section class="section reveal section--compact" id="bundles">
+    <div class="section-head section-head--tight">
+      <h2 class="section-title section-title--sm">Ready-made packages</h2>
+      <p class="section-lead section-lead--one">Quote on WhatsApp — we tailor quantities for your school or club.</p>
+    </div>
+    <div class="grid-3">
+      <article class="package-card">
+        <h3>School Starter Kit</h3>
+        <ul>
+          <li>PE shirts + shorts combo</li>
+          <li>Training balls mixed sizes</li>
+          <li>Cones &amp; whistles</li>
+        </ul>
+        <div class="package-card__cta-row">
+          <button type="button" class="quote-btn quote-btn--compact js-pack-quote" data-pack="School Starter Kit">Institutional quote</button>
+          <button type="button" class="mini-wa js-pack-wa" data-pack="School Starter Kit">WhatsApp bundle</button>
+        </div>
+      </article>
+      <article class="package-card">
+        <h3>Club Season Ready</h3>
+        <ul>
+          <li>Full outfield kit lineup</li>
+          <li>Match-grade ball crate</li>
+          <li>Portable goals bundle</li>
+        </ul>
+        <div class="package-card__cta-row">
+          <button type="button" class="quote-btn quote-btn--compact js-pack-quote" data-pack="Club Season Ready">Institutional quote</button>
+          <button type="button" class="mini-wa js-pack-wa" data-pack="Club Season Ready">WhatsApp bundle</button>
+        </div>
+      </article>
+      <article class="package-card">
+        <h3>PE Department Reload</h3>
+        <ul>
+          <li>Mats, ladders &amp; basics</li>
+          <li>Multi-sport teaching aids</li>
+          <li>LPO-ready invoicing</li>
+        </ul>
+        <div class="package-card__cta-row">
+          <button type="button" class="quote-btn quote-btn--compact js-pack-quote" data-pack="PE Department Reload">Institutional quote</button>
+          <button type="button" class="mini-wa js-pack-wa" data-pack="PE Department Reload">WhatsApp bundle</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section reveal section--compact" id="voices">
+    <div class="section-head section-head--tight">
+      <h2 class="section-title section-title--sm">What institutions say</h2>
+    </div>
+    <div class="grid-2-testimonials">
+      <article class="quote-card quote-card--compact">
+        <blockquote id="t1-quote">One WhatsApp thread for athletics week — gear arrived labelled by house.</blockquote>
+        <div class="who"><strong id="t1-attrib">Hellen Mwangi · Games Mistress</strong>Kiambu County</div>
+      </article>
+      <article class="quote-card quote-card--compact">
+        <blockquote id="t2-quote">Transparent pricing before our LPO — consistent kits every season.</blockquote>
+        <div class="who"><strong id="t2-attrib">Coach Brian Omondi</strong>Nairobi academy</div>
+      </article>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <div class="footer-lockup">
+          <span class="brand-mark footer-mark" aria-hidden="true">
+            <svg class="brand-mark-svg" viewBox="0 0 48 52" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path class="brand-mark-shield" stroke="currentColor" stroke-width="1" stroke-linejoin="round" d="M24 3L44 13v21c0 9-10 17-20 21-10-4-20-12-20-21V13L24 3z"/>
+              <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="round" d="M19 17h7.2c4.1 0 6 2.9 6 6 0 3.9-2.4 6-7 6H21v11"/>
+              <path fill="none" stroke="currentColor" stroke-opacity=".38" stroke-width="1.2" d="M21 29h12"/>
+            </svg>
+          </span>
+          <div class="footer-lockup-copy">
+            <p id="footerBrandLines" class="brand-org-title brand-org-title--footer"><span class="brand-line-main">Pollygram</span><span class="brand-second-row"><span class="brand-line-join">&amp;</span><span class="brand-line-sub">General Supplies</span></span></p>
+            <p class="footer-brand-tagline">Sports Equipment &amp; Uniforms</p>
+            <p class="footer-business-line"><span id="footerBusinessLine">Pollygram &amp; General Supplies</span></p>
+            <p class="footer-email">info@pollygram.co.ke</p>
+            <p class="footer-phone"><span id="utilityPhoneDup">+254 700 000 000</span></p>
+          </div>
+        </div>
+      </div>
+      <div><div class="f-head">Shop</div>
+        <a class="f-link" href="#products">Catalogue</a>
+        <a class="f-link" href="#bundles">Packages</a>
+        <a class="f-link" href="#contact">Contact</a>
+      </div>
+      <div><div class="f-head">Order</div>
+        <a class="f-link pg-wa-link" id="footerWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" class="f-link f-link--btn" id="footerQuoteBtn">Get a quote</button>
+      </div>
+      <div><div class="f-head">Visit</div>
+        <span class="f-link"><span id="footerAddressLine">Nairobi, Kenya</span></span>
+        <span class="f-link"><span id="footerHoursLine">Mon–Sat 8am–7pm</span></span>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 2026 Pollygram &amp; General Supplies</span>
+      <span><a href="admin.html" target="_blank" rel="noopener" class="copy-admin">Admin</a></span>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a class="wa-fab" id="wa" href="#" target="_blank" rel="noopener" aria-label="Order Now on WhatsApp" data-track="whatsapp_click" data-track-source="floating_fab">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.004 4C9.924 4 5 8.924 5 15.008c0 2.394.783 4.596 2.098 6.379L5 27l5.812-2.069A11.93 11.93 0 0 0 16.004 26C22.086 26 27 21.086 27 15.008 27 8.924 22.086 4 16.004 4zm7.086 17.068c-.302.849-1.688 1.556-2.362 1.651-.596.086-1.366.154-4.442-1.068-3.734-1.556-6.146-5.375-6.334-5.627-.178-.261-1.518-2.026-1.518-3.867 0-1.834.957-2.743 1.297-3.117.348-.394.759-.489 1.012-.489.259 0 .518.008.743.024.266.016.62-.097.974.743.356.849 1.21 2.956 1.318 3.173.118.226.208.489.049.783-.169.297-.267.489-.527.743-.267.274-.547.596-.783.794-.267.237-.547.527-.239 1.004.297.477 1.326 2.186 2.851 3.541 2.007 1.785 3.694 2.356 4.212 2.622.527.274.834.231 1.138-.154.297-.379 1.138-1.326 1.445-1.785.297-.459.596-.379.974-.239.379.154 2.379 1.122 2.786 1.322.397.219.659.347.759.547.089.237.089 1.355-.239 2.704z"/></svg>
+    Order Now
+  </a>
+
+  <button type="button" class="cart-float" id="cartBtn" aria-label="Open enquiry cart" data-track="cart_open" data-track-source="floating_cart">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+    <span class="cart-label">LIST</span>
+  </button>
+  <aside class="cart-panel" id="cartPanel" aria-label="Enquiry cart">
+    <div class="cart-head"><h4>Enquiry basket</h4><button type="button" class="close" id="closeCart">✕</button></div>
+    <div class="cart-org-row">
+      <label for="cartOrgType">Buying for</label>
+      <select id="cartOrgType" aria-label="Institution type for quotation">
+        <option value="School">School</option>
+        <option value="Club / Academy">Club / Academy</option>
+        <option value="Institution / NGO">Institution / NGO</option>
+        <option value="Corporate / CSR">Corporate / CSR</option>
+        <option value="Individual">Individual / Retail</option>
+      </select>
+    </div>
+    <div class="cart-items" id="cartItems"><div class="empty">Tap “+ Enquiry” on catalogue cards to assemble a list.</div></div>
+    <div class="cart-foot"><button type="button" class="send" id="sendCart">Send enquiry on WhatsApp</button></div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Product quick view -->
+  <div id="pgQuickViewRoot" class="pg-qv-root" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pgQvTitle">
+    <div class="pg-qv-backdrop" id="pgQuickViewBackdrop" tabindex="-1"></div>
+    <div class="pg-qv-dialog">
+      <div class="pg-qv-head">
+        <h2 id="pgQvTitle" class="pg-qv-title">Product</h2>
+        <button type="button" class="pg-qv-close" id="pgQuickViewClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="pg-qv-body">
+        <div class="pg-qv-media">
+          <div id="pgQvImage" class="pg-qv-image"></div>
+          <span id="pgQvStock" class="stock-badge stock-badge--in-stock">In Stock</span>
+        </div>
+        <div class="pg-qv-copy">
+          <p id="pgQvCat" class="pg-qv-cat"></p>
+          <p id="pgQvDesc" class="pg-qv-desc"></p>
+          <div class="pg-qv-meta">
+            <span id="pgQvPrice" class="pg-qv-price"></span>
+            <span id="pgQvMoq" class="pg-qv-moq"></span>
+          </div>
+          <div id="pgQvTags" class="pg-qv-tags" hidden></div>
+          <label class="pg-qv-qty-label" for="pgQvQty">Quantity</label>
+          <div class="pg-qv-qty-row">
+            <input type="number" id="pgQvQty" class="pg-qv-qty" min="1" step="1" value="1">
+          </div>
+          <div class="pg-qv-actions">
+            <button type="button" class="btn-primary pg-qv-wa" id="pgQvWa">WhatsApp — request quotation</button>
+            <button type="button" class="btn-ghost pg-qv-enq" id="pgQvEnquiry">Add to enquiry list</button>
+          </div>
+          <div class="pg-qv-related" id="pgQvRelated" hidden>
+            <h3 class="pg-qv-related-title">Related in category</h3>
+            <div class="pg-qv-related-grid" id="pgQvRelatedGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile sticky bar -->
+  <div class="mobile-cta-bar" role="region" aria-label="Quick actions">
+    <a class="ghost-m" href="#products">Catalogue</a>
+    <a class="solid-m" id="stickyWa" href="#" target="_blank" rel="noopener" data-track="whatsapp_click" data-track-source="mobile_sticky">Order Now</a>
+  </div>
+
+  <div id="leadBackdrop" class="lead-backdrop" aria-hidden="true"></div>
+  <aside class="lead-sheet" id="leadSheet" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+    <button type="button" class="lead-close" id="leadCloseBtn" aria-label="Close enquiry form">×</button>
+    <h3 id="leadTitle">Institutional quotation</h3>
+    <p class="lead-hint">Schools, academies &amp; bulk buyers — we reply with pricing and timelines.</p>
+    <form id="leadForm" novalidate>
+      <div class="lead-field">
+        <label for="leadSchool">School / institution name <span aria-hidden="true">*</span></label>
+        <input id="leadSchool" name="school" type="text" required autocomplete="organization" maxlength="180" placeholder="Greenfield Academy">
+      </div>
+      <div class="lead-field">
+        <label for="leadContact">Contact person <span aria-hidden="true">*</span></label>
+        <input id="leadContact" name="contact" type="text" required autocomplete="name" maxlength="120" placeholder="Jane Wanjiku">
+      </div>
+      <div class="lead-field">
+        <label for="leadPhone">Phone (WhatsApp) <span aria-hidden="true">*</span></label>
+        <input id="leadPhone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" maxlength="32" placeholder="+254 7xx xxx xxx">
+      </div>
+      <div class="lead-field">
+        <label for="leadEmail">Email</label>
+        <input id="leadEmail" name="email" type="email" autocomplete="email" maxlength="120" placeholder="procurement@school.ac.ke">
+      </div>
+      <div class="lead-field">
+        <label for="leadProducts">Products needed <span aria-hidden="true">*</span></label>
+        <input id="leadProducts" name="products" type="text" maxlength="400" required placeholder="e.g. team kits, balls, mats — one line or comma-separated">
+      </div>
+      <div class="lead-field">
+        <label for="leadQuantities">Quantities / sizes (optional)</label>
+        <input id="leadQuantities" name="quantities" type="text" maxlength="300" placeholder="e.g. 30 kits M/L, 24 balls size 5">
+      </div>
+      <div class="lead-field">
+        <label for="leadCounty">Delivery county / region</label>
+        <input id="leadCounty" name="county" type="text" maxlength="80" placeholder="e.g. Kiambu">
+      </div>
+      <div class="lead-field">
+        <label for="leadMessage">Notes (optional)</label>
+        <textarea id="leadMessage" name="message" rows="3" maxlength="800" placeholder="LPO timeline, budget band, inspection visit…"></textarea>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-top:8px;">
+        <input type="checkbox" id="leadAlsoWa" checked> Also open WhatsApp with this summary
+      </label>
+      <div class="lead-actions">
+        <button type="submit" class="btn-primary" id="leadSubmit">Submit enquiry</button>
+        <button type="button" class="btn-ghost" id="leadCancel" style="border-width:1px;">Cancel</button>
+      </div>
+      <p id="leadFormError" style="color:#e11d48;font-size:13px;margin-top:10px;min-height:18px;" role="alert"></p>
+    </form>
+  </aside>
+
+  <script src="assets/js/track.js"></script>
+  <script src="assets/js/catalog-data.js"></script>
+  <script src="assets/js/pollygram-leads.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+  (function () {
+    /* -------------------------------------------------------------------------- */
+    /* CONFIG SECTION                                                               */
+    /* -------------------------------------------------------------------------- */
+    const STORAGE_THEME = 'pollygram_theme';
+
+    /** Paste your project URL and anon key from Supabase. Placeholders = static fallback (no remote fetch). */
+    const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+    const SUPABASE_PLACEHOLDER_URL = 'YOUR_SUPABASE_PROJECT_URL';
+    const SUPABASE_PLACEHOLDER_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const isSupabaseConfigured = () =>
+      SUPABASE_URL !== SUPABASE_PLACEHOLDER_URL &&
+      SUPABASE_ANON_KEY !== SUPABASE_PLACEHOLDER_KEY &&
+      SUPABASE_URL.length > 12 &&
+      SUPABASE_ANON_KEY.length > 20;
+
+    if (typeof PollygramLeads !== 'undefined' && PollygramLeads.configure) {
+      PollygramLeads.configure({
+        isSupabaseConfigured: isSupabaseConfigured,
+        getSupabaseClient: function () {
+          if (!isSupabaseConfigured() || !window.supabase || typeof window.supabase.createClient !== 'function')
+            return null;
+          return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+      });
+    }
+
+    function getPublicLeadClient() {
+      if (!isSupabaseConfigured() || !window.supabase || typeof window.supabase.createClient !== 'function')
+        return null;
+      return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    async function trackLeadThen(action) {
+      try {
+        await Promise.race([
+          typeof action === 'function' ? action() : Promise.resolve(),
+          new Promise(function (resolve) {
+            setTimeout(resolve, 2200);
+          })
+        ]);
+      } catch (e0) {}
+    }
+
+    /** Default WhatsApp (Kenya-style, digits only — must match till admin/Supabase loads). */
+    const DEFAULT_WA_DIGITS = '254700000000';
+
+    /** -------------------------------------------------------------------------- */
+    /** WHATSAPP HANDLING                                                          */
+    /** -------------------------------------------------------------------------- */
+    function sanitizeWhatsAppDigits(value) {
+      const raw = value == null ? '' : String(value);
+      const digits = raw.replace(/\D/g, '');
+      return digits.length ? digits : '';
+    }
+
+    let waDigits = sanitizeWhatsAppDigits(DEFAULT_WA_DIGITS) || DEFAULT_WA_DIGITS;
+    let waIntroOverride = '';
+
+    /** Build wa.me URL; message encoded for mobile + desktop WhatsApp Web. */
+    function buildWhatsAppHref(messageText) {
+      const digits = sanitizeWhatsAppDigits(waDigits) || DEFAULT_WA_DIGITS;
+      const text = encodeURIComponent(messageText || '');
+      return `https://wa.me/${digits}${text ? `?text=${text}` : ''}`;
+    }
+
+    /** Default “contact us” blurb for hero FAB, sticky bar & floating WhatsApp. */
+    function defaultIntroWaMessage() {
+      return [
+        'Hello Pollygram & General Supplies,',
+        '',
+        'I visited your website and want pricing for schools/clubs bundles.',
+        '',
+        'Please share MOQs and availability.',
+        '',
+        'Thank you.'
+      ].join('\n');
+    }
+
+    /** Refresh hero FAB, sticky CTA & floating WhatsApp hrefs after number changes. */
+    function refreshWhatsAppLinks(customIntro) {
+      var fromArg =
+        typeof customIntro === 'string' && customIntro.trim()
+          ? customIntro
+          : waIntroOverride && String(waIntroOverride).trim()
+            ? String(waIntroOverride)
+            : '';
+      var intro = fromArg.trim() ? fromArg : defaultIntroWaMessage();
+      ['heroWa', 'stickyWa', 'wa', 'footerWa'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.href = buildWhatsAppHref(intro);
+      });
+    }
+
+    function bindTrackedWhatsAppAnchors() {
+      var ids = [
+        { id: 'heroWa', tag: 'hero' },
+        { id: 'stickyWa', tag: 'sticky_mobile' },
+        { id: 'wa', tag: 'floating_fab' },
+        { id: 'footerWa', tag: 'footer' }
+      ];
+      ids.forEach(function (cfg) {
+        var el = document.getElementById(cfg.id);
+        if (!el || el.dataset.pgWaTracked) return;
+        el.dataset.pgWaTracked = '1';
+        el.addEventListener('click', function (ev) {
+          var href = el.getAttribute('href');
+          if (!href || href === '#') return;
+          ev.preventDefault();
+          var introMsg =
+            typeof waIntroOverride === 'string' && waIntroOverride.trim()
+              ? waIntroOverride
+              : defaultIntroWaMessage();
+          trackLeadThen(function () {
+            if (typeof PollygramLeads === 'undefined') return Promise.resolve();
+            return PollygramLeads.insertLead(
+              PollygramLeads.normalizeLeadRow({
+                products: 'General WhatsApp contact',
+                source: 'whatsapp_' + cfg.tag,
+                message: introMsg.slice(0, 400),
+                timeline: [
+                  PollygramLeads.timelineEntry('WhatsApp link (' + cfg.tag + ')', 'whatsapp')
+                ]
+              })
+            );
+          }).then(function () {
+            window.open(href, '_blank');
+          });
+        });
+      });
+    }
+
+    const nav = document.getElementById('nav');
+
+    refreshWhatsAppLinks();
+    bindTrackedWhatsAppAnchors();
+
+    /* --- Sticky offset (catalogue tabs) ---------------------------------------- */
+    function syncStackHeight() {
+      var bundle = document.getElementById('stickyTopBundle');
+      if (!bundle) return;
+      document.documentElement.style.setProperty('--stack-h', bundle.offsetHeight + 'px');
+    }
+    syncStackHeight();
+    window.addEventListener('resize', function () {
+      syncStackHeight();
+    });
+
+    /* --- Promo bar (closes + persists) ---------------------------------------- */
+    const PROMO_LS = 'pollygram_promo_dismissed_v1';
+    function setPromoVisible(on) {
+      var bar = document.getElementById('promoBar');
+      if (!bar) return;
+      if (on) bar.classList.remove('dismissed');
+      else {
+        bar.classList.add('dismissed');
+        syncStackHeight();
+      }
+    }
+    function wirePromoDismiss() {
+      try {
+        if (localStorage.getItem(PROMO_LS)) setPromoVisible(false);
+      } catch (_) {}
+      var cls = document.getElementById('promoClose');
+      if (cls && !cls.dataset.pgWired) {
+        cls.dataset.pgWired = '1';
+        cls.addEventListener('click', function () {
+          try {
+            localStorage.setItem(PROMO_LS, '1');
+          } catch (_) {}
+          setPromoVisible(false);
+          if (typeof trackEvent === 'function') trackEvent('promo_dismiss');
+        });
+      }
+    }
+    wirePromoDismiss();
+
+    /* --- Hero video (muted autoplay with graceful fallback image) ----------- */
+    (function heroVideoBoot() {
+      var root = document.getElementById('top');
+      var v = document.getElementById('heroVideo');
+      if (!root || !v) return;
+      v.muted = true;
+      v.setAttribute('muted', '');
+      var fail = function () {
+        root.classList.add('hero--video-fail');
+      };
+      v.addEventListener('error', fail);
+      var p =
+        v.play &&
+        v.play().catch(function () {
+          fail();
+        });
+      if (p && typeof p.then === 'function') p.catch(fail);
+    })();
+
+    /* --- Campaign presets (?campaign=…) --------------------------------------- */
+    const CAMPAIGN_PRESETS = {
+      schools: {
+        promo_append: '🏆 School sports season — bundles & jerseys ready to ship ',
+        subtitle:
+          'PE departments & games captains: one thread for quotations, jerseys, spikes and trophies — built for Kenyan school calendars.'
+      },
+      'football-kits': {
+        promo_append: '⚽ Custom football kits • MOQs that work for academies ',
+        subtitle: 'Grassroots to academy level: dyed fabrics, numbering, GK sets and crates of match balls on one invoice.'
+      },
+      'gym-equipment': {
+        promo_append: '🏋️ Gym fit-outs & PE conditioning packs ',
+        subtitle: 'Rubber-coated weight rooms, agility kits and mats — ideal for reopening gyms and varsity conditioning suites.'
+      },
+      'back-to-school': {
+        promo_append: '🔥 Back-to-school athletics rush discounts ',
+        subtitle: 'Order early for athletics week — labelled house kits, whistles, cones and safe student gear dispatched fast.'
+      }
+    };
+
+    /* --- Deferred analytics IDs (populate before deploy) ---------------------- */
+    window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || '';
+    window.META_PIXEL_ID = window.META_PIXEL_ID || '';
+
+    /* --- Lead modal timing ---------------------------------------------------- */
+    const LEAD_POPUP_DELAY_MS = 42000;
+
+    /** --- Global capture: theme + tracked CTAs ---------------------------- */
+    document.addEventListener(
+      'click',
+      function (e) {
+        var t = e.target.closest('[data-track]');
+        if (t && typeof trackEvent === 'function') trackEvent(String(t.dataset.track), { source: t.dataset.trackSource || t.id || 'unknown' });
+      },
+      true
+    );
+
+    /** Browser UI tint mirrors active palette */
+    function syncThemeColor(theme) {
+      var meta = document.getElementById('pg-theme-color');
+      if (!meta) return;
+      var hex =
+        theme === 'promo' ? '#f5f5f4' : theme === 'marketplace' ? '#0c0e11' : '#050505';
+      meta.setAttribute('content', hex);
+    }
+
+    /** Theme persistence + switcher */
+    function applyTheme(name) {
+      const allowed = new Set(['elite', 'promo', 'marketplace']);
+      const t = allowed.has(name) ? name : 'elite';
+      document.documentElement.dataset.theme = t;
+      document.body.classList.toggle('has-mobile-bar', window.matchMedia('(max-width:980px)').matches);
+      document.querySelectorAll('.theme-btn').forEach((btn) => {
+        btn.setAttribute('aria-pressed', btn.dataset.themeSet === t ? 'true' : 'false');
+      });
+      syncThemeColor(t);
+      localStorage.setItem(STORAGE_THEME, t);
+    }
+    try {
+      const saved = localStorage.getItem(STORAGE_THEME);
+      applyTheme(saved || 'elite');
+    } catch { applyTheme('elite'); }
+
+    document.querySelectorAll('.theme-btn').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        applyTheme(btn.dataset.themeSet);
+        if (typeof trackEvent === 'function') trackEvent('theme_switch', { theme: btn.dataset.themeSet || '' });
+      }));
+
+    /** Mobile navigation drawer */
+    const navDrawerTrigger = document.getElementById('navDrawerTrigger');
+    const navMobile = document.getElementById('navMobile');
+    const navDrawerBackdrop = document.getElementById('navDrawerBackdrop');
+    function setNavDrawer(open) {
+      document.body.classList.toggle('nav-drawer-open', open);
+      if (navDrawerTrigger) navDrawerTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (navMobile) navMobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+      if (navDrawerBackdrop) navDrawerBackdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    navDrawerTrigger?.addEventListener('click', function () {
+      setNavDrawer(!document.body.classList.contains('nav-drawer-open'));
+    });
+    navDrawerBackdrop?.addEventListener('click', function () {
+      setNavDrawer(false);
+    });
+    document.getElementById('navDrawerClose')?.addEventListener('click', function () {
+      setNavDrawer(false);
+    });
+    navMobile?.querySelectorAll('a.mobile-link').forEach(function (a) {
+      a.addEventListener('click', function () { setNavDrawer(false); });
+    });
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setNavDrawer(false);
+    });
+
+    /** Scroll shadow */
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+    /** Mobile spacing + close drawer when returning to desktop */
+    window.addEventListener('resize', () => {
+      const mobileBar = window.matchMedia('(max-width:980px)').matches;
+      document.body.classList.toggle('has-mobile-bar', mobileBar);
+      if (!mobileBar && document.body.classList.contains('nav-drawer-open')) setNavDrawer(false);
+    });
+
+    /** Reveal observers */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              observer.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' })
+      : null;
+    revealEls.forEach((el) => observer ? observer.observe(el) : el.classList.add('visible'));
+
+    /** Product catalogue: category tabs + search (combined filters) */
+    function getProductCards() {
+      return Array.from(document.querySelectorAll('#productGrid .card'));
+    }
+
+    function getActiveCategoryFilter() {
+      const tab = document.querySelector(
+        '#pgMegaNav .tabs-inner .tab.active, .pg-discovery__categories .tab.active'
+      );
+      return tab && tab.dataset.filter ? tab.dataset.filter : 'all';
+    }
+
+    var runtimeProductById = {};
+    /** Centralized shop filter state (refine + tab + search read in applyCatalogFilters) */
+    var catalogFilters = {
+      category: 'all',
+      search: '',
+      stock: 'all',
+      featured: false,
+      price: 'all',
+      tag: 'all',
+      tags: []
+    };
+
+    function normalizeProductRecord(p) {
+      if (!p || typeof p !== 'object') p = {};
+      var o = JSON.parse(JSON.stringify(p));
+      if (o.sku == null || !String(o.sku).trim()) o.sku = o.id != null ? String(o.id) : '';
+      var st = String(o.stock_status || 'in_stock').toLowerCase().replace(/\s+/g, '_');
+      if (st !== 'low_stock' && st !== 'out_of_stock' && st !== 'in_stock') st = 'in_stock';
+      o.stock_status = st;
+      o.featured = o.featured === true || o.featured === 'true' || o.featured === 1;
+      if (!Array.isArray(o.tags)) {
+        o.tags =
+          typeof o.tags === 'string' && o.tags.trim()
+            ? o.tags
+                .split(/[,;]+/)
+                .map(function (t) {
+                  return t.trim();
+                })
+                .filter(Boolean)
+            : [];
+      }
+      return o;
+    }
+
+    function parseKesFromPrice(str) {
+      var m = String(str || '').replace(/,/g, '').match(/(\d+)/);
+      return m ? parseInt(m[1], 10) : NaN;
+    }
+
+    function cardPriceBand(card) {
+      var pe = card.querySelector('.price');
+      var n = parseKesFromPrice(pe ? pe.textContent : '');
+      if (!isFinite(n)) return 'unknown';
+      return n < 5000 ? 'under5k' : 'over5k';
+    }
+
+    function readCatalogFiltersFromDom() {
+      var input = document.getElementById('productSearch');
+      var q = (input && input.value ? input.value : '').trim().toLowerCase();
+      catalogFilters.search = q;
+      catalogFilters.category = getActiveCategoryFilter();
+      return catalogFilters;
+    }
+
+    function cardPassesCatalogFilters(card, f) {
+      if (!f) return true;
+      if (f.featured) {
+        if (card.dataset.featured !== 'true') return false;
+      }
+      if (f.stock !== 'all') {
+        var st = card.dataset.stockStatus || 'in_stock';
+        if (st !== f.stock) return false;
+      }
+      if (f.price !== 'all') {
+        var band = cardPriceBand(card);
+        if (band === 'unknown') {
+          /* Keep “Quote” / non-numeric prices visible; only filter when a band is known */
+        } else if (f.price === 'under5k' && band !== 'under5k') return false;
+        else if (f.price === 'over5k' && band !== 'over5k') return false;
+      }
+      if (f.tag !== 'all') {
+        var tks = (card.dataset.tags || '').split(/\s+/).filter(Boolean);
+        if (tks.indexOf(f.tag) === -1) return false;
+      }
+      if (f.tags && f.tags.length) {
+        var tagList = (card.dataset.tags || '').split(/\s+/).filter(Boolean);
+        for (var ti = 0; ti < f.tags.length; ti++) {
+          if (tagList.indexOf(f.tags[ti]) === -1) return false;
+        }
+      }
+      return true;
+    }
+
+    function filterProducts(cards, f) {
+      var out = [];
+      for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        if (cardMatchesCategory(c, f.category) && queryMatchesBlob(getCardSearchBlob(c), f.search) && cardPassesCatalogFilters(c, f)) {
+          out.push(c);
+        }
+      }
+      return out;
+    }
+
+    function syncRefinePillActiveStates() {
+      document.querySelectorAll('#pgRefineBar [data-pg-refine-key]').forEach(function (btn) {
+        var k = btn.getAttribute('data-pg-refine-key');
+        var v = btn.getAttribute('data-pg-refine-val');
+        if (!k) return;
+        if (k === 'featured') {
+          var on = catalogFilters.featured === true;
+          btn.classList.toggle('active', (v === 'on' && on) || (v === 'off' && !on));
+        } else {
+          btn.classList.toggle('active', String(catalogFilters[k]) === String(v));
+        }
+      });
+    }
+
+    function catalogHasActiveRefinement(f) {
+      if (!f) f = catalogFilters;
+      return (
+        (f.search && f.search.length > 0) ||
+        f.category !== 'all' ||
+        f.featured === true ||
+        f.stock !== 'all' ||
+        f.price !== 'all' ||
+        f.tag !== 'all'
+      );
+    }
+
+    function countActiveRefineDimensions() {
+      var n = 0;
+      if (catalogFilters.featured) n++;
+      if (catalogFilters.stock !== 'all') n++;
+      if (catalogFilters.price !== 'all') n++;
+      if (catalogFilters.tag !== 'all') n++;
+      return n;
+    }
+
+    function updateFilterSheetBadge() {
+      var badge = document.getElementById('pgFilterBadge');
+      if (!badge) return;
+      var n = countActiveRefineDimensions();
+      if (n > 0) {
+        badge.textContent = String(n);
+        badge.hidden = false;
+        badge.setAttribute('aria-hidden', 'false');
+      } else {
+        badge.hidden = true;
+        badge.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    function rebuildRefineTagPillsFromCatalog() {
+      var wrap = document.getElementById('pgRefineTagPills');
+      var grp = document.getElementById('pgRefineTagGroup');
+      if (!wrap || !grp) return;
+      wrap.innerHTML = '';
+      var seen = {};
+      var tags = [];
+      var src =
+        typeof megaCatalogSource !== 'undefined' && megaCatalogSource && megaCatalogSource.length
+          ? megaCatalogSource
+          : typeof POLLYGRAM_CATALOG !== 'undefined'
+            ? POLLYGRAM_CATALOG
+            : [];
+      for (var i = 0; i < src.length; i++) {
+        var pr = normalizeProductRecord(src[i]);
+        for (var j = 0; j < pr.tags.length; j++) {
+          var t = String(pr.tags[j] || '')
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, '-');
+          if (!t || seen[t]) continue;
+          seen[t] = true;
+          tags.push(t);
+          if (tags.length >= 16) break;
+        }
+        if (tags.length >= 16) break;
+      }
+      tags.sort();
+      if (!tags.length) {
+        grp.hidden = true;
+        return;
+      }
+      grp.hidden = false;
+      var all = document.createElement('button');
+      all.type = 'button';
+      all.className = 'pg-refine-pill filter-pill' + (catalogFilters.tag === 'all' ? ' active' : '');
+      all.setAttribute('data-pg-refine-key', 'tag');
+      all.setAttribute('data-pg-refine-val', 'all');
+      all.textContent = 'All tags';
+      wrap.appendChild(all);
+      for (var k = 0; k < tags.length; k++) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'pg-refine-pill filter-pill' + (catalogFilters.tag === tags[k] ? ' active' : '');
+        b.setAttribute('data-pg-refine-key', 'tag');
+        b.setAttribute('data-pg-refine-val', tags[k]);
+        b.textContent = tags[k].replace(/-/g, ' ');
+        wrap.appendChild(b);
+      }
+    }
+
+    function resetShopFilters() {
+      catalogFilters.featured = false;
+      catalogFilters.stock = 'all';
+      catalogFilters.price = 'all';
+      catalogFilters.tag = 'all';
+      catalogFilters.tags = [];
+      syncRefinePillActiveStates();
+      rebuildRefineTagPillsFromCatalog();
+      updateFilterSheetBadge();
+      scheduleApplyCatalogFilters();
+    }
+
+    function initShopRefineBar() {
+      var bar = document.getElementById('pgRefineBar');
+      if (!bar || bar.dataset.pgWired) return;
+      bar.dataset.pgWired = '1';
+      bar.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-pg-refine-key]');
+        if (!btn) return;
+        var key = btn.getAttribute('data-pg-refine-key');
+        var val = btn.getAttribute('data-pg-refine-val');
+        if (!key) return;
+        if (key === 'featured') {
+          catalogFilters.featured = val === 'on';
+        } else {
+          catalogFilters[key] = val;
+        }
+        syncRefinePillActiveStates();
+        updateFilterSheetBadge();
+        scheduleApplyCatalogFilters();
+      });
+      document.getElementById('pgRefineReset')?.addEventListener('click', function () {
+        resetShopFilters();
+        setFilterSheetOpen(false);
+      });
+    }
+
+    var filterSheetOpen = false;
+    var filterSheetLastFocus = null;
+    var filterSheetTrapHandler = null;
+
+    function getFilterPanelFocusableElements() {
+      var panel = document.getElementById('pgFilterPanel');
+      if (!panel) return [];
+      var sel =
+        'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      var nodes = panel.querySelectorAll(sel);
+      var out = [];
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (el.closest('[hidden]')) continue;
+        var ac = el.closest('[aria-hidden="true"]');
+        if (ac && ac !== panel && panel.contains(ac)) continue;
+        var st = window.getComputedStyle(el);
+        if (st.visibility === 'hidden' || st.display === 'none') continue;
+        out.push(el);
+      }
+      return out;
+    }
+
+    function attachFilterSheetFocusTrap() {
+      if (filterSheetTrapHandler) return;
+      filterSheetTrapHandler = function (e) {
+        if (!filterSheetOpen || e.key !== 'Tab') return;
+        var panel = document.getElementById('pgFilterPanel');
+        if (!panel) return;
+        var list = getFilterPanelFocusableElements();
+        if (!list.length) return;
+        if (list.length === 1) {
+          e.preventDefault();
+          list[0].focus();
+          return;
+        }
+        var first = list[0];
+        var last = list[list.length - 1];
+        var act = document.activeElement;
+        if (e.shiftKey) {
+          if (!panel.contains(act)) {
+            e.preventDefault();
+            last.focus();
+          } else if (act === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (!panel.contains(act)) {
+            e.preventDefault();
+            first.focus();
+          } else if (act === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+      document.addEventListener('keydown', filterSheetTrapHandler, true);
+    }
+
+    function detachFilterSheetFocusTrap() {
+      if (filterSheetTrapHandler) {
+        document.removeEventListener('keydown', filterSheetTrapHandler, true);
+        filterSheetTrapHandler = null;
+      }
+    }
+
+    function setFilterSheetOpen(open) {
+      var root = document.getElementById('pgFilterSheet');
+      var openBtn = document.getElementById('pgFilterOpen');
+      if (!root) return;
+      filterSheetOpen = !!open;
+      root.classList.toggle('is-open', filterSheetOpen);
+      root.setAttribute('aria-hidden', filterSheetOpen ? 'false' : 'true');
+      if (openBtn) {
+        openBtn.setAttribute('aria-expanded', filterSheetOpen ? 'true' : 'false');
+      }
+      if (filterSheetOpen) {
+        filterSheetLastFocus = document.activeElement;
+        root.removeAttribute('inert');
+        document.body.classList.add('pg-filter-sheet-open');
+        attachFilterSheetFocusTrap();
+        var closeEl = document.getElementById('pgFilterClose');
+        if (closeEl) setTimeout(function () { closeEl.focus(); }, 0);
+      } else {
+        detachFilterSheetFocusTrap();
+        root.setAttribute('inert', '');
+        document.body.classList.remove('pg-filter-sheet-open');
+        if (filterSheetLastFocus && typeof filterSheetLastFocus.focus === 'function') {
+          try {
+            filterSheetLastFocus.focus();
+          } catch (e1) {}
+        }
+      }
+    }
+    function initFilterSheet() {
+      if (document.body && document.body.dataset.pgFilterSheetWired) return;
+      if (document.body) document.body.dataset.pgFilterSheetWired = '1';
+      var openBtn = document.getElementById('pgFilterOpen');
+      var closeBtn = document.getElementById('pgFilterClose');
+      var back = document.getElementById('pgFilterBackdrop');
+      if (openBtn) {
+        openBtn.addEventListener('click', function () {
+          setFilterSheetOpen(true);
+        });
+      }
+      if (closeBtn) closeBtn.addEventListener('click', function () { setFilterSheetOpen(false); });
+      if (back) {
+        back.addEventListener('click', function () { setFilterSheetOpen(false); });
+      }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && filterSheetOpen) {
+          e.preventDefault();
+          setFilterSheetOpen(false);
+        }
+      });
+    }
+    initFilterSheet();
+
+    function getCardSearchBlob(card) {
+      const pre = card.getAttribute('data-search-index');
+      if (pre) return pre;
+      var cat = card.querySelector('.cat');
+      var name = card.querySelector('.name');
+      var desc = card.querySelector('.desc');
+      var badge = card.querySelector('.badge');
+      var moq = card.querySelector('.moq');
+      var price = card.querySelector('.price');
+      var parts = [
+        card.dataset.category || '',
+        cat ? cat.textContent : '',
+        name ? name.textContent : '',
+        desc ? desc.textContent : '',
+        badge ? badge.textContent : '',
+        moq ? moq.textContent : '',
+        price ? price.textContent : ''
+      ];
+      return parts
+        .join(' ')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function queryMatchesBlob(blob, qq) {
+      if (!qq) return true;
+      var tokens = qq.split(/\s+/).filter(function (w) {
+        return w.length > 0;
+      });
+      if (!tokens.length) return true;
+      for (var i = 0; i < tokens.length; i++) {
+        if (blob.indexOf(tokens[i]) === -1) return false;
+      }
+      return true;
+    }
+
+    function cardMatchesCategory(card, filter) {
+      if (filter === 'all') return true;
+      return (card.dataset.category || '') === filter;
+    }
+
+    var catalogFilterRaf = null;
+    function scheduleApplyCatalogFilters() {
+      if (catalogFilterRaf) cancelAnimationFrame(catalogFilterRaf);
+      catalogFilterRaf = requestAnimationFrame(function () {
+        catalogFilterRaf = null;
+        applyCatalogFilters();
+      });
+    }
+
+    function applyCatalogFilters() {
+      var f = readCatalogFiltersFromDom();
+      var cards = getProductCards();
+      var matched = filterProducts(cards, f);
+      var matchedSet = new Set(matched);
+      var emptyEl = document.getElementById('catalogSearchEmpty');
+      var grid = document.getElementById('productGrid');
+      var clearBtn = document.getElementById('productSearchClear');
+      var visible = matched.length;
+      for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        var ok = matchedSet.has(card);
+        if (ok) {
+          card.style.display = '';
+          card.removeAttribute('hidden');
+        } else {
+          card.style.display = 'none';
+          card.setAttribute('hidden', 'hidden');
+        }
+      }
+      if (emptyEl) {
+        var showEmpty = cards.length > 0 && visible === 0;
+        emptyEl.hidden = !showEmpty;
+        emptyEl.setAttribute('aria-hidden', showEmpty ? 'false' : 'true');
+      }
+      if (grid)
+        grid.classList.toggle('catalogue-grid--filtered', catalogHasActiveRefinement(f));
+      if (clearBtn) clearBtn.hidden = !f.search || !f.search.length;
+      updateFilterSheetBadge();
+    }
+
+    var searchInput = document.getElementById('productSearch');
+    var searchForm = document.getElementById('productSearchForm');
+    var searchClearBtn = document.getElementById('productSearchClear');
+    if (searchForm && searchInput) {
+      searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        closeSearchSuggest();
+        applyCatalogFilters();
+      });
+      searchInput.addEventListener('input', function () {
+        scheduleApplyCatalogFilters();
+        scheduleSuggestUpdate();
+      });
+      searchInput.addEventListener('search', function () {
+        scheduleApplyCatalogFilters();
+        scheduleSuggestUpdate();
+      });
+    }
+    if (searchClearBtn && searchInput) {
+      searchClearBtn.addEventListener('click', function () {
+        searchInput.value = '';
+        searchInput.focus();
+        closeSearchSuggest();
+        applyCatalogFilters();
+      });
+    }
+
+    /** Search autocomplete (catalog-backed, respects active category + main filter rules) */
+    var searchProductIndex = [];
+    var suggestHighlight = -1;
+    var suggestTimer = null;
+
+    function rebuildSearchProductIndex() {
+      searchProductIndex = [];
+      if (typeof POLLYGRAM_CATALOG !== 'undefined' && Array.isArray(POLLYGRAM_CATALOG)) {
+        POLLYGRAM_CATALOG.forEach(function (p) {
+          var np = normalizeProductRecord(p);
+          var tagsBlob = (np.tags || []).join(' ');
+          searchProductIndex.push({
+            id: String(p.id || ''),
+            name: String(p.name || ''),
+            category: String(p.category || '').toLowerCase(),
+            categoryLabel: String(p.category_label || ''),
+            price: String(p.price || ''),
+            image_url: String(p.image_url || ''),
+            blob: [
+              np.category,
+              np.category_label,
+              np.name,
+              np.desc,
+              np.badge,
+              np.moq,
+              np.price,
+              np.sku,
+              np.stock_status,
+              tagsBlob
+            ]
+              .join(' ')
+              .toLowerCase()
+              .replace(/\s+/g, ' ')
+              .trim()
+          });
+        });
+        return;
+      }
+      getProductCards().forEach(function (card) {
+        var nm = card.querySelector('.name');
+        var cat = card.querySelector('.cat');
+        var price = card.querySelector('.price');
+        var img = card.querySelector('.media img');
+        searchProductIndex.push({
+          id: '',
+          name: nm ? nm.textContent.trim() : '',
+          category: String(card.dataset.category || '').toLowerCase(),
+          categoryLabel: cat ? cat.textContent.trim() : '',
+          price: price ? price.textContent.trim() : '',
+          image_url: img ? img.src : '',
+          blob: getCardSearchBlob(card)
+        });
+      });
+    }
+
+    function categorySlugMatchesFilter(slug) {
+      var filter = getActiveCategoryFilter();
+      if (filter === 'all') return true;
+      return (slug || '') === filter;
+    }
+
+    function getSuggestionEntries(qq) {
+      var q = (qq || '').trim().toLowerCase();
+      if (!q) return [];
+      var out = [];
+      for (var i = 0; i < searchProductIndex.length; i++) {
+        var e = searchProductIndex[i];
+        if (!categorySlugMatchesFilter(e.category)) continue;
+        if (!queryMatchesBlob(e.blob, q)) continue;
+        out.push(e);
+        if (out.length >= 8) break;
+      }
+      return out;
+    }
+
+    function closeSearchSuggest() {
+      var box = document.getElementById('productSearchSuggest');
+      var inp = document.getElementById('productSearch');
+      suggestHighlight = -1;
+      if (box) {
+        box.hidden = true;
+        box.innerHTML = '';
+      }
+      if (inp) inp.setAttribute('aria-expanded', 'false');
+    }
+
+    function updateSearchSuggestionsUI() {
+      var box = document.getElementById('productSearchSuggest');
+      var inp = document.getElementById('productSearch');
+      if (!box || !inp) return;
+      var raw = inp.value || '';
+      var q = raw.trim().toLowerCase();
+      if (!q) {
+        closeSearchSuggest();
+        return;
+      }
+      if (!searchProductIndex.length) rebuildSearchProductIndex();
+      var items = getSuggestionEntries(raw);
+      inp.setAttribute('aria-expanded', 'true');
+      box.hidden = false;
+      box.innerHTML = '';
+      suggestHighlight = -1;
+      if (!items.length) {
+        var empty = document.createElement('div');
+        empty.className = 'pg-search__empty';
+        empty.setAttribute('role', 'presentation');
+        empty.textContent = 'No products found';
+        box.appendChild(empty);
+        return;
+      }
+      items.forEach(function (item, idx) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pg-search__opt';
+        btn.role = 'option';
+        btn.id = 'pg-suggest-opt-' + idx;
+        btn.dataset.idx = String(idx);
+        btn.addEventListener('mousedown', function (ev) {
+          ev.preventDefault();
+        });
+        btn.addEventListener('click', function () {
+          pickSearchSuggestion(item.name);
+        });
+        var thumb = document.createElement('span');
+        thumb.className = 'pg-search__opt-thumb';
+        if (item.image_url) {
+          var im = document.createElement('img');
+          im.src = item.image_url;
+          im.alt = '';
+          im.width = 44;
+          im.height = 44;
+          im.loading = 'lazy';
+          im.onerror = function () {
+            thumb.classList.add('pg-search__opt-thumb--empty');
+          };
+          thumb.appendChild(im);
+        } else thumb.classList.add('pg-search__opt-thumb--empty');
+        var main = document.createElement('span');
+        main.className = 'pg-search__opt-main';
+        var nameEl = document.createElement('span');
+        nameEl.className = 'pg-search__opt-name';
+        nameEl.textContent = item.name;
+        var catEl = document.createElement('span');
+        catEl.className = 'pg-search__opt-cat';
+        catEl.textContent = item.categoryLabel || item.category || '';
+        main.appendChild(nameEl);
+        main.appendChild(catEl);
+        var priceEl = document.createElement('span');
+        priceEl.className = 'pg-search__opt-price';
+        priceEl.textContent = item.price;
+        btn.appendChild(thumb);
+        btn.appendChild(main);
+        btn.appendChild(priceEl);
+        box.appendChild(btn);
+      });
+    }
+
+    function scheduleSuggestUpdate() {
+      clearTimeout(suggestTimer);
+      suggestTimer = setTimeout(function () {
+        suggestTimer = null;
+        updateSearchSuggestionsUI();
+      }, 90);
+    }
+
+    function highlightSuggestOption(delta) {
+      var box = document.getElementById('productSearchSuggest');
+      if (!box || box.hidden) return;
+      var opts = box.querySelectorAll('.pg-search__opt');
+      if (!opts.length) return;
+      if (suggestHighlight >= 0 && opts[suggestHighlight]) opts[suggestHighlight].classList.remove('pg-search__opt--hl');
+      suggestHighlight += delta;
+      if (suggestHighlight < 0) suggestHighlight = opts.length - 1;
+      if (suggestHighlight >= opts.length) suggestHighlight = 0;
+      var cur = opts[suggestHighlight];
+      if (cur) {
+        cur.classList.add('pg-search__opt--hl');
+        cur.focus();
+        var inp = document.getElementById('productSearch');
+        if (inp) inp.setAttribute('aria-activedescendant', cur.id);
+      }
+    }
+
+    function pickSearchSuggestion(nameStr) {
+      var inp = document.getElementById('productSearch');
+      if (inp) inp.value = nameStr;
+      closeSearchSuggest();
+      applyCatalogFilters();
+      var grid = document.getElementById('productGrid');
+      if (grid)
+        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('focus', function () {
+        if ((searchInput.value || '').trim()) scheduleSuggestUpdate();
+      });
+      searchInput.addEventListener('keydown', function (ev) {
+        var box = document.getElementById('productSearchSuggest');
+        var open = box && !box.hidden && box.querySelector('.pg-search__opt');
+        if (ev.key === 'Escape') {
+          closeSearchSuggest();
+          return;
+        }
+        if (!open) return;
+        if (ev.key === 'ArrowDown') {
+          ev.preventDefault();
+          highlightSuggestOption(1);
+        } else if (ev.key === 'ArrowUp') {
+          ev.preventDefault();
+          highlightSuggestOption(-1);
+        } else if (ev.key === 'Enter') {
+          var opts = box.querySelectorAll('.pg-search__opt');
+          if (opts.length && suggestHighlight >= 0 && opts[suggestHighlight]) {
+            ev.preventDefault();
+            opts[suggestHighlight].click();
+          }
+        }
+      });
+      searchInput.addEventListener('blur', function () {
+        setTimeout(function () {
+          var shell = document.querySelector('.pg-search-shell');
+          var ae = document.activeElement;
+          if (shell && ae && shell.contains(ae)) return;
+          closeSearchSuggest();
+        }, 160);
+      });
+    }
+
+    document.addEventListener('click', function (ev) {
+      if (!ev.target.closest('.pg-search-shell')) closeSearchSuggest();
+    });
+
+    document.querySelectorAll('.js-pack-wa').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var pack = btn.dataset.pack || '';
+        if (typeof trackEvent === 'function') trackEvent('bundle_quote_click', { bundle: pack });
+        var msg = [
+          'Hello Pollygram & General Supplies,',
+          '',
+          'Please quote bundle: ' + pack + ' for our institution.',
+          '',
+          'Institution Type: ' + getOrgType(),
+          '',
+          'Please share pricing breakdown and earliest delivery.',
+          '',
+          'Thank you.'
+        ].join('\n');
+        trackLeadThen(function () {
+          if (typeof PollygramLeads === 'undefined') return Promise.resolve();
+          return PollygramLeads.insertLead(
+            PollygramLeads.normalizeLeadRow({
+              products: pack + ' (bundle)',
+              source: 'whatsapp_package_bundle',
+              message: 'Org type: ' + getOrgType(),
+              timeline: [PollygramLeads.timelineEntry('Package bundle → WhatsApp', 'whatsapp')]
+            })
+          );
+        }).then(function () {
+          window.open(buildWhatsAppHref(msg), '_blank');
+        });
+      });
+    });
+
+    document.querySelectorAll('.js-pack-quote').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var pack = btn.dataset.pack || '';
+        if (typeof trackEvent === 'function') trackEvent('institutional_package_quote', { bundle: pack });
+        openLeadSheet('package_institutional_quote', {
+          products: pack + ' — ready-made package (institutional quote)'
+        });
+      });
+    });
+
+    /** Cart logic */
+    const cartBtn = document.getElementById('cartBtn');
+    const cartPanel = document.getElementById('cartPanel');
+    const overlay = document.getElementById('overlay');
+    const closeCartBtn = document.getElementById('closeCart');
+    const cartItems = document.getElementById('cartItems');
+    const cartCountEl = document.getElementById('cartCount');
+    const sendCartBtn = document.getElementById('sendCart');
+
+    /** @type {{name:string,price:string,thumb:string,qty:number}[]} */
+    let cart = [];
+
+    function getOrgType() {
+      var sel = document.getElementById('cartOrgType');
+      return sel && sel.value ? sel.value : 'School';
+    }
+
+    function cardThumb(cardEl) {
+      var img = cardEl.querySelector('.media img');
+      return img ? img.currentSrc || img.src : '';
+    }
+
+    function renderCart() {
+      var totalQty = cart.reduce(function (a, i) {
+        return a + (Number(i.qty) > 0 ? Number(i.qty) : 1);
+      }, 0);
+      cartCountEl.textContent = String(totalQty);
+      if (!cart.length) {
+        cartItems.innerHTML = '<div class="empty">Tap “+ Enquiry” on catalogue cards to assemble a list.</div>';
+        return;
+      }
+      cartItems.innerHTML = cart
+        .map(function (item, idx) {
+          var q = Number(item.qty) > 0 ? Number(item.qty) : 1;
+          var line =
+            `<div class="cart-item-row">
+          <div class="cart-thumb">${
+            item.thumb ? `<img loading="lazy" src="${item.thumb.replace(/"/g, '&quot;')}" alt="">` : '<div></div>'
+          }</div>
+          <div>
+            <div style="font-weight:700;font-size:13px;">${escapeHtml(item.name)}</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">${escapeHtml(item.price)}</div>
+            <div class="qty-ui" style="margin-top:8px;">
+              <button type="button" aria-label="Decrease quantity" class="qty-minus" data-idx="${idx}">−</button>
+              <span>${q}</span>
+              <button type="button" aria-label="Increase quantity" class="qty-plus" data-idx="${idx}">+</button>
+            </div>
+          </div>
+          <button type="button" class="cart-remove" data-rem="${idx}" aria-label="Remove">✕</button>
+        </div>`;
+          return line;
+        })
+        .join('');
+      cartItems.querySelectorAll('button[data-rem]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          cart.splice(Number(b.dataset.rem), 1);
+          renderCart();
+        });
+      });
+      cartItems.querySelectorAll('.qty-minus').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var ix = Number(b.dataset.idx);
+          if (cart[ix] && cart[ix].qty > 1) cart[ix].qty -= 1;
+          else cart.splice(ix, 1);
+          renderCart();
+        });
+      });
+      cartItems.querySelectorAll('.qty-plus').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var ix = Number(b.dataset.idx);
+          if (!cart[ix]) return;
+          cart[ix].qty = (Number(cart[ix].qty) || 1) + 1;
+          renderCart();
+        });
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    /** Sports category mega menu: product thumbnails + quick jump (desktop hover / mobile panel). */
+    var megaProductsByCategory = {};
+    var megaCatalogSource = null;
+    var megaHideTimer = null;
+    var megaBindingsAbort = null;
+    var megaLastOpenSlug = '';
+    var megaFocusOutTimer = null;
+
+    function clearMegaFocusOutTimer() {
+      if (megaFocusOutTimer) {
+        clearTimeout(megaFocusOutTimer);
+        megaFocusOutTimer = null;
+      }
+    }
+
+    function scheduleMegaFocusLeaveHide(megaNav) {
+      clearMegaFocusOutTimer();
+      megaFocusOutTimer = setTimeout(function () {
+        megaFocusOutTimer = null;
+        if (!megaNav || !megaNav.classList.contains('is-open')) return;
+        var ae = document.activeElement;
+        if (ae && megaNav.contains(ae)) return;
+        hideMegaPanelUi();
+      }, 0);
+    }
+
+    function rebuildMegaMenuCache() {
+      megaProductsByCategory = {};
+      var src = megaCatalogSource;
+      if (!src || !Array.isArray(src) || !src.length) {
+        if (typeof POLLYGRAM_CATALOG !== 'undefined' && Array.isArray(POLLYGRAM_CATALOG)) src = POLLYGRAM_CATALOG;
+      }
+      if (!src || !Array.isArray(src)) return;
+      for (var i = 0; i < src.length; i++) {
+        var p = src[i];
+        var slug = String((p && p.category) || '')
+          .trim()
+          .toLowerCase();
+        if (!slug) continue;
+        if (!megaProductsByCategory[slug]) megaProductsByCategory[slug] = [];
+        megaProductsByCategory[slug].push(p);
+      }
+    }
+
+    function isMegaDesktopHover() {
+      try {
+        return window.matchMedia('(hover: hover) and (min-width: 901px)').matches;
+      } catch (_) {
+        return window.innerWidth >= 901;
+      }
+    }
+
+    function getMegaLabelForProduct(p) {
+      if (!p) return '';
+      if (p.badge && String(p.badge).trim()) return String(p.badge).trim();
+      if (p.price != null && String(p.price).trim()) return stripLeadingFrom(p.price);
+      if (p.moq != null && String(p.moq).trim()) return String(p.moq).trim();
+      return '';
+    }
+
+    function fillMegaGrid(gridEl, slug) {
+      if (!gridEl) return;
+      var list = megaProductsByCategory[slug] || [];
+      var limit = 12;
+      var slice = list.slice(0, limit);
+      gridEl.textContent = '';
+      gridEl.classList.toggle('pg-mega__grid--few', slice.length > 0 && slice.length < 4);
+      if (!slice.length) {
+        var empty = document.createElement('p');
+        empty.className = 'pg-mega__empty';
+        empty.textContent = 'No products in this category yet.';
+        gridEl.appendChild(empty);
+        return;
+      }
+      for (var j = 0; j < slice.length; j++) {
+        var p = slice[j];
+        var id = String(p.id || '').trim();
+        var a = document.createElement('a');
+        a.className = 'pg-mega__item';
+        a.href = '#products';
+        if (id) {
+          a.setAttribute('data-mega-product', id);
+          a.setAttribute('data-mega-category', slug);
+        }
+        var thumb = document.createElement('span');
+        thumb.className = 'pg-mega__thumb';
+        var imgUrl = (p.image_url || '').trim();
+        if (imgUrl) {
+          var im = document.createElement('img');
+          im.loading = 'lazy';
+          im.decoding = 'async';
+          im.alt = p.name ? String(p.name) : '';
+          im.src = imgUrl;
+          im.setAttribute('data-fallback-src', 'assets/images/placeholder.svg');
+          im.setAttribute(
+            'onerror',
+            "typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)"
+          );
+          thumb.appendChild(im);
+        }
+        var body = document.createElement('span');
+        body.className = 'pg-mega__item-body';
+        var nameEl = document.createElement('span');
+        nameEl.className = 'pg-mega__name';
+        nameEl.textContent = p.name ? String(p.name) : 'Product';
+        body.appendChild(nameEl);
+        var sub = getMegaLabelForProduct(p);
+        if (sub) {
+          var lab = document.createElement('span');
+          lab.className = 'pg-mega__label';
+          lab.textContent = sub;
+          body.appendChild(lab);
+        }
+        var qv = document.createElement('span');
+        qv.className = 'pg-mega__qv';
+        qv.textContent = 'View';
+        a.appendChild(thumb);
+        a.appendChild(body);
+        a.appendChild(qv);
+        gridEl.appendChild(a);
+      }
+    }
+
+    function readCategoryLabelForSlug(slug) {
+      var tab = document.querySelector('#pgMegaNav .tabs-inner .tab[data-filter="' + slug + '"]');
+      if (tab && tab.textContent) return tab.textContent.trim();
+      if (typeof POLLYGRAM_CATEGORIES !== 'undefined' && Array.isArray(POLLYGRAM_CATEGORIES)) {
+        for (var i = 0; i < POLLYGRAM_CATEGORIES.length; i++) {
+          var c = POLLYGRAM_CATEGORIES[i];
+          if (c && String(c.slug || '').toLowerCase() === slug) return String(c.label || slug).trim();
+        }
+      }
+      return formatCategoryLabel(slug);
+    }
+
+    function clearMegaHideTimer() {
+      if (megaHideTimer) {
+        clearTimeout(megaHideTimer);
+        megaHideTimer = null;
+      }
+    }
+
+    function scheduleHideMegaPanel() {
+      clearMegaHideTimer();
+      megaHideTimer = setTimeout(function () {
+        megaHideTimer = null;
+        hideMegaPanelUi();
+      }, 160);
+    }
+
+    function syncMegaPanelContent(slug) {
+      var panel = document.getElementById('pgMegaPanel');
+      var grid = document.getElementById('pgMegaGrid');
+      var title = document.getElementById('pgMegaTitle');
+      var eyebrow = document.getElementById('pgMegaEyebrow');
+      var viewAll = document.getElementById('pgMegaViewAll');
+      if (!panel || !grid || !title) return;
+      megaLastOpenSlug = slug;
+      if (eyebrow) eyebrow.textContent = 'Shop';
+      title.textContent = readCategoryLabelForSlug(slug);
+      fillMegaGrid(grid, slug);
+      if (viewAll) {
+        viewAll.setAttribute('data-mega-jump', slug);
+      }
+    }
+
+    function showMegaPanel(slug, mode) {
+      var nav = document.getElementById('pgMegaNav');
+      var panel = document.getElementById('pgMegaPanel');
+      if (!nav || !panel || !slug) return;
+      if (mode === 'mobile') nav.classList.add('pg-mega--mobile-open');
+      else nav.classList.remove('pg-mega--mobile-open');
+      if (megaLastOpenSlug === slug && nav.classList.contains('is-open')) {
+        panel.hidden = false;
+        panel.setAttribute('aria-hidden', 'false');
+        return;
+      }
+      syncMegaPanelContent(slug);
+      nav.classList.add('is-open');
+      panel.hidden = false;
+      panel.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideMegaPanelUi() {
+      var nav = document.getElementById('pgMegaNav');
+      var panel = document.getElementById('pgMegaPanel');
+      if (!nav || !panel) return;
+      clearMegaFocusOutTimer();
+      nav.classList.remove('is-open');
+      nav.classList.remove('pg-mega--mobile-open');
+      panel.hidden = true;
+      panel.setAttribute('aria-hidden', 'true');
+      megaLastOpenSlug = '';
+    }
+
+    function onCategoryTabsClick(e) {
+      var t = e.target.closest('.tab');
+      if (!t || !e.currentTarget.contains(t)) return;
+      var inner = e.currentTarget.querySelector('.tabs-inner');
+      if (inner) {
+        inner.querySelectorAll('.tab').forEach(function (x) {
+          x.classList.remove('active');
+        });
+      }
+      t.classList.add('active');
+      applyCatalogFilters();
+      scheduleSuggestUpdate();
+      var slug = (t.dataset.filter || 'all').trim();
+      if (!isMegaDesktopHover()) {
+        if (slug === 'all') hideMegaPanelUi();
+        else showMegaPanel(slug, 'mobile');
+      } else {
+        hideMegaPanelUi();
+      }
+    }
+
+    function onMegaProductLinkClick(e) {
+      var link = e.target.closest('a.pg-mega__item');
+      if (!link || !document.getElementById('pgMegaNav')?.contains(link)) return;
+      e.preventDefault();
+      var pid = link.getAttribute('data-mega-product');
+      var cat = (link.getAttribute('data-mega-category') || '').trim();
+      if (cat) {
+        document.querySelectorAll('#pgMegaNav .tabs-inner .tab').forEach(function (tab) {
+          tab.classList.toggle('active', tab.dataset.filter === cat);
+        });
+      }
+      var si = document.getElementById('productSearch');
+      if (si) si.value = '';
+      closeSearchSuggest();
+      applyCatalogFilters();
+      scheduleSuggestUpdate();
+      hideMegaPanelUi();
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var sel = pid ? '[data-product-id="' + pid.replace(/"/g, '') + '"]' : '';
+          var card = sel ? document.querySelector('#productGrid .card' + sel) : null;
+          if (card && typeof card.scrollIntoView === 'function')
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          else document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+
+    function onMegaViewAllClick(e) {
+      var a = e.target.closest('#pgMegaViewAll');
+      if (!a) return;
+      e.preventDefault();
+      var slug = a.getAttribute('data-mega-jump') || megaLastOpenSlug;
+      if (slug) {
+        document.querySelectorAll('#pgMegaNav .tabs-inner .tab').forEach(function (tab) {
+          tab.classList.toggle('active', tab.dataset.filter === slug);
+        });
+      }
+      var si = document.getElementById('productSearch');
+      if (si) si.value = '';
+      closeSearchSuggest();
+      applyCatalogFilters();
+      scheduleSuggestUpdate();
+      hideMegaPanelUi();
+      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function bindMegaMenuInteractions() {
+      var nav = document.getElementById('pgMegaNav');
+      var inner = nav.querySelector('.tabs-inner.tabs-inner--pills');
+      if (!nav || !inner) return;
+      if (megaBindingsAbort) megaBindingsAbort.abort();
+      megaBindingsAbort = new AbortController();
+      var sig = { signal: megaBindingsAbort.signal };
+
+      inner.addEventListener(
+        'pointerover',
+        function (ev) {
+          if (!isMegaDesktopHover()) return;
+          var tab = ev.target.closest ? ev.target.closest('.tab') : null;
+          if (!tab || !inner.contains(tab)) return;
+          var slug = (tab.dataset.filter || '').trim();
+          if (!slug || slug === 'all') {
+            scheduleHideMegaPanel();
+            return;
+          }
+          clearMegaHideTimer();
+          showMegaPanel(slug, 'desktop');
+        },
+        sig
+      );
+
+      inner.addEventListener(
+        'focusin',
+        function (ev) {
+          if (!isMegaDesktopHover()) return;
+          var tab = ev.target.closest ? ev.target.closest('.tab') : null;
+          if (!tab || !inner.contains(tab)) return;
+          var slug = (tab.dataset.filter || '').trim();
+          if (!slug || slug === 'all') {
+            scheduleHideMegaPanel();
+            return;
+          }
+          clearMegaHideTimer();
+          showMegaPanel(slug, 'desktop');
+        },
+        sig
+      );
+
+      nav.addEventListener(
+        'pointerleave',
+        function (ev) {
+          if (!isMegaDesktopHover()) return;
+          var rel = ev.relatedTarget;
+          if (rel && nav.contains(rel)) return;
+          scheduleHideMegaPanel();
+        },
+        sig
+      );
+
+      /** Close mega when keyboard / focus leaves the whole nav (tabs + panel), after focus settles. */
+      nav.addEventListener(
+        'focusout',
+        function (ev) {
+          if (!nav.classList.contains('is-open')) return;
+          var next = ev.relatedTarget;
+          if (next && nav.contains(next)) return;
+          scheduleMegaFocusLeaveHide(nav);
+        },
+        sig
+      );
+
+      document.getElementById('pgMegaCloseBtn')?.addEventListener(
+        'click',
+        function () {
+          hideMegaPanelUi();
+        },
+        sig
+      );
+
+      nav.addEventListener('click', onMegaProductLinkClick, sig);
+      document.getElementById('pgMegaViewAll')?.addEventListener('click', onMegaViewAllClick, sig);
+
+      document.addEventListener(
+        'keydown',
+        function (ke) {
+          if (ke.key !== 'Escape') return;
+          if (!nav.classList.contains('is-open')) return;
+          hideMegaPanelUi();
+        },
+        sig
+      );
+    }
+
+    document.querySelector('#pgMegaNav .tabs-wrap')?.addEventListener('click', onCategoryTabsClick);
+
+    /** Title-case words for professional brand display (nav + footer lockups). */
+    function titleCaseBrand(str) {
+      return String(str || '')
+        .trim()
+        .replace(/\s+/g, ' ')
+        .split(' ')
+        .map(function (w) {
+          if (!w) return '';
+          return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+        })
+        .join(' ');
+    }
+
+    /** Split “Name & Second line” for nav + footer lockups; preserves CMS `business_name`. */
+    function renderBusinessBrand(raw) {
+      var fallback = 'Pollygram & General Supplies';
+      var s = raw && String(raw).trim() ? String(raw).trim() : fallback;
+      var m = s.match(/^(.+?)\s*(?:&|(?:\band\b))\s+(.+)$/i);
+      var lineMain;
+      var lineSub;
+      var metaLine;
+      var single = false;
+      if (m) {
+        lineMain = titleCaseBrand(m[1].trim());
+        lineSub = titleCaseBrand(m[2].trim());
+        metaLine = lineMain + ' & ' + lineSub;
+      } else {
+        lineMain = titleCaseBrand(s);
+        lineSub = '';
+        metaLine = s;
+        single = true;
+      }
+      var innerSingle =
+        '<span class="brand-line-main brand-line-full">' + escapeHtml(lineMain) + '</span>';
+      var innerSplit =
+        '<span class="brand-line-main">' +
+        escapeHtml(lineMain) +
+        '</span><span class="brand-second-row"><span class="brand-line-join">&amp;</span><span class="brand-line-sub">' +
+        escapeHtml(lineSub || '') +
+        '</span></span>';
+      var inner = single ? innerSingle : innerSplit;
+      ['brandBusiness', 'footerBrandLines'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.classList.toggle('brand-org-title--single', single);
+        el.innerHTML = inner;
+      });
+      var fbl = document.getElementById('footerBusinessLine');
+      if (fbl) fbl.textContent = metaLine;
+    }
+
+    function openCart() { cartPanel.classList.add('open'); overlay.classList.add('show'); }
+    function closeCartPanel() { cartPanel.classList.remove('open'); overlay.classList.remove('show'); }
+
+    cartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCartPanel);
+    overlay.addEventListener('click', closeCartPanel);
+
+    document.getElementById('productGrid')?.addEventListener('click', function (e) {
+      var qvBtn = e.target.closest('.js-quick-view');
+      if (qvBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var qc = qvBtn.closest('.card');
+        if (qc && typeof openQuickViewFromCard === 'function') openQuickViewFromCard(qc);
+        return;
+      }
+      var quoteBtn = e.target.closest('.js-quote-product');
+      if (quoteBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var card = quoteBtn.closest('.card');
+        if (!card) return;
+        if (typeof trackEvent === 'function') trackEvent('institutional_quote_click', {});
+        var name = card.querySelector('.name')?.textContent.trim() || 'Product';
+        var cat = card.querySelector('.cat')?.textContent.trim() || '';
+        var moq = card.querySelector('.moq')?.textContent.trim() || '';
+        var line = [name, cat, moq].filter(Boolean).join(' — ');
+        openLeadSheet('product_institutional_quote', {
+          products: line + ' — institutional quotation'
+        });
+        return;
+      }
+      var enqBtn = e.target.closest('.enq');
+      if (enqBtn) {
+        e.stopPropagation();
+        if (typeof trackEvent === 'function') trackEvent('add_enquiry_click', {});
+        var card = enqBtn.closest('.card');
+        if (!card) return;
+        var name = card.querySelector('.name')?.textContent.trim() || '';
+        var price = card.querySelector('.price')?.textContent.trim() || '';
+        var thumb = cardThumb(card);
+        var ix = cart.findIndex((entry) => entry.name === name);
+        if (ix === -1) cart.push({ name: name, price: price, thumb: thumb, qty: 1 });
+        else cart[ix].qty = (Number(cart[ix].qty) || 1) + 1;
+        renderCart();
+        openCart();
+        return;
+      }
+      var waBtn = e.target.closest('.js-wa-one');
+      if (waBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var c = waBtn.closest('.card');
+        if (c) handleSingleWa(c);
+      }
+    });
+
+    sendCartBtn.addEventListener('click', function () {
+      if (!cart.length) return;
+      if (typeof trackEvent === 'function') trackEvent('whatsapp_cart_submit', { items: cart.length });
+      var org = getOrgType();
+      var lines = cart.map(function (item) {
+        var q = Number(item.qty) > 0 ? Number(item.qty) : 1;
+        return '- ' + q + ' × ' + item.name;
+      });
+      var msg = [
+        'Hello Pollygram & General Supplies,',
+        '',
+        'I am interested in:',
+        ...lines,
+        '',
+        'Institution Type: ' + org,
+        '',
+        'Please send quotation and delivery timelines.',
+        '',
+        'Thank you.'
+      ].join('\n');
+      var summary = lines.join('; ');
+      trackLeadThen(function () {
+        return PollygramLeads.insertLead(
+          PollygramLeads.normalizeLeadRow({
+            products: summary,
+            source: 'whatsapp_enquiry_cart',
+            message: 'Institution: ' + org,
+            meta: { enquiry_cart: true, line_count: cart.length },
+            timeline: [PollygramLeads.timelineEntry('Enquiry cart → WhatsApp', 'whatsapp')]
+          })
+        );
+      }).then(function () {
+        window.open(buildWhatsAppHref(msg), '_blank');
+        closeCartPanel();
+      });
+    });
+
+    function buildWaProductRequestMessage(name, categoryLabel, qty, priceLine) {
+      var q = Number(qty) > 0 ? Math.floor(Number(qty)) : 1;
+      return [
+        'Hello Pollygram & General Supplies,',
+        '',
+        'I would like to request:',
+        '',
+        'Product: ' + name,
+        'Category: ' + (categoryLabel || '—'),
+        'Quantity: ' + q,
+        priceLine ? 'Price reference: ' + priceLine : '',
+        '',
+        'Institution type: ' + getOrgType(),
+        '',
+        'Please send quotation.',
+        '',
+        'Thank you.'
+      ]
+        .filter(Boolean)
+        .join('\n');
+    }
+
+    function handleSingleWa(card) {
+      if (!card) return;
+      if (card.dataset && card.dataset.waPreset) {
+        if (typeof trackEvent === 'function') trackEvent('whatsapp_click', { source: 'product_card_preset' });
+        var pn =
+          card.querySelector('.name')?.textContent.trim() ||
+          card.dataset.productName ||
+          'Product';
+        var catLab = card.querySelector('.cat')?.textContent.trim() || card.dataset.category || '';
+        trackLeadThen(function () {
+          return PollygramLeads.insertLead(
+            PollygramLeads.normalizeLeadRow({
+              products: pn,
+              source: 'whatsapp_product_preset',
+              lead_category: catLab,
+              meta: { preset_tap: true },
+              timeline: [
+                PollygramLeads.timelineEntry('WhatsApp (saved preset message)', 'whatsapp')
+              ]
+            })
+          );
+        }).then(function () {
+          window.open(buildWhatsAppHref(card.dataset.waPreset), '_blank');
+        });
+        return;
+      }
+      if (typeof trackEvent === 'function') trackEvent('whatsapp_click', { source: 'product_card_quick' });
+      var name = card.querySelector('.name')?.textContent.trim() || 'Product';
+      var price = card.querySelector('.price')?.textContent.trim() || '';
+      var catLab = card.querySelector('.cat')?.textContent.trim() || card.dataset.category || '';
+      var slug = card.dataset.category || '';
+      var pid = card.dataset.productId || '';
+      var msg = buildWaProductRequestMessage(name, catLab, 1, price);
+      var ctx = {
+        name: name,
+        category: slug,
+        category_label: catLab,
+        id: pid
+      };
+      trackLeadThen(function () {
+        return PollygramLeads.insertLead(
+          PollygramLeads.buildWhatsAppLeadPayload(ctx, {
+            quantity: 1,
+            source: 'whatsapp_product_card',
+            source_detail: 'product_card'
+          })
+        );
+      }).then(function () {
+        window.open(buildWhatsAppHref(msg), '_blank');
+      });
+    }
+
+    var qvCurrentProduct = null;
+
+    function closeQuickView() {
+      var root = document.getElementById('pgQuickViewRoot');
+      if (!root) return;
+      root.classList.remove('is-open');
+      root.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('pg-qv-open');
+    }
+
+    function fillQuickViewRelated(p) {
+      var rel = document.getElementById('pgQvRelated');
+      var grid = document.getElementById('pgQvRelatedGrid');
+      if (!rel || !grid || !p) return;
+      var src =
+        typeof megaCatalogSource !== 'undefined' && megaCatalogSource && megaCatalogSource.length
+          ? megaCatalogSource
+          : typeof POLLYGRAM_CATALOG !== 'undefined'
+            ? POLLYGRAM_CATALOG
+            : [];
+      var cat = String(p.category || '')
+        .trim()
+        .toLowerCase();
+      var selfId = String(p.id || '');
+      var list = [];
+      for (var i = 0; i < src.length; i++) {
+        var o = src[i];
+        if (String(o.id) === selfId) continue;
+        if (String((o.category || '').trim().toLowerCase()) !== cat) continue;
+        list.push(o);
+        if (list.length >= 4) break;
+      }
+      grid.innerHTML = '';
+      if (!list.length) {
+        rel.hidden = true;
+        return;
+      }
+      rel.hidden = false;
+      list.forEach(function (rp) {
+        var a = document.createElement('button');
+        a.type = 'button';
+        a.className = 'pg-qv-rel';
+        var imgUrl = (rp.image_url || '').trim();
+        if (imgUrl) {
+          var im = document.createElement('img');
+          im.src = imgUrl;
+          im.alt = '';
+          im.loading = 'lazy';
+          a.appendChild(im);
+        }
+        var sp = document.createElement('span');
+        sp.className = 'pg-qv-rel-name';
+        sp.textContent = rp.name || 'Product';
+        a.appendChild(sp);
+        a.addEventListener('click', function () {
+          var c = document.querySelector('#productGrid .card[data-product-id="' + String(rp.id).replace(/"/g, '') + '"]');
+          if (c) openQuickViewFromCard(c);
+        });
+        grid.appendChild(a);
+      });
+    }
+
+    function openQuickViewFromCard(card) {
+      if (!card) return;
+      var id = card.dataset.productId;
+      var p =
+        id && runtimeProductById[id]
+          ? JSON.parse(JSON.stringify(runtimeProductById[id]))
+          : null;
+      if (!p) {
+        p = normalizeProductRecord({
+          id: id || '',
+          name: card.querySelector('.name')?.textContent.trim() || 'Product',
+          desc: card.querySelector('.desc')?.textContent.trim() || '',
+          price: card.querySelector('.price')?.textContent.trim() || '',
+          moq: card.querySelector('.moq')?.textContent.trim() || '',
+          category_label: card.querySelector('.cat')?.textContent.trim() || '',
+          category: card.dataset.category || '',
+          image_url: card.querySelector('.pg-product-pic img')?.getAttribute('src') || '',
+          stock_status: card.dataset.stockStatus || 'in_stock',
+          tags: (card.dataset.tags || '').split(/\s+/).filter(Boolean),
+          sku: card.dataset.sku || '',
+          featured: card.dataset.featured === 'true'
+        });
+      } else p = normalizeProductRecord(p);
+
+      qvCurrentProduct = p;
+      var root = document.getElementById('pgQuickViewRoot');
+      var title = document.getElementById('pgQvTitle');
+      var catEl = document.getElementById('pgQvCat');
+      var desc = document.getElementById('pgQvDesc');
+      var price = document.getElementById('pgQvPrice');
+      var moq = document.getElementById('pgQvMoq');
+      var imgBox = document.getElementById('pgQvImage');
+      var stEl = document.getElementById('pgQvStock');
+      var tagsEl = document.getElementById('pgQvTags');
+      var qtyIn = document.getElementById('pgQvQty');
+      if (!root) return;
+      if (title) title.textContent = p.name || 'Product';
+      if (catEl)
+        catEl.textContent =
+          p.category_label || (p.category ? formatCategoryLabel(String(p.category)) : '');
+      if (desc) desc.textContent = p.desc || '';
+      if (price) price.textContent = p.price != null ? stripLeadingFrom(p.price) : '—';
+      if (moq) moq.textContent = p.moq != null ? String(p.moq) : '';
+      if (qtyIn) qtyIn.value = '1';
+      if (imgBox) {
+        imgBox.innerHTML = '';
+        var iu = (p.image_url || '').trim();
+        if (iu) {
+          var im = document.createElement('img');
+          im.src = iu;
+          im.alt = p.name || '';
+          imgBox.appendChild(im);
+        }
+      }
+      if (stEl) {
+        stEl.className =
+          'stock-badge stock-badge--' + String(p.stock_status || 'in_stock').replace(/_/g, '-');
+        stEl.textContent =
+          p.stock_status === 'low_stock'
+            ? 'Low Stock'
+            : p.stock_status === 'out_of_stock'
+              ? 'Out of Stock'
+              : 'In Stock';
+      }
+      if (tagsEl) {
+        tagsEl.innerHTML = '';
+        if (p.tags && p.tags.length) {
+          tagsEl.hidden = false;
+          p.tags.forEach(function (t) {
+            var s = document.createElement('span');
+            s.className = 'pg-qv-tag';
+            s.textContent = String(t);
+            tagsEl.appendChild(s);
+          });
+        } else tagsEl.hidden = true;
+      }
+      fillQuickViewRelated(p);
+      root.classList.add('is-open');
+      root.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('pg-qv-open');
+    }
+
+    document.getElementById('pgQuickViewClose')?.addEventListener('click', closeQuickView);
+    document.getElementById('pgQuickViewBackdrop')?.addEventListener('click', closeQuickView);
+    document.getElementById('pgQvWa')?.addEventListener('click', function () {
+      if (!qvCurrentProduct) return;
+      var p = qvCurrentProduct;
+      var qty = document.getElementById('pgQvQty')?.value || '1';
+      var catLab = p.category_label || formatCategoryLabel(String(p.category || ''));
+      var msg = buildWaProductRequestMessage(
+        p.name || 'Product',
+        catLab,
+        qty,
+        p.price != null ? stripLeadingFrom(p.price) : ''
+      );
+      if (typeof trackEvent === 'function') trackEvent('whatsapp_click', { source: 'quick_view' });
+      var qn = Math.max(1, parseInt(qty, 10) || 1);
+      var ctx = {
+        name: p.name || 'Product',
+        category: p.category || '',
+        category_label: catLab,
+        id: p.id != null ? String(p.id) : ''
+      };
+      trackLeadThen(function () {
+        return PollygramLeads.insertLead(
+          PollygramLeads.buildWhatsAppLeadPayload(ctx, {
+            quantity: qn,
+            source: 'whatsapp_quick_view',
+            source_detail: 'quick_view'
+          })
+        );
+      }).then(function () {
+        window.open(buildWhatsAppHref(msg), '_blank');
+      });
+    });
+    document.getElementById('pgQvEnquiry')?.addEventListener('click', function () {
+      if (!qvCurrentProduct) return;
+      var p = qvCurrentProduct;
+      var qty = Math.max(1, parseInt(document.getElementById('pgQvQty')?.value || '1', 10) || 1);
+      var name = p.name || 'Product';
+      var price = p.price != null ? stripLeadingFrom(p.price) : '';
+      var card = document.querySelector(
+        '#productGrid .card[data-product-id="' + String(p.id || '').replace(/"/g, '') + '"]'
+      );
+      var thumb = card ? cardThumb(card) : '';
+      var ix = cart.findIndex((entry) => entry.name === name);
+      if (ix === -1) cart.push({ name: name, price: price, thumb: thumb, qty: qty });
+      else cart[ix].qty = (Number(cart[ix].qty) || 1) + qty;
+      renderCart();
+      openCart();
+      closeQuickView();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      var qv = document.getElementById('pgQuickViewRoot');
+      if (qv && qv.classList.contains('is-open')) closeQuickView();
+    });
+
+    document.getElementById('btnInstitutionalQuote')?.addEventListener('click', function () {
+      if (typeof openLeadSheet === 'function') openLeadSheet('institutional_quote');
+    });
+
+    /* --- Lead capture ---------------------------------------------------------- */
+    const LEADS_LS = 'pollygram_leads_queue_v1';
+    const LEAD_ONCE = 'pollygram_lead_prompted_v1';
+    var leadBackdrop = document.getElementById('leadBackdrop');
+    var leadSheet = document.getElementById('leadSheet');
+    var leadForm = document.getElementById('leadForm');
+    var leadAutoTimer = null;
+    var lastFocusEl = null;
+
+    function clearLeadAutoTimer() {
+      if (leadAutoTimer) {
+        clearTimeout(leadAutoTimer);
+        leadAutoTimer = null;
+      }
+    }
+
+    function openLeadSheet(source, prefill) {
+      if (!leadSheet || !leadBackdrop) return;
+      try {
+        sessionStorage.setItem(LEAD_ONCE, '1');
+      } catch (_) {}
+      clearLeadAutoTimer();
+      if (typeof trackEvent === 'function') trackEvent('lead_open', { source: source || 'unknown' });
+      lastFocusEl = document.activeElement;
+      leadBackdrop.classList.add('open');
+      leadSheet.classList.add('open');
+      leadBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (prefill && typeof prefill === 'object') {
+        var set = function (id, v) {
+          var el = document.getElementById(id);
+          if (el && v != null) el.value = String(v);
+        };
+        set('leadProducts', prefill.products);
+        set('leadQuantities', prefill.quantities);
+        set('leadCounty', prefill.county);
+        set('leadSchool', prefill.school);
+        set('leadContact', prefill.contact);
+        set('leadMessage', prefill.message);
+      }
+      var nm = document.getElementById('leadSchool');
+      if (nm) setTimeout(() => nm.focus(), 140);
+      syncStackHeight();
+    }
+
+    function closeLeadSheet() {
+      if (!leadSheet || !leadBackdrop) return;
+      leadBackdrop.classList.remove('open');
+      leadSheet.classList.remove('open');
+      leadBackdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocusEl && typeof lastFocusEl.focus === 'function') try { lastFocusEl.focus(); } catch (_) {}
+    }
+
+    function enqueueLeadLocal(payload) {
+      try {
+        var arr = JSON.parse(localStorage.getItem(LEADS_LS) || '[]');
+        arr.push(payload);
+        localStorage.setItem(LEADS_LS, JSON.stringify(arr));
+      } catch (e2) {
+        console.warn('[Pollygram] local lead queue unavailable', e2);
+      }
+    }
+
+    async function submitLeadRemote(client, payload) {
+      try {
+        var qtyLine = payload.quantities ? String(payload.quantities) : '';
+        var productsJson = [];
+        if (payload.products)
+          productsJson.push({ line: payload.products, kind: 'summary' });
+        var qtyJson = qtyLine ? [{ detail: qtyLine }] : [];
+        var normalized =
+          typeof PollygramLeads !== 'undefined' && PollygramLeads.normalizeLeadRow
+            ? PollygramLeads.normalizeLeadRow({
+                customer_name: payload.contact_name,
+                institution_name: payload.school,
+                phone: payload.phone,
+                email: payload.email || '',
+                products: payload.products,
+                message: payload.message,
+                delivery_county: payload.county || '',
+                source: payload.source || 'institutional_quote',
+                status: 'new',
+                lead_category: payload.lead_category || '',
+                products_json: productsJson,
+                quantities_json: qtyJson,
+                meta: { form: 'institutional_quote' },
+                timeline:
+                  typeof PollygramLeads.timelineEntry === 'function'
+                    ? [PollygramLeads.timelineEntry('Institutional quote submitted', 'form')]
+                    : []
+              })
+            : null;
+        var row =
+          normalized && PollygramLeads.rowForSupabase
+            ? PollygramLeads.rowForSupabase(normalized)
+            : {
+                full_name: payload.contact_name,
+                organisation: payload.school,
+                phone: payload.phone,
+                email: payload.email || null,
+                products: payload.products,
+                message: payload.message || '',
+                source: payload.source || 'institutional_quote',
+                delivery_county: payload.county || null,
+                status: 'new'
+              };
+        var res = await client.from('leads').insert(row);
+        if (res.error) throw res.error;
+        return true;
+      } catch (e) {
+        console.warn('[Pollygram] leads table insert failed — queued locally', e && e.message ? e.message : e);
+        return false;
+      }
+    }
+
+    function buildLeadWaSummary(d) {
+      return [
+        'Hello Pollygram & General Supplies,',
+        '',
+        'Institutional quotation request:',
+        `School / institution: ${d.school}`,
+        `Contact: ${d.contact}`,
+        `Phone: ${d.phone}`,
+        d.email ? `Email: ${d.email}` : '',
+        `Products: ${d.products || '—'}`,
+        d.quantities ? `Quantities / sizes: ${d.quantities}` : '',
+        d.county ? `Delivery region: ${d.county}` : '',
+        d.message ? `Notes: ${d.message}` : '',
+        '',
+        'Please follow up with a formal quote.',
+        ''
+      ]
+        .filter(Boolean)
+        .join('\n');
+    }
+
+    if (leadBackdrop) leadBackdrop.addEventListener('click', closeLeadSheet);
+    document.getElementById('leadCloseBtn')?.addEventListener('click', closeLeadSheet);
+    document.getElementById('leadCancel')?.addEventListener('click', closeLeadSheet);
+    document.getElementById('navLeadBtn')?.addEventListener('click', function () {
+      openLeadSheet('nav_quote');
+    });
+    document.getElementById('footerQuoteBtn')?.addEventListener('click', function () {
+      openLeadSheet('footer');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && leadBackdrop && leadBackdrop.classList.contains('open')) closeLeadSheet();
+    });
+
+    if (leadForm) {
+      leadForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var errEl = document.getElementById('leadFormError');
+        if (errEl) errEl.textContent = '';
+        var school = document.getElementById('leadSchool').value.trim();
+        var contact = document.getElementById('leadContact').value.trim();
+        var phone = document.getElementById('leadPhone').value.trim();
+        var email = document.getElementById('leadEmail').value.trim();
+        var products = document.getElementById('leadProducts').value.trim();
+        var quantities = document.getElementById('leadQuantities').value.trim();
+        var county = document.getElementById('leadCounty').value.trim();
+        var message = document.getElementById('leadMessage').value.trim();
+        if (school.length < 2 || contact.length < 2 || phone.length < 6) {
+          if (errEl) errEl.textContent = 'Please complete institution name, contact person, and phone.';
+          return;
+        }
+        if (products.length < 2) {
+          if (errEl) errEl.textContent = 'Please describe at least one product or package you need.';
+          return;
+        }
+        var payload = {
+          school: school,
+          contact: contact,
+          contact_name: contact,
+          phone: phone,
+          email: email,
+          products: products,
+          quantities: quantities,
+          county: county,
+          message: message,
+          ts: new Date().toISOString(),
+          source: 'institutional_quote_form'
+        };
+        enqueueLeadLocal(payload);
+        if (typeof trackEvent === 'function') trackEvent('lead_submit', { source: 'institutional_quote' });
+        var okRemote = false;
+        if (isSupabaseConfigured() && window.supabase && typeof window.supabase.createClient === 'function') {
+          var lc = getPublicLeadClient();
+          okRemote = await submitLeadRemote(lc, payload);
+        }
+        var waPayload = {
+          school: school,
+          contact: contact,
+          phone: phone,
+          email: email,
+          products: products,
+          quantities: quantities,
+          county: county,
+          message: message
+        };
+        var alsoWa = document.getElementById('leadAlsoWa');
+        if (alsoWa && alsoWa.checked) window.open(buildWhatsAppHref(buildLeadWaSummary(waPayload)), '_blank');
+        closeLeadSheet();
+        alert(okRemote ? 'Thanks — enquiry saved. We will reply shortly.' : 'Thanks — enquiry saved locally until Supabase `leads` table is connected.');
+        leadForm.reset();
+      });
+    }
+
+    if (!sessionStorage.getItem(LEAD_ONCE)) {
+      leadAutoTimer = setTimeout(function () {
+        openLeadSheet('auto_timer');
+      }, LEAD_POPUP_DELAY_MS);
+    }
+
+    renderCart();
+
+    /** Defaults merged with site_content when Supabase is available */
+    const fallback = {
+      business_name: 'Pollygram & General Supplies',
+      promo_bar_text:
+        '⚡ Bulk orders get special pricing — schools & clubs ordering now for the new term',
+      hero_headline:
+        "Kenya's Institutional Sports Supplier — Schools & County Programmes",
+      hero_subtitle:
+        'High schools, academies, colleges, clubs and PE departments — full-programme equipment supply.',
+      hero_cta_primary: 'View Catalogue',
+      wa_default_intro: '',
+      og_title: '',
+      og_description: '',
+      og_url: '',
+      og_image_url: '',
+      t1_quote: '',
+      t1_attrib: '',
+      t2_quote: '',
+      t2_attrib: '',
+      t3_quote: '',
+      t3_attrib: '',
+      whatsapp_number: '254700000000',
+      phone: '+254 700 000 000',
+      wholesale_description: 'Perseverance · Innovation · Integrity\n\nWe focus on supplying performance-grade sports gear with transparent timelines and concierge support.',
+      address: 'Nairobi, Kenya',
+      hours: 'Mon–Sat 8am–7pm',
+      p1_name: 'Match Football — Size 5',
+      p1_price: 'From KES 1,200',
+      p2_name: 'Team Football Kit Set',
+      p2_price: 'From KES 2,800',
+      p3_name: 'Track & Field Spikes',
+      p3_price: 'From KES 3,800',
+      p4_name: 'Athletics Tracksuit Set',
+      p4_price: 'From KES 2,500',
+      p5_name: 'Rubber Hex Dumbbell Set',
+      p5_price: 'From KES 1,800',
+      p6_name: 'Exercise Mat — 10mm',
+      p6_price: 'From KES 950',
+      hero_trust_line: 'Nationwide delivery · Bulk school orders · Institutional supply',
+      hero_wa_label: 'WhatsApp Order',
+      trust_strip_1: 'Nationwide Delivery',
+      trust_strip_2: 'Bulk School Orders',
+      trust_strip_3: 'WhatsApp Ordering',
+      trust_strip_4: 'Institutional Quotes',
+      meta_title: '',
+      meta_description: '',
+      products_catalog:
+        typeof POLLYGRAM_CATALOG !== 'undefined'
+          ? JSON.stringify(POLLYGRAM_CATALOG)
+          : '[]',
+      categories_config:
+        typeof POLLYGRAM_CATEGORIES !== 'undefined'
+          ? JSON.stringify(POLLYGRAM_CATEGORIES)
+          : '[]'
+    };
+
+    function stripLeadingFrom(priceStr) {
+      return String(priceStr || '').replace(/^from\s+/i, '').trim();
+    }
+
+    function formatCategoryLabel(slug) {
+      if (!slug || typeof slug !== 'string') return '';
+      return slug
+        .split('-')
+        .filter(Boolean)
+        .map(function (w) {
+          return w.charAt(0).toUpperCase() + w.slice(1);
+        })
+        .join(' ');
+    }
+
+    function fillCardFromProduct(card, p) {
+      if (!card || !p) return;
+      p = normalizeProductRecord(p);
+      if (p.id != null && String(p.id).trim()) runtimeProductById[String(p.id).trim()] = p;
+
+      const slug = (p.category || '').trim().toLowerCase();
+      if (slug) card.dataset.category = slug;
+      if (p.id != null && String(p.id).trim()) card.dataset.productId = String(p.id).trim();
+      else delete card.dataset.productId;
+      if (p.wa_preset) card.dataset.waPreset = p.wa_preset;
+      else delete card.dataset.waPreset;
+
+      card.dataset.stockStatus = p.stock_status;
+      card.dataset.featured = p.featured ? 'true' : 'false';
+      card.dataset.sku = p.sku ? String(p.sku) : '';
+      var tagsNorm = (p.tags || []).map(function (t) {
+        return String(t || '')
+          .trim()
+          .toLowerCase()
+          .replace(/\s+/g, '-');
+      });
+      card.dataset.tags = tagsNorm.join(' ');
+      card.dataset.tagsBlob = tagsNorm.join(' ');
+      card.classList.toggle('card--featured', !!p.featured);
+
+      var sb = card.querySelector('.js-stock-badge');
+      if (sb) {
+        sb.className =
+          'stock-badge js-stock-badge stock-badge--' + String(p.stock_status).replace(/_/g, '-');
+        sb.textContent =
+          p.stock_status === 'low_stock'
+            ? 'Low Stock'
+            : p.stock_status === 'out_of_stock'
+              ? 'Out of Stock'
+              : 'In Stock';
+      }
+
+      const nameEl = card.querySelector('.name');
+      if (nameEl && p.name) nameEl.textContent = p.name;
+      const priceEl = card.querySelector('.price');
+      if (priceEl && p.price != null) priceEl.textContent = stripLeadingFrom(p.price);
+      const catEl = card.querySelector('.cat');
+      if (catEl) {
+        if (p.category_label) catEl.textContent = p.category_label;
+        else if (slug) catEl.textContent = formatCategoryLabel(slug);
+      }
+      const descEl = card.querySelector('.desc');
+      if (descEl && p.desc != null) descEl.textContent = p.desc;
+      const moqEl = card.querySelector('.moq');
+      if (moqEl && p.moq != null) moqEl.textContent = p.moq;
+
+      const media = card.querySelector('.media');
+      let badge = card.querySelector('.badge');
+      if (p.badge) {
+        if (!badge && media) {
+          badge = document.createElement('span');
+          badge.className = 'badge';
+          const actions = media.querySelector('.card-actions');
+          if (actions) media.insertBefore(badge, actions);
+          else media.appendChild(badge);
+        }
+        if (badge) {
+          badge.textContent = p.badge;
+          badge.style.display = '';
+        }
+      } else if (badge) {
+        badge.remove();
+      }
+
+      const pic = card.querySelector('.pg-product-pic');
+      const imgUrl = (p.image_url || '').trim();
+      if (pic && imgUrl) {
+        pic.innerHTML = '';
+        if ((p.image_webp || '').trim()) {
+          const src = document.createElement('source');
+          src.type = 'image/webp';
+          src.srcset = p.image_webp.trim();
+          pic.appendChild(src);
+        }
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.width = 900;
+        img.height = 900;
+        img.alt = p.name || '';
+        img.src = imgUrl;
+        img.setAttribute('data-fallback-src', 'assets/images/placeholder.svg');
+        img.setAttribute(
+          'onerror',
+          "typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)"
+        );
+        pic.appendChild(img);
+      }
+
+      const idxParts = [
+        slug,
+        (p.category_label || '').trim(),
+        (p.name || '').trim(),
+        (p.desc || '').trim(),
+        String(p.badge || '').trim(),
+        p.moq != null ? String(p.moq) : '',
+        p.price != null ? String(p.price) : '',
+        String(p.sku || ''),
+        p.stock_status || '',
+        tagsNorm.join(' ')
+      ];
+      card.setAttribute(
+        'data-search-index',
+        idxParts.join(' ').toLowerCase().replace(/\s+/g, ' ').trim()
+      );
+    }
+
+    function applyProducts(data) {
+      let catalog = null;
+      try {
+        if (data.products_catalog) catalog = JSON.parse(data.products_catalog);
+      } catch (err) {
+        catalog = null;
+      }
+
+      const grid = document.getElementById('productGrid');
+      const tmpl = document.getElementById('pgCatalogCardProto');
+      let proto =
+        tmpl && tmpl.content && tmpl.content.firstElementChild
+          ? tmpl.content.firstElementChild
+          : document.querySelector('[data-product-slot="1"]');
+
+      if (Array.isArray(catalog) && catalog.length > 0 && grid && proto) {
+        document.querySelectorAll('#productGrid .pg-catalog-dynamic').forEach(function (n) {
+          n.remove();
+        });
+        const protoBackup = proto.cloneNode(true);
+        grid.innerHTML = '';
+        runtimeProductById = {};
+        catalog.forEach(function (p) {
+          const card = protoBackup.cloneNode(true);
+          card.removeAttribute('data-product-slot');
+          card.classList.add('pg-catalog-dynamic', 'reveal', 'visible');
+          fillCardFromProduct(card, p);
+          grid.appendChild(card);
+        });
+
+        for (let j = 0; j < 3 && j < catalog.length; j += 1) {
+          const featName = document.querySelector(`[data-feat-slot="${j + 1}"].feat-name`);
+          const featPrice = document.querySelector(`[data-feat-slot="${j + 1}"].feat-price`);
+          if (featName && catalog[j].name) featName.textContent = catalog[j].name;
+          if (featPrice && catalog[j].price)
+            featPrice.textContent = stripLeadingFrom(catalog[j].price);
+        }
+        megaCatalogSource = catalog;
+        rebuildMegaMenuCache();
+        applyCatalogFilters();
+        rebuildSearchProductIndex();
+        closeSearchSuggest();
+        bindMegaMenuInteractions();
+        rebuildRefineTagPillsFromCatalog();
+        syncRefinePillActiveStates();
+        initShopRefineBar();
+        return;
+      }
+
+      megaCatalogSource =
+        typeof POLLYGRAM_CATALOG !== 'undefined' && Array.isArray(POLLYGRAM_CATALOG)
+          ? POLLYGRAM_CATALOG
+          : [];
+      rebuildMegaMenuCache();
+
+      for (let i = 1; i <= 6; i += 1) {
+        const nameKey = `p${i}_name`;
+        const priceKey = `p${i}_price`;
+        const card = document.querySelector(`[data-product-slot="${i}"]`);
+        if (!card) continue;
+        if (data[nameKey]) card.querySelector('.name').textContent = data[nameKey];
+        if (data[priceKey])
+          card.querySelector('.price').textContent = stripLeadingFrom(data[priceKey]);
+        const featName = document.querySelector(`[data-feat-slot="${i}"].feat-name`);
+        const featPrice = document.querySelector(`[data-feat-slot="${i}"].feat-price`);
+        if (featName && data[nameKey]) featName.textContent = data[nameKey];
+        if (featPrice && data[priceKey])
+          featPrice.textContent = stripLeadingFrom(data[priceKey]);
+      }
+      applyCatalogFilters();
+      rebuildSearchProductIndex();
+      bindMegaMenuInteractions();
+      rebuildRefineTagPillsFromCatalog();
+      syncRefinePillActiveStates();
+      initShopRefineBar();
+    }
+
+    function applyTrustStrip(data) {
+      const keys = ['trust_strip_1', 'trust_strip_2', 'trust_strip_3', 'trust_strip_4'];
+      const items = document.querySelectorAll('#trust-strip .trust-strip-item');
+      keys.forEach((k, i) => {
+        if (!data[k] || !items[i]) return;
+        const mark = items[i].querySelector('.trust-strip-mark');
+        items[i].innerHTML = '';
+        if (mark) items[i].appendChild(mark);
+        else {
+          const m = document.createElement('span');
+          m.className = 'trust-strip-mark';
+          m.textContent = '✓';
+          items[i].appendChild(m);
+        }
+        items[i].appendChild(document.createTextNode(String(data[k])));
+      });
+    }
+
+    function applyCategoriesFromConfig(data) {
+      let cfg = null;
+      try {
+        if (data.categories_config) cfg = JSON.parse(data.categories_config);
+      } catch (e) {
+        cfg = null;
+      }
+      if (!Array.isArray(cfg) || !cfg.length) return;
+      cfg.sort((a, b) => (a.order || 0) - (b.order || 0));
+      const inner = document.querySelector('#pgMegaNav .tabs-inner');
+      if (!inner) return;
+      const btnHtml = cfg
+        .map((c) => {
+          const slug = String(c.slug || '')
+            .trim()
+            .replace(/[^a-z0-9-]/gi, '')
+            .toLowerCase();
+          const label = String(c.label || slug).trim();
+          if (!slug) return '';
+          return `<button type="button" class="tab tab--pill" role="tab" data-filter="${escapeHtml(slug)}">${escapeHtml(label)}</button>`;
+        })
+        .filter(Boolean)
+        .join('');
+      inner.innerHTML =
+        '<button type="button" class="tab tab--pill active" role="tab" data-filter="all">All</button>' + btnHtml;
+      applyCatalogFilters();
+      bindMegaMenuInteractions();
+    }
+
+    function setMetaById(domId, content) {
+      var el = document.getElementById(domId);
+      if (el && content) el.setAttribute('content', content);
+    }
+
+    function applyContent(data) {
+      waIntroOverride = data.wa_default_intro ? String(data.wa_default_intro) : '';
+
+      renderBusinessBrand(data.business_name || 'Pollygram & General Supplies');
+      const heroHeading = document.getElementById('heroHeadline');
+      if (heroHeading && data.hero_headline)
+        heroHeading.innerHTML = escapeHtml(data.hero_headline).replace(/\r?\n/g, '<br>');
+      if (data.hero_subtitle) document.getElementById('heroSubtitle').textContent = data.hero_subtitle;
+      if (data.hero_cta_primary) {
+        var hcp = document.getElementById('heroCtaPrimary');
+        if (hcp) hcp.textContent = data.hero_cta_primary;
+      }
+      if (data.hero_wa_label) {
+        var hw = document.getElementById('heroWa');
+        if (hw) hw.textContent = data.hero_wa_label;
+      }
+      if (data.hero_trust_line) {
+        var htl = document.getElementById('heroTrustLine');
+        if (htl) htl.textContent = data.hero_trust_line;
+      }
+      if (data.phone) document.getElementById('utilityPhone').textContent = data.phone;
+
+      if (data.promo_bar_text) {
+        var pe = document.getElementById('promoBarText');
+        if (pe) pe.textContent = data.promo_bar_text;
+      }
+
+      applyTrustStrip(data);
+
+      if (data.meta_title) {
+        document.title = data.meta_title;
+      } else if (data.og_title) {
+        document.title = data.og_title;
+      }
+      if (data.og_title) {
+        setMetaById('pg-meta-og-title', data.og_title);
+        setMetaById('pg-meta-tw-title', data.og_title);
+      }
+      var descForMeta = data.meta_description || data.og_description;
+      if (descForMeta) {
+        var md = document.querySelector('meta[name="description"]');
+        if (md) md.setAttribute('content', descForMeta);
+      }
+      if (data.og_description) {
+        setMetaById('pg-meta-og-desc', data.og_description);
+        setMetaById('pg-meta-tw-desc', data.og_description);
+      }
+      if (data.og_url) setMetaById('pg-meta-og-url', data.og_url);
+      if (data.og_image_url) {
+        setMetaById('pg-meta-og-image', data.og_image_url);
+        setMetaById('pg-meta-tw-image', data.og_image_url);
+      }
+
+      var tmap = [
+        ['t1_quote', 't1-quote'],
+        ['t1_attrib', 't1-attrib'],
+        ['t2_quote', 't2-quote'],
+        ['t2_attrib', 't2-attrib'],
+        ['t3_quote', 't3-quote'],
+        ['t3_attrib', 't3-attrib']
+      ];
+      tmap.forEach(function (pair) {
+        var k = pair[0];
+        var id = pair[1];
+        if (data[k]) {
+          var node = document.getElementById(id);
+          if (node) node.textContent = data[k];
+        }
+      });
+
+      waDigits = sanitizeWhatsAppDigits(data.whatsapp_number) || DEFAULT_WA_DIGITS;
+      refreshWhatsAppLinks();
+      bindTrackedWhatsAppAnchors();
+
+      document.getElementById('utilityPhoneDup').textContent =
+        document.getElementById('utilityPhone').textContent;
+
+      if (data.address) document.getElementById('footerAddressLine').textContent = data.address;
+      if (data.address) document.getElementById('utilityAddressSnippet').textContent = data.address;
+      if (data.hours) document.getElementById('footerHoursLine').textContent = data.hours;
+      if (data.hours) document.getElementById('utilityHoursSnippet').textContent = data.hours.split(',')[0];
+
+      if (data.wholesale_description && document.getElementById('wholesaleText'))
+        document.getElementById('wholesaleText').innerHTML = escapeHtml(data.wholesale_description).replace(/\r?\n/g, '<br>');
+
+      applyCategoriesFromConfig(data);
+      applyProducts(data);
+    }
+
+    /** URL campaign overlays (?campaign=schools|football-kits|…) */
+    function applyUrlCampaignLayer() {
+      var slug = new URLSearchParams(location.search || '').get('campaign');
+      if (!slug || !CAMPAIGN_PRESETS[slug]) return;
+      var pr = CAMPAIGN_PRESETS[slug];
+      if (pr.subtitle) {
+        var hs = document.getElementById('heroSubtitle');
+        if (hs) hs.textContent = pr.subtitle;
+      }
+      if (pr.promo_append) {
+        try {
+          if (!localStorage.getItem(PROMO_LS)) {
+            var el = document.getElementById('promoBarText');
+            if (el) el.textContent = pr.promo_append + ' · ' + el.textContent.trim();
+            setPromoVisible(true);
+          }
+        } catch (_) {}
+      }
+      if (typeof trackEvent === 'function') trackEvent('campaign_landing', { slug: slug });
+    }
+
+    var _pgPageOpen = Date.now();
+    document.addEventListener('mouseleave', function (e) {
+      if (typeof e.clientY !== 'number' || e.clientY > 40) return;
+      if (Date.now() - _pgPageOpen < 9000) return;
+      try {
+        if (sessionStorage.getItem(LEAD_ONCE)) return;
+      } catch (_) {}
+      openLeadSheet('exit_intent');
+    });
+
+    /** -------------------------------------------------------------------------- */
+    /** SUPABASE INTEGRATION — site_content (key/value rows)                           */
+    /** -------------------------------------------------------------------------- */
+    async function loadContent() {
+      const baseSnapshot = Object.assign({}, fallback);
+
+      applyContent(baseSnapshot);
+
+      if (!isSupabaseConfigured()) {
+        console.info('[Pollygram] Supabase credentials not configured; using bundled fallback.');
+        return;
+      }
+
+      if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+        console.warn('[Pollygram] Supabase SDK not available; check CDN or ad blockers.');
+        return;
+      }
+
+      try {
+        const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const { data: rows, error } = await client.from('site_content').select('key,value');
+
+        if (error) throw error;
+
+        if (!rows || rows.length === 0) {
+          console.info('[Pollygram] Supabase reachable but site_content is empty — fallback kept.');
+          return;
+        }
+
+        const remoteMap = {};
+        rows.forEach(function (row) {
+          remoteMap[row.key] = row.value;
+        });
+        applyContent(Object.assign({}, fallback, remoteMap));
+        console.info('[Pollygram] site_content synced:', Object.keys(remoteMap).sort().join(', '));
+      } catch (err) {
+        console.warn(
+          '[Pollygram] Cannot load Supabase site_content;',
+          err && err.message ? err.message : String(err),
+          '(using fallback)'
+        );
+        applyContent(baseSnapshot);
+      }
+    }
+
+    loadContent()
+      .catch(function () {})
+      .finally(function () {
+        applyUrlCampaignLayer();
+        syncStackHeight();
+      });
+
+  })();
+  </script>
+</body>
+</html>

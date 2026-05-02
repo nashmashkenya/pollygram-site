@@ -1,0 +1,35 @@
+Pollygram — local asset naming (WebP + JPEG for each basename)
+
+Each file is built to show the *product* (ball, kit, shoes, barbell, etc.), not generic match photos.
+Regenerate: python scripts/build_site_images.py
+
+Hero (video poster + picture fallback if video missing):
+  assets/images/hero/kenya-nairobi-night-football-hero.webp
+  assets/images/hero/kenya-nairobi-night-football-hero.jpg
+  (Nairobi, Kenya — night football training; also used as video poster)
+
+Products (4:3 crop, 1200×900 deliverables from scripts/build_site_images.py):
+  assets/images/products/kenya-grassroots-football-match.{webp,jpg}
+  assets/images/products/east-africa-academy-football-team-kits.{webp,jpg}
+  assets/images/products/athletics-track-running-spikes.{webp,jpg}
+  assets/images/products/track-sprint-training-institutional.{webp,jpg}
+  assets/images/products/gym-hex-dumbbells-pe-conditioning.{webp,jpg}
+  assets/images/products/gym-olympic-barbell-training.{webp,jpg}
+  assets/images/products/badminton-racket-sports-hall.{webp,jpg}
+  assets/images/products/aquatics-swim-training-pool.{webp,jpg}
+  assets/images/products/school-pe-uniforms-students.{webp,jpg}
+  assets/images/products/institutional-sports-equipment-bundle.{webp,jpg}
+  assets/images/products/grassroots-portable-football-goals.{webp,jpg}
+  assets/images/products/pe-conditioning-exercise-mat.{webp,jpg}
+
+Attribution: assets/images/ATTRIBUTION.txt · source URLs: assets/images/sources.json
+
+Default multi-sport catalogue (67 SKUs) maps to the basenames above for similar equipment until you add
+sport-specific photos. Regenerate the product list: node scripts/gen-catalog-data.js
+Output: assets/js/catalog-data.js (do not hand-edit; edit scripts/gen-catalog-data.js instead).
+
+Video:
+  assets/videos/sports-hero.mp4  (add your own B-roll; hero image shows until video loads)
+
+Optional partner marks:
+  assets/images/partners/partner-01.svg …
