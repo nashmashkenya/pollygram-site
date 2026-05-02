@@ -62,12 +62,33 @@
       <span class="promo-msg" id="promoBarText">⚡ Bulk orders get special pricing — schools &amp; clubs ordering now for the new term</span>
       <button type="button" class="promo-close" id="promoClose" aria-label="Dismiss promotion banner">×</button>
     </div>
-    <div class="utility">
-      <div><strong>📧</strong> <span>info@pollygram.co.ke</span> &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp; <strong>📞</strong> <span id="utilityPhone">+254 700 000 000</span></div>
-      <div><span id="utilityHoursSnippet">Mon–Sat 8am–7pm</span> · <span id="utilityAddressSnippet">Nairobi</span></div>
-    </div>
 
   <header class="nav" id="nav">
+    <div class="nav-mobile-bar" aria-label="Mobile site navigation">
+      <div class="nav-mobile-bar__row">
+        <button
+          type="button"
+          class="mobile-menu-trigger nav-drawer-trigger"
+          id="navDrawerTrigger"
+          aria-expanded="false"
+          aria-controls="navMobile"
+          aria-label="Browse sports categories">
+          <span class="mobile-menu-trigger__glyph" aria-hidden="true">☰</span>
+          <span class="mobile-menu-trigger__label">Categories</span>
+        </button>
+        <a href="#" class="nav-mobile-bar__brand" aria-label="Pollygram &amp; General Supplies — home">
+          <span class="mobile-brand-title" id="navMobileHeaderBrandTitle">Pollygram &amp; General Supplies</span>
+        </a>
+        <button type="button" class="nav-mobile-search-trigger" id="navMobileHeaderSearchBtn" aria-label="Search products">
+          <svg class="nav-mobile-search-trigger__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M20 20l-4.3-4.3"/>
+          </svg>
+        </button>
+      </div>
+      <p class="nav-mobile-bar__tagline" id="navMobileHeaderBrandTagline">Sports Equipment &amp; Uniforms</p>
+    </div>
+
     <a href="#" class="brand-block brand-lockup" aria-label="Pollygram &amp; General Supplies — home">
       <span class="brand-mark" aria-hidden="true">
         <svg class="brand-mark-svg" viewBox="0 0 48 52" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -83,14 +104,73 @@
     </a>
     <nav class="links">
       <a class="link active" href="#">Home</a>
-      <a class="link" href="#products">Catalogue</a>
+      <div class="nav-dropdown nav-dropdown--catalogue" id="navCatalogueDropdown">
+        <button
+          type="button"
+          class="link nav-dropdown__trigger"
+          id="navCatalogueTrigger"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="navCataloguePanel">
+          Catalogue
+          <svg class="nav-dropdown__caret" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="nav-dropdown__backdrop" id="navCatalogueBackdrop" aria-hidden="true"></div>
+        <div class="nav-dropdown__panel" id="navCataloguePanel" role="region" aria-label="Sports catalogue categories" hidden>
+          <div class="nav-dropdown__panel-toolbar">
+            <span class="nav-dropdown__panel-title" id="navCataloguePanelTitle">Sports</span>
+            <label class="nav-catalogue-mini-search">
+              <span class="visually-hidden">Search categories</span>
+              <input type="search" id="navCatalogueMiniSearch" class="nav-catalogue-mini-search__input" placeholder="Find a sport…" autocomplete="off" aria-label="Filter sports list">
+            </label>
+            <button type="button" class="nav-dropdown__panel-close" id="navCataloguePanelClose" aria-label="Close catalogue menu">×</button>
+          </div>
+          <div class="pg-mega pg-mega--premium-nav pg-mega--nav-dropdown" id="pgMegaNav">
+            <div class="nav-catalogue-split" id="navCatalogueSplit">
+              <div class="nav-catalogue-split__cats">
+                <nav class="tabs-wrap pg-cat-rail__tabs category-scroll" aria-label="Sports categories">
+                  <div class="tabs-inner tabs-inner--pills tabs-inner--rail" id="pgMegaTabsInner" role="tablist">
+                    <button type="button" class="tab tab--pill tab--cat-all active" data-filter="all" role="tab">All sports</button>
+                  </div>
+                </nav>
+              </div>
+              <div class="nav-catalogue-split__preview" aria-live="polite">
+                <div
+                  class="pg-mega__panel pg-mega__panel--preview"
+                  id="pgMegaPanel"
+                  role="region"
+                  aria-label="Category preview"
+                  aria-hidden="true"
+                  hidden>
+                  <div class="pg-mega__panel-inner">
+                    <div class="pg-mega__top">
+                      <div class="pg-mega__top-main">
+                        <p class="pg-mega__eyebrow" id="pgMegaEyebrow">Preview</p>
+                        <p class="pg-mega__title" id="pgMegaTitle">Sports equipment</p>
+                        <p class="pg-mega__desc" id="pgMegaDesc"></p>
+                      </div>
+                      <div class="pg-mega__top-actions">
+                        <button type="button" class="pg-mega__close" id="pgMegaCloseBtn" aria-label="Close preview">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </button>
+                        <a href="#products" class="pg-mega__link-all" id="pgMegaViewAll">Shop category →</a>
+                      </div>
+                    </div>
+                    <div class="pg-mega__grid" id="pgMegaGrid"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="nav-dropdown__panel-footer-cta" href="#products">Full catalogue</a>
+        </div>
+      </div>
       <a class="link" href="#bundles">Packages</a>
       <a class="link" href="#contact">Contact</a>
     </nav>
     <div class="nav-actions">
-      <button type="button" class="nav-drawer-trigger" id="navDrawerTrigger" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
       <div class="theme-bar" role="group" aria-label="Theme switcher">
         <button type="button" class="theme-btn" data-theme-set="elite" aria-pressed="false" title="Night Performance">Night</button>
         <button type="button" class="theme-btn" data-theme-set="promo" aria-pressed="true" title="Luxury Athletics">Luxe</button>
@@ -102,17 +182,67 @@
   </div>
 
   <div class="nav-drawer-backdrop" id="navDrawerBackdrop" aria-hidden="true" tabindex="-1"></div>
-  <div class="nav-mobile-sheet" id="navMobile" role="dialog" aria-modal="true" aria-label="Site navigation" aria-hidden="true">
-    <div class="nav-mobile-sheet__header">
-      <span class="nav-mobile-sheet__title">Menu</span>
-      <button type="button" class="nav-mobile-sheet__close" id="navDrawerClose" aria-label="Close menu">×</button>
+  <div class="nav-mobile-sheet mobile-menu" id="navMobile" role="dialog" aria-modal="true" aria-label="Pollygram catalogue menu" aria-hidden="true">
+    <div class="nav-mobile-sheet__inner">
+      <header class="nav-mobile-sheet__masthead">
+        <button type="button" class="nav-mobile-sheet__close" id="navDrawerClose" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <a href="#" class="nav-mobile-sheet__brand-block" aria-label="Pollygram &amp; General Supplies — home">
+          <span class="nav-mobile-sheet__brand-mark" aria-hidden="true">
+            <svg class="nav-mobile-sheet__brand-svg brand-mark-svg" viewBox="0 0 48 52" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path class="brand-mark-shield" stroke="currentColor" stroke-width="1" stroke-linejoin="round" d="M24 3L44 13v21c0 9-10 17-20 21-10-4-20-12-20-21V13L24 3z"/>
+              <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="round" d="M19 17h7.2c4.1 0 6 2.9 6 6 0 3.9-2.4 6-7 6H21v11"/>
+              <path fill="none" stroke="currentColor" stroke-opacity=".38" stroke-width="1.2" d="M21 29h12"/>
+            </svg>
+          </span>
+          <span class="nav-mobile-sheet__brand-copy">
+            <span class="nav-mobile-sheet__brand-title brand-title" id="navMobileBrandTitle">Pollygram &amp; General Supplies</span>
+            <span class="nav-mobile-sheet__brand-tagline brand-subtitle" id="navMobileBrandTagline">Sports Equipment &amp; Uniforms</span>
+          </span>
+        </a>
+      </header>
+
+      <div class="nav-mobile-sheet__search-shell nav-mobile-search-shell pg-search-shell">
+        <label class="visually-hidden" for="navMobileSearch">Search products</label>
+        <input
+          type="search"
+          id="navMobileSearch"
+          class="nav-mobile-sheet__search-input"
+          placeholder="Search equipment…"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          enterkeyhint="search"
+          inputmode="search"
+          aria-label="Search products"
+          aria-autocomplete="list"
+          aria-controls="navMobileSearchSuggest"
+          aria-expanded="false">
+        <div id="navMobileSearchSuggest" class="nav-mobile-sheet__search-suggest" hidden role="listbox" aria-label="Product suggestions"></div>
+      </div>
+
+      <section class="nav-mobile-sheet__section" aria-labelledby="navMobileSportsHeading">
+        <h2 class="nav-mobile-sheet__section-title menu-section-title" id="navMobileSportsHeading">Sports categories</h2>
+        <div class="nav-mobile-acc" id="navMobileAccordion"></div>
+      </section>
+
+      <nav class="nav-mobile-sheet__quicklinks" aria-label="Quick links">
+        <a class="nav-mobile-sheet__qlink" href="#">Home</a>
+        <a class="nav-mobile-sheet__qlink" href="#products">Catalogue</a>
+        <a class="nav-mobile-sheet__qlink" href="#bundles">Packages</a>
+        <a class="nav-mobile-sheet__qlink" href="#contact">Contact</a>
+      </nav>
+
+      <footer class="nav-mobile-sheet__footer" aria-label="Institutional contact">
+        <p class="nav-mobile-sheet__footer-lead">Need bulk school supply?</p>
+        <div class="nav-mobile-sheet__footer-actions">
+          <a class="nav-mobile-sheet__footer-wa" id="navMobileWa" href="#" target="_blank" rel="noopener" data-track="whatsapp_click" data-track-source="mobile_menu_drawer">WhatsApp us</a>
+          <a class="nav-mobile-sheet__footer-phone" id="navMobileTel" href="tel:"><span id="navMobileTelText">+254 700 000 000</span></a>
+        </div>
+        <button type="button" class="nav-mobile-sheet__footer-quote" id="navMobileQuoteBtn">Quick quote</button>
+      </footer>
     </div>
-    <nav class="nav-mobile-sheet__nav" aria-label="Primary">
-      <a class="mobile-link active" href="#">Home</a>
-      <a class="mobile-link" href="#products">Catalogue</a>
-      <a class="mobile-link" href="#bundles">Packages</a>
-      <a class="mobile-link" href="#contact">Contact</a>
-    </nav>
   </div>
 
   <main id="main-content">
@@ -152,98 +282,13 @@
     </div>
   </section>
 
-  <!-- Discovery: compact sticky categories + filter entry (search lives above grid in #products) -->
+  <!-- Wayfinding: anchor to in-page catalogue (categories live beside the grid in #products) -->
   <div class="pg-discovery reveal visible" id="catalogue-shop">
-    <div class="pg-discovery__inner">
-      <div class="pg-discovery__head">
+    <div class="pg-discovery__inner pg-discovery__inner--compact">
+      <p class="pg-discovery__compact-line">
         <span class="pg-discovery__eyebrow">Shop sports equipment</span>
-        <p class="pg-discovery__title">Find stock by category or search the full catalogue</p>
-      </div>
-      <div class="pg-discovery__toolbar">
-        <button type="button" class="pg-filter-sheet-trigger mobile-filter-btn" id="pgFilterOpen" aria-expanded="false" aria-controls="pgFilterSheet">
-          <span class="pg-filter-sheet-trigger__label">Filters</span>
-          <span class="pg-filter-sheet-trigger__badge" id="pgFilterBadge" hidden aria-hidden="true">0</span>
-        </button>
-        <div class="pg-mega pg-mega--toolbar" id="pgMegaNav">
-        <nav class="tabs-wrap tabs-wrap--discovery pg-discovery__categories category-scroll" aria-label="Sports categories">
-          <div class="tabs-inner tabs-inner--pills">
-            <button type="button" class="tab tab--pill active" data-filter="all" role="tab">All</button>
-          </div>
-        </nav>
-        <div
-          class="pg-mega__panel"
-          id="pgMegaPanel"
-          role="region"
-          aria-label="Products in category"
-          aria-hidden="true"
-          hidden>
-          <div class="pg-mega__panel-inner">
-            <div class="pg-mega__top">
-              <div class="pg-mega__top-main">
-                <p class="pg-mega__eyebrow" id="pgMegaEyebrow">Browse</p>
-                <p class="pg-mega__title" id="pgMegaTitle">Category</p>
-              </div>
-              <div class="pg-mega__top-actions">
-                <button type="button" class="pg-mega__close" id="pgMegaCloseBtn" aria-label="Close">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                </button>
-                <a href="#products" class="pg-mega__link-all" id="pgMegaViewAll">View all →</a>
-              </div>
-            </div>
-            <div class="pg-mega__grid" id="pgMegaGrid"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Filters: sheet / modal — stock, price, featured, tags (non-blocking) -->
-  <div class="pg-filter-sheet" id="pgFilterSheet" aria-hidden="true" inert>
-    <div class="pg-filter-sheet__backdrop" id="pgFilterBackdrop" tabindex="-1" aria-hidden="true"></div>
-    <div class="pg-filter-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="pgFilterSheetTitle" id="pgFilterPanel">
-      <div class="pg-filter-sheet__head">
-        <h2 class="pg-filter-sheet__title" id="pgFilterSheetTitle">Filters</h2>
-        <div class="pg-filter-sheet__head-actions">
-          <button type="button" class="pg-refine__reset pg-filter-sheet__clear" id="pgRefineReset">Clear all</button>
-          <button type="button" class="pg-filter-sheet__close" id="pgFilterClose" aria-label="Close filters">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
-          </button>
-        </div>
-      </div>
-      <div class="pg-filter-sheet__body">
-        <div class="pg-refine pg-refine--sheet" id="pgRefineBar" aria-label="Refine catalogue">
-          <div class="pg-refine__groups">
-            <div class="pg-refine-group" role="group" aria-label="Featured">
-              <span class="pg-refine-group__label">Highlight</span>
-              <div class="pg-refine-pills">
-                <button type="button" class="pg-refine-pill filter-pill active" data-pg-refine-key="featured" data-pg-refine-val="off">All products</button>
-                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="featured" data-pg-refine-val="on">Featured only</button>
-              </div>
-            </div>
-            <div class="pg-refine-group" role="group" aria-label="Availability">
-              <span class="pg-refine-group__label">Stock</span>
-              <div class="pg-refine-pills" id="pgRefineStockPills">
-                <button type="button" class="pg-refine-pill filter-pill active" data-pg-refine-key="stock" data-pg-refine-val="all">Any</button>
-                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="stock" data-pg-refine-val="in_stock">In stock</button>
-                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="stock" data-pg-refine-val="low_stock">Low stock</button>
-                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="stock" data-pg-refine-val="out_of_stock">Out of stock</button>
-              </div>
-            </div>
-            <div class="pg-refine-group" role="group" aria-label="Price band">
-              <span class="pg-refine-group__label">Price</span>
-              <div class="pg-refine-pills">
-                <button type="button" class="pg-refine-pill filter-pill active" data-pg-refine-key="price" data-pg-refine-val="all">Any</button>
-                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="price" data-pg-refine-val="under5k">Under KES 5,000</button>
-                <button type="button" class="pg-refine-pill filter-pill" data-pg-refine-key="price" data-pg-refine-val="over5k">KES 5,000+</button>
-              </div>
-            </div>
-            <div class="pg-refine-group pg-refine-group--tags" role="group" aria-label="Tags" id="pgRefineTagGroup" hidden>
-              <span class="pg-refine-group__label">Tags</span>
-              <div class="pg-refine-pills" id="pgRefineTagPills"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <a class="pg-discovery__compact-link" href="#products">Open full catalogue →</a>
+      </p>
     </div>
   </div>
 
@@ -324,28 +369,32 @@
       </div>
       <button type="button" class="btn-inst-quote" id="btnInstitutionalQuote">Request institutional quote</button>
     </div>
-    <div class="pg-products-search-wrap">
-      <div class="pg-search-shell">
-        <form class="catalogue-search hero-search pg-search pg-search--premium" id="productSearchForm" role="search" aria-label="Search catalogue" onsubmit="return false;">
-          <span class="pg-search__icon-wrap" aria-hidden="true">
-            <svg class="pg-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="M21 21l-4.2-4.2"/>
-            </svg>
-          </span>
-          <input type="search" class="pg-search__input" id="productSearch" name="q" placeholder="Search sports equipment..." autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-label="Search products" aria-expanded="false" aria-controls="productSearchSuggest" aria-autocomplete="list" inputmode="search">
-          <button type="button" class="pg-search__clear" id="productSearchClear" hidden aria-label="Clear search">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
-          </button>
-          <button type="submit" class="pg-search__submit">Search</button>
-        </form>
-        <div id="productSearchSuggest" class="pg-search__dropdown" hidden role="listbox" aria-label="Product suggestions"></div>
+    <div class="pg-catalog-shell">
+      <div class="pg-catalog-main">
+        <div class="pg-products-search-wrap">
+          <div class="pg-search-shell">
+            <form class="catalogue-search hero-search pg-search pg-search--premium" id="productSearchForm" role="search" aria-label="Search catalogue" onsubmit="return false;">
+              <span class="pg-search__icon-wrap" aria-hidden="true">
+                <svg class="pg-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7"/>
+                  <path d="M21 21l-4.2-4.2"/>
+                </svg>
+              </span>
+              <input type="search" class="pg-search__input" id="productSearch" name="q" placeholder="Search sports equipment..." autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-label="Search products" aria-expanded="false" aria-controls="productSearchSuggest" aria-autocomplete="list" inputmode="search">
+              <button type="button" class="pg-search__clear" id="productSearchClear" hidden aria-label="Clear search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+              <button type="submit" class="pg-search__submit">Search</button>
+            </form>
+            <div id="productSearchSuggest" class="pg-search__dropdown" hidden role="listbox" aria-label="Product suggestions"></div>
+          </div>
+        </div>
+        <div class="catalogue-grid pg-product-grid-root" id="productGrid"></div>
       </div>
     </div>
-    <div class="grid catalogue-grid" id="productGrid"></div>
     <div class="catalog-search-empty empty-state" id="catalogSearchEmpty" hidden role="status" aria-live="polite" aria-atomic="true">
       <p class="catalog-search-empty__title">No matching products found</p>
-      <p class="catalog-search-empty__hint">Try a different word, clear the search, adjust filters, or pick “All” categories.</p>
+      <p class="catalog-search-empty__hint">Try a different word, clear the search, or pick “All” categories.</p>
     </div>
   </section>
 
@@ -427,8 +476,6 @@
             <p id="footerBrandLines" class="brand-org-title brand-org-title--footer"><span class="brand-line-main">Pollygram</span><span class="brand-second-row"><span class="brand-line-join">&amp;</span><span class="brand-line-sub">General Supplies</span></span></p>
             <p class="footer-brand-tagline">Sports Equipment &amp; Uniforms</p>
             <p class="footer-business-line"><span id="footerBusinessLine">Pollygram &amp; General Supplies</span></p>
-            <p class="footer-email">info@pollygram.co.ke</p>
-            <p class="footer-phone"><span id="utilityPhoneDup">+254 700 000 000</span></p>
           </div>
         </div>
       </div>
@@ -445,6 +492,10 @@
         <span class="f-link"><span id="footerAddressLine">Nairobi, Kenya</span></span>
         <span class="f-link"><span id="footerHoursLine">Mon–Sat 8am–7pm</span></span>
       </div>
+    </div>
+    <div class="utility utility--footer" aria-label="Contact information">
+      <div><strong>📧</strong> <span>info@pollygram.co.ke</span> &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp; <strong>📞</strong> <span id="utilityPhone">+254 700 000 000</span></div>
+      <div><span id="utilityHoursSnippet">Mon–Sat 8am–7pm</span> · <span id="utilityAddressSnippet">Nairobi</span></div>
     </div>
     <div class="copy">
       <span>© 2026 Pollygram &amp; General Supplies</span>
@@ -846,16 +897,72 @@
         if (typeof trackEvent === 'function') trackEvent('theme_switch', { theme: btn.dataset.themeSet || '' });
       }));
 
+    /** Prevent page scroll behind overlays (nav drawer / catalogue dropdown) */
+    function pgSyncBodyScrollLock() {
+      var drawer = document.body.classList.contains('nav-drawer-open');
+      var catalogue = document.body.classList.contains('nav-catalogue-open');
+      document.body.style.overflow = drawer || catalogue ? 'hidden' : '';
+    }
+
     /** Mobile navigation drawer */
     const navDrawerTrigger = document.getElementById('navDrawerTrigger');
     const navMobile = document.getElementById('navMobile');
     const navDrawerBackdrop = document.getElementById('navDrawerBackdrop');
+
+    function syncMobileMenuBrandFromSite() {
+      var biz = document.getElementById('brandBusiness');
+      var nmTitle = document.getElementById('navMobileBrandTitle');
+      if (biz && nmTitle) nmTitle.textContent = biz.innerText.replace(/\s+/g, ' ').trim();
+      var tag = document.querySelector('.brand-tagline');
+      var nmTag = document.getElementById('navMobileBrandTagline');
+      if (tag && nmTag) nmTag.textContent = tag.textContent.trim();
+      var ht = document.getElementById('navMobileHeaderBrandTitle');
+      var htg = document.getElementById('navMobileHeaderBrandTagline');
+      if (biz && ht) ht.textContent = biz.innerText.replace(/\s+/g, ' ').trim();
+      if (tag && htg) htg.textContent = tag.textContent.trim();
+      var waFab = document.getElementById('wa');
+      var nmWa = document.getElementById('navMobileWa');
+      var waHref =
+        waFab && waFab.href && waFab.href !== '#'
+          ? waFab.href
+          : null;
+      if (!waHref) {
+        var heroWa = document.getElementById('heroWa');
+        if (heroWa && heroWa.href && heroWa.href !== '#') waHref = heroWa.href;
+      }
+      if (!waHref) {
+        var stickyWa = document.getElementById('stickyWa');
+        if (stickyWa && stickyWa.href && stickyWa.href !== '#') waHref = stickyWa.href;
+      }
+      if (nmWa && waHref) nmWa.href = waHref;
+      var phoneEl = document.getElementById('utilityPhone');
+      var nmTel = document.getElementById('navMobileTel');
+      var nmTelText = document.getElementById('navMobileTelText');
+      if (phoneEl && nmTel && nmTelText) {
+        var t = phoneEl.textContent.trim();
+        nmTelText.textContent = t;
+        var digits = t.replace(/[^\d+]/g, '');
+        nmTel.href = 'tel:' + String(digits).replace(/^\+/, '');
+      }
+    }
+
     function setNavDrawer(open) {
       document.body.classList.toggle('nav-drawer-open', open);
       if (navDrawerTrigger) navDrawerTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
       if (navMobile) navMobile.setAttribute('aria-hidden', open ? 'false' : 'true');
       if (navDrawerBackdrop) navDrawerBackdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
-      document.body.style.overflow = open ? 'hidden' : '';
+      if (!open && typeof closeSearchSuggest === 'function') closeSearchSuggest();
+      pgSyncBodyScrollLock();
+      if (open) syncMobileMenuBrandFromSite();
+      if (open && typeof rebuildMobileNavAccordion === 'function') {
+        requestAnimationFrame(function () {
+          var mainInp = document.getElementById('productSearch');
+          var mobInp = document.getElementById('navMobileSearch');
+          if (mainInp && mobInp) mobInp.value = mainInp.value;
+          rebuildMobileNavAccordion();
+          if (mobInp && (mobInp.value || '').trim()) scheduleSuggestUpdate();
+        });
+      }
     }
     navDrawerTrigger?.addEventListener('click', function () {
       setNavDrawer(!document.body.classList.contains('nav-drawer-open'));
@@ -866,11 +973,206 @@
     document.getElementById('navDrawerClose')?.addEventListener('click', function () {
       setNavDrawer(false);
     });
-    navMobile?.querySelectorAll('a.mobile-link').forEach(function (a) {
-      a.addEventListener('click', function () { setNavDrawer(false); });
+    document.getElementById('navMobileHeaderSearchBtn')?.addEventListener('click', function () {
+      setNavDrawer(true);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          document.getElementById('navMobileSearch')?.focus();
+        });
+      });
     });
+    syncMobileMenuBrandFromSite();
+    navMobile?.querySelectorAll('.nav-mobile-sheet__qlink, .nav-mobile-sheet__brand-block').forEach(function (a) {
+      a.addEventListener('click', function () {
+        setNavDrawer(false);
+      });
+    });
+    navMobile?.querySelectorAll('.nav-mobile-sheet__footer-wa, .nav-mobile-sheet__footer-phone').forEach(function (a) {
+      a.addEventListener('click', function () {
+        setNavDrawer(false);
+      });
+    });
+    document.getElementById('navMobileQuoteBtn')?.addEventListener('click', function () {
+      setNavDrawer(false);
+      window.setTimeout(function () {
+        document.getElementById('navLeadBtn')?.click();
+      }, 320);
+    });
+
+    /** Header “Catalogue” dropdown — hover on desktop; click on touch / narrow viewports */
+    (function bindNavCatalogueDropdown() {
+      var root = document.getElementById('navCatalogueDropdown');
+      var trigger = document.getElementById('navCatalogueTrigger');
+      var panel = document.getElementById('navCataloguePanel');
+      var backdrop = document.getElementById('navCatalogueBackdrop');
+      var panelCloseBtn = document.getElementById('navCataloguePanelClose');
+      if (!root || !trigger || !panel) return;
+
+      var hoverCloseTimer = null;
+      var catalogueDesktopExplicitOpen = false;
+      var catalogueAllowPageScrollWhileOpen = false;
+      var catalogueHoverWide = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 981px)');
+      var narrowCatalogueMq = window.matchMedia('(max-width: 980px)');
+      var linksStrip = trigger.closest('.links');
+
+      function useCatalogueHoverOpen() {
+        return catalogueHoverWide.matches;
+      }
+
+      function shouldLockCatalogueBackground() {
+        if (!root.classList.contains('is-open')) return false;
+        /* Full scroll lock only on narrow overlay; desktop stays scrollable */
+        return narrowCatalogueMq.matches;
+      }
+
+      function applyCatalogueScrollLockFromState() {
+        if (shouldLockCatalogueBackground()) {
+          document.body.classList.add('nav-catalogue-open');
+          document.documentElement.classList.add('nav-catalogue-open');
+        } else {
+          document.body.classList.remove('nav-catalogue-open');
+          document.documentElement.classList.remove('nav-catalogue-open');
+        }
+        pgSyncBodyScrollLock();
+      }
+
+      /** Let the panel/backdrop escape .links overflow clipping on phones/tablets ≤980px */
+      function syncNavLinksOverflowForCatalogue() {
+        if (!linksStrip) return;
+        linksStrip.classList.toggle(
+          'nav-links--catalogue-open',
+          narrowCatalogueMq.matches && root.classList.contains('is-open')
+        );
+      }
+
+      function clearHoverCloseTimer() {
+        if (hoverCloseTimer != null) {
+          clearTimeout(hoverCloseTimer);
+          hoverCloseTimer = null;
+        }
+      }
+
+      function catOpen() {
+        return root.classList.contains('is-open');
+      }
+      function closeCat() {
+        clearHoverCloseTimer();
+        catalogueDesktopExplicitOpen = false;
+        catalogueAllowPageScrollWhileOpen = false;
+        root.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+        panel.setAttribute('aria-hidden', 'true');
+        trigger.classList.remove('nav-dropdown__trigger--active');
+        if (backdrop) backdrop.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('nav-catalogue-open');
+        document.documentElement.classList.remove('nav-catalogue-open');
+        syncNavLinksOverflowForCatalogue();
+        pgSyncBodyScrollLock();
+        if (typeof hideMegaPanelUi === 'function') hideMegaPanelUi();
+      }
+      function openCat() {
+        clearHoverCloseTimer();
+        root.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        panel.hidden = false;
+        panel.setAttribute('aria-hidden', 'false');
+        trigger.classList.add('nav-dropdown__trigger--active');
+        if (backdrop) backdrop.setAttribute('aria-hidden', 'false');
+        syncNavLinksOverflowForCatalogue();
+        applyCatalogueScrollLockFromState();
+        requestAnimationFrame(function () {
+          if (typeof primeMegaPreviewForNavDropdown === 'function') primeMegaPreviewForNavDropdown();
+        });
+      }
+      window.pgCloseNavCatalogue = closeCat;
+
+      /** After picking a sport: mobile closes overlay; desktop keeps menu open & unlocks page scroll. */
+      window.pgAfterCatalogueCategoryPick = function () {
+        if (narrowCatalogueMq.matches) {
+          closeCat();
+          return;
+        }
+        catalogueAllowPageScrollWhileOpen = true;
+        document.body.classList.remove('nav-catalogue-open');
+        document.documentElement.classList.remove('nav-catalogue-open');
+        pgSyncBodyScrollLock();
+      };
+
+      root.addEventListener('mouseenter', function () {
+        if (!useCatalogueHoverOpen()) return;
+        clearHoverCloseTimer();
+        catalogueDesktopExplicitOpen = false;
+        catalogueAllowPageScrollWhileOpen = false;
+        openCat();
+      });
+      root.addEventListener('mouseleave', function () {
+        if (!useCatalogueHoverOpen()) return;
+        clearHoverCloseTimer();
+        hoverCloseTimer = setTimeout(function () {
+          hoverCloseTimer = null;
+          closeCat();
+        }, 220);
+      });
+
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var wideHover = useCatalogueHoverOpen() && !narrowCatalogueMq.matches;
+        var wasOpen = catOpen();
+        if (wideHover) {
+          if (!wasOpen) catalogueDesktopExplicitOpen = true;
+          else catalogueDesktopExplicitOpen = false;
+        }
+        wasOpen ? closeCat() : openCat();
+      });
+      panelCloseBtn?.addEventListener('click', closeCat);
+      backdrop?.addEventListener('click', closeCat);
+
+      panel.querySelector('.nav-dropdown__panel-footer-cta')?.addEventListener('click', function () {
+        closeCat();
+      });
+
+      document.addEventListener(
+        'pointerdown',
+        function (e) {
+          if (!catOpen()) return;
+          if (root.contains(e.target)) return;
+          closeCat();
+        },
+        true
+      );
+
+      catalogueHoverWide.addEventListener('change', function () {
+        if (!catalogueHoverWide.matches) clearHoverCloseTimer();
+        if (root.classList.contains('is-open')) applyCatalogueScrollLockFromState();
+      });
+      narrowCatalogueMq.addEventListener('change', function () {
+        syncNavLinksOverflowForCatalogue();
+        if (root.classList.contains('is-open')) applyCatalogueScrollLockFromState();
+      });
+    })();
+
+    (function bindNavCatalogueMiniSearch() {
+      var inp = document.getElementById('navCatalogueMiniSearch');
+      if (!inp) return;
+      inp.addEventListener('input', function () {
+        var q = (inp.value || '').trim().toLowerCase();
+        document.querySelectorAll('#pgMegaNav .tabs-inner .tab').forEach(function (tab) {
+          var label = (tab.textContent || '').toLowerCase();
+          tab.hidden = q.length > 0 && label.indexOf(q) === -1;
+        });
+      });
+    })();
+
     window.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setNavDrawer(false);
+      if (e.key !== 'Escape') return;
+      if (document.getElementById('navCatalogueDropdown')?.classList.contains('is-open')) {
+        if (typeof window.pgCloseNavCatalogue === 'function') window.pgCloseNavCatalogue();
+        document.getElementById('navCatalogueTrigger')?.focus();
+        return;
+      }
+      setNavDrawer(false);
     });
 
     /** Scroll shadow */
@@ -903,9 +1205,7 @@
     }
 
     function getActiveCategoryFilter() {
-      const tab = document.querySelector(
-        '#pgMegaNav .tabs-inner .tab.active, .pg-discovery__categories .tab.active'
-      );
+      const tab = document.querySelector('#pgMegaNav .tabs-inner .tab.active');
       return tab && tab.dataset.filter ? tab.dataset.filter : 'all';
     }
 
@@ -1236,6 +1536,7 @@
       }
     }
     function initFilterSheet() {
+      if (!document.getElementById('pgFilterSheet')) return;
       if (document.body && document.body.dataset.pgFilterSheetWired) return;
       if (document.body) document.body.dataset.pgFilterSheetWired = '1';
       var openBtn = document.getElementById('pgFilterOpen');
@@ -1310,17 +1611,142 @@
       });
     }
 
+    /** Flatten #productGrid to direct .card children (undo lanes / hidden pool). */
+    function flattenAndListCards(grid) {
+      if (!grid) return [];
+      var cards = grid.querySelectorAll('.card');
+      cards.forEach(function (c) {
+        grid.appendChild(c);
+      });
+      grid.querySelectorAll(':scope > *').forEach(function (n) {
+        if (!n.classList.contains('card')) n.remove();
+      });
+      return Array.from(grid.querySelectorAll(':scope > .card'));
+    }
+
+    function categoryOrderIndexMap() {
+      var orderIdx = {};
+      if (typeof POLLYGRAM_CATEGORIES !== 'undefined' && Array.isArray(POLLYGRAM_CATEGORIES)) {
+        for (var i = 0; i < POLLYGRAM_CATEGORIES.length; i++) {
+          var s = String(POLLYGRAM_CATEGORIES[i].slug || '')
+            .toLowerCase()
+            .trim();
+          if (s) orderIdx[s] = i;
+        }
+      }
+      return orderIdx;
+    }
+
+    function sortCategorySlugsForLanes(slugs) {
+      var orderIdx = categoryOrderIndexMap();
+      return slugs.sort(function (a, b) {
+        var ia = orderIdx[a];
+        var ib = orderIdx[b];
+        if (ia != null && ib != null) return ia - ib;
+        if (ia != null) return -1;
+        if (ib != null) return 1;
+        return String(a).localeCompare(String(b));
+      });
+    }
+
+    /** Horizontal rows per category (or one row when searched / filtered to one sport). */
+    function layoutCatalogLanes(grid, f, matched) {
+      if (!grid) return;
+      var matchedSet = new Set(matched);
+      var flat = flattenAndListCards(grid);
+      var hidden = [];
+      for (var i = 0; i < flat.length; i++) {
+        var hc = flat[i];
+        grid.removeChild(hc);
+        if (!matchedSet.has(hc)) hidden.push(hc);
+      }
+
+      function makeLaneWrap(trackCards) {
+        var outer = document.createElement('div');
+        outer.className = 'pg-hscroll';
+        var track = document.createElement('div');
+        track.className = 'pg-horizontal-track';
+        for (var t = 0; t < trackCards.length; t++) track.appendChild(trackCards[t]);
+        outer.appendChild(track);
+        return outer;
+      }
+
+      if (!matched.length) {
+        /* restore hidden-only pool */
+      } else if (f.category !== 'all' || (f.search && String(f.search).trim().length)) {
+        var stage1 = document.createElement('section');
+        stage1.className = 'pg-cat-stage';
+        var hh = document.createElement('header');
+        hh.className = 'pg-cat-stage__header';
+        var ttl = document.createElement('h3');
+        ttl.className = 'pg-cat-stage__title';
+        if (f.category !== 'all') {
+          ttl.textContent = readCategoryLabelForSlug(String(f.category).trim());
+        } else ttl.textContent = 'Search results';
+        hh.appendChild(ttl);
+        stage1.appendChild(hh);
+        stage1.appendChild(makeLaneWrap(matched));
+        if (f.category !== 'all') {
+          stage1.setAttribute(
+            'data-pg-lane-category',
+            String(f.category)
+              .toLowerCase()
+              .trim()
+          );
+        }
+        grid.appendChild(stage1);
+      } else {
+        var buckets = {};
+        var ord = [];
+        for (var m = 0; m < matched.length; m++) {
+          var mc = matched[m];
+          var slug =
+            String(mc.dataset.category || 'other')
+              .toLowerCase()
+              .trim() || 'other';
+          if (!buckets[slug]) {
+            buckets[slug] = [];
+            ord.push(slug);
+          }
+          buckets[slug].push(mc);
+        }
+        ord = sortCategorySlugsForLanes(ord);
+        for (var o = 0; o < ord.length; o++) {
+          var sg = ord[o];
+          var st = document.createElement('section');
+          st.className = 'pg-cat-stage';
+          st.setAttribute('data-pg-lane-category', sg);
+          var hd = document.createElement('header');
+          hd.className = 'pg-cat-stage__header';
+          var h3 = document.createElement('h3');
+          h3.className = 'pg-cat-stage__title';
+          h3.textContent = readCategoryLabelForSlug(sg);
+          hd.appendChild(h3);
+          st.appendChild(hd);
+          st.appendChild(makeLaneWrap(buckets[sg]));
+          grid.appendChild(st);
+        }
+      }
+
+      var pool = document.createElement('div');
+      pool.className = 'pg-card-pool';
+      pool.setAttribute('hidden', '');
+      pool.setAttribute('aria-hidden', 'true');
+      for (var h = 0; h < hidden.length; h++) pool.appendChild(hidden[h]);
+      if (pool.children.length) grid.appendChild(pool);
+    }
+
     function applyCatalogFilters() {
       var f = readCatalogFiltersFromDom();
-      var cards = getProductCards();
+      var grid = document.getElementById('productGrid');
+      var cards = flattenAndListCards(grid);
       var matched = filterProducts(cards, f);
       var matchedSet = new Set(matched);
       var emptyEl = document.getElementById('catalogSearchEmpty');
-      var grid = document.getElementById('productGrid');
       var clearBtn = document.getElementById('productSearchClear');
       var visible = matched.length;
-      for (var i = 0; i < cards.length; i++) {
-        var card = cards[i];
+
+      cards.forEach(function (card) {
         var ok = matchedSet.has(card);
         if (ok) {
           card.style.display = '';
@@ -1329,7 +1755,10 @@
           card.style.display = 'none';
           card.setAttribute('hidden', 'hidden');
         }
-      }
+      });
+
+      layoutCatalogLanes(grid, f, matched);
+
       if (emptyEl) {
         var showEmpty = cards.length > 0 && visible === 0;
         emptyEl.hidden = !showEmpty;
@@ -1446,30 +1875,25 @@
     function closeSearchSuggest() {
       var box = document.getElementById('productSearchSuggest');
       var inp = document.getElementById('productSearch');
+      var mobBox = document.getElementById('navMobileSearchSuggest');
+      var mobInp = document.getElementById('navMobileSearch');
       suggestHighlight = -1;
       if (box) {
         box.hidden = true;
         box.innerHTML = '';
       }
       if (inp) inp.setAttribute('aria-expanded', 'false');
+      if (mobBox) {
+        mobBox.hidden = true;
+        mobBox.innerHTML = '';
+      }
+      if (mobInp) mobInp.setAttribute('aria-expanded', 'false');
     }
 
-    function updateSearchSuggestionsUI() {
-      var box = document.getElementById('productSearchSuggest');
-      var inp = document.getElementById('productSearch');
-      if (!box || !inp) return;
-      var raw = inp.value || '';
-      var q = raw.trim().toLowerCase();
-      if (!q) {
-        closeSearchSuggest();
-        return;
-      }
-      if (!searchProductIndex.length) rebuildSearchProductIndex();
-      var items = getSuggestionEntries(raw);
-      inp.setAttribute('aria-expanded', 'true');
-      box.hidden = false;
+    function renderSuggestionOptionsInto(box, items, raw, idPrefix) {
+      if (!box) return;
       box.innerHTML = '';
-      suggestHighlight = -1;
+      var prefix = idPrefix || 'pg-suggest-opt';
       if (!items.length) {
         var empty = document.createElement('div');
         empty.className = 'pg-search__empty';
@@ -1483,7 +1907,7 @@
         btn.type = 'button';
         btn.className = 'pg-search__opt';
         btn.role = 'option';
-        btn.id = 'pg-suggest-opt-' + idx;
+        btn.id = prefix + '-' + idx;
         btn.dataset.idx = String(idx);
         btn.addEventListener('mousedown', function (ev) {
           ev.preventDefault();
@@ -1525,6 +1949,39 @@
       });
     }
 
+    function updateSearchSuggestionsUI() {
+      var box = document.getElementById('productSearchSuggest');
+      var inp = document.getElementById('productSearch');
+      var mobBox = document.getElementById('navMobileSearchSuggest');
+      var drawerOpen = document.body.classList.contains('nav-drawer-open');
+      if (!inp) return;
+      var raw = inp.value || '';
+      var q = raw.trim().toLowerCase();
+      if (!q) {
+        closeSearchSuggest();
+        return;
+      }
+      if (!searchProductIndex.length) rebuildSearchProductIndex();
+      var items = getSuggestionEntries(raw);
+      suggestHighlight = -1;
+      if (box) {
+        inp.setAttribute('aria-expanded', 'true');
+        box.hidden = false;
+        renderSuggestionOptionsInto(box, items, raw, 'pg-suggest-opt');
+      }
+      if (mobBox && drawerOpen) {
+        var mobInp = document.getElementById('navMobileSearch');
+        if (mobInp) mobInp.setAttribute('aria-expanded', 'true');
+        mobBox.hidden = false;
+        renderSuggestionOptionsInto(mobBox, items, raw, 'pg-mob-suggest-opt');
+      } else if (mobBox) {
+        mobBox.hidden = true;
+        mobBox.innerHTML = '';
+        var mi = document.getElementById('navMobileSearch');
+        if (mi) mi.setAttribute('aria-expanded', 'false');
+      }
+    }
+
     function scheduleSuggestUpdate() {
       clearTimeout(suggestTimer);
       suggestTimer = setTimeout(function () {
@@ -1553,15 +2010,22 @@
 
     function pickSearchSuggestion(nameStr) {
       var inp = document.getElementById('productSearch');
+      var mobInp = document.getElementById('navMobileSearch');
       if (inp) inp.value = nameStr;
+      if (mobInp) mobInp.value = nameStr;
       closeSearchSuggest();
       applyCatalogFilters();
+      if (document.body.classList.contains('nav-drawer-open')) setNavDrawer(false);
       var grid = document.getElementById('productGrid');
       if (grid)
         grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        var mob = document.getElementById('navMobileSearch');
+        if (mob && document.body.classList.contains('nav-drawer-open')) mob.value = searchInput.value;
+      });
       searchInput.addEventListener('focus', function () {
         if ((searchInput.value || '').trim()) scheduleSuggestUpdate();
       });
@@ -1590,15 +2054,41 @@
       searchInput.addEventListener('blur', function () {
         setTimeout(function () {
           var shell = document.querySelector('.pg-search-shell');
+          var mobShell = document.querySelector('.nav-mobile-search-shell');
           var ae = document.activeElement;
           if (shell && ae && shell.contains(ae)) return;
+          if (mobShell && ae && mobShell.contains(ae)) return;
           closeSearchSuggest();
         }, 160);
       });
     }
 
+    (function bindMobileNavSearch() {
+      var navMobileSearchInp = document.getElementById('navMobileSearch');
+      if (!navMobileSearchInp) return;
+      navMobileSearchInp.addEventListener('input', function () {
+        var main = document.getElementById('productSearch');
+        if (main) main.value = navMobileSearchInp.value;
+        scheduleSuggestUpdate();
+        applyCatalogFilters();
+      });
+      navMobileSearchInp.addEventListener('focus', function () {
+        if ((navMobileSearchInp.value || '').trim()) scheduleSuggestUpdate();
+      });
+      navMobileSearchInp.addEventListener('blur', function () {
+        setTimeout(function () {
+          var mobShell = document.querySelector('.nav-mobile-search-shell');
+          var shell = document.querySelector('.pg-search-shell');
+          var ae = document.activeElement;
+          if (mobShell && ae && mobShell.contains(ae)) return;
+          if (shell && ae && shell.contains(ae)) return;
+          closeSearchSuggest();
+        }, 160);
+      });
+    })();
+
     document.addEventListener('click', function (ev) {
-      if (!ev.target.closest('.pg-search-shell')) closeSearchSuggest();
+      if (!ev.target.closest('.pg-search-shell') && !ev.target.closest('.nav-mobile-search-shell')) closeSearchSuggest();
     });
 
     document.querySelectorAll('.js-pack-wa').forEach(function (btn) {
@@ -1769,9 +2259,9 @@
 
     function isMegaDesktopHover() {
       try {
-        return window.matchMedia('(hover: hover) and (min-width: 901px)').matches;
+        return window.matchMedia('(hover: hover) and (min-width: 981px)').matches;
       } catch (_) {
-        return window.innerWidth >= 901;
+        return window.innerWidth >= 981;
       }
     }
 
@@ -1783,10 +2273,47 @@
       return '';
     }
 
+    /** Single-line price (+ optional MOQ) for catalogue dropdown / mega preview */
+    function formatDropdownPriceLine(p) {
+      if (!p) return { text: '', variant: 'empty' };
+      var priceRaw = p.price != null ? String(p.price).trim() : '';
+      var moqRaw = p.moq != null ? String(p.moq).trim() : '';
+      var main = '';
+      if (priceRaw) {
+        if (/^from\s+/i.test(priceRaw)) {
+          main = priceRaw.charAt(0).toUpperCase() + priceRaw.slice(1);
+        } else if (/quote|enquir|request|on request|tbd|contact|lpo/i.test(priceRaw)) {
+          main = priceRaw;
+        } else {
+          main = 'From ' + stripLeadingFrom(priceRaw);
+        }
+      }
+      var moqShort = '';
+      if (moqRaw) {
+        var m = moqRaw.match(/(\d+)/);
+        if (m) moqShort = 'Min ' + m[1] + ' pcs';
+        else moqShort = moqRaw;
+      }
+      var combined = '';
+      if (main && moqShort) combined = main + ' • ' + moqShort;
+      else if (main) combined = main;
+      else if (moqShort) combined = moqShort;
+      if (combined) return { text: combined, variant: 'price' };
+      if (p.badge && String(p.badge).trim()) return { text: String(p.badge).trim(), variant: 'badge' };
+      return { text: 'Quote on request', variant: 'muted' };
+    }
+
     function fillMegaGrid(gridEl, slug) {
       if (!gridEl) return;
-      var list = megaProductsByCategory[slug] || [];
+      var list = [];
       var limit = 12;
+      if (String(slug || '').toLowerCase().trim() === 'all') {
+        if (typeof POLLYGRAM_CATALOG !== 'undefined' && Array.isArray(POLLYGRAM_CATALOG)) {
+          list = POLLYGRAM_CATALOG.slice(0, limit);
+        }
+      } else {
+        list = megaProductsByCategory[slug] || [];
+      }
       var slice = list.slice(0, limit);
       gridEl.textContent = '';
       gridEl.classList.toggle('pg-mega__grid--few', slice.length > 0 && slice.length < 4);
@@ -1801,17 +2328,18 @@
         var p = slice[j];
         var id = String(p.id || '').trim();
         var a = document.createElement('a');
-        a.className = 'pg-mega__item';
+        a.className = 'pg-mega__item dropdown-product-item';
         a.href = '#products';
         if (id) {
           a.setAttribute('data-mega-product', id);
           a.setAttribute('data-mega-category', slug);
         }
         var thumb = document.createElement('span');
-        thumb.className = 'pg-mega__thumb';
+        thumb.className = 'pg-mega__thumb dropdown-product-thumb';
         var imgUrl = (p.image_url || '').trim();
         if (imgUrl) {
           var im = document.createElement('img');
+          im.className = 'dropdown-product-img';
           im.loading = 'lazy';
           im.decoding = 'async';
           im.alt = p.name ? String(p.name) : '';
@@ -1823,27 +2351,202 @@
           );
           thumb.appendChild(im);
         }
-        var body = document.createElement('span');
-        body.className = 'pg-mega__item-body';
+        var info = document.createElement('div');
+        info.className = 'dropdown-product-info pg-mega__item-body';
         var nameEl = document.createElement('span');
-        nameEl.className = 'pg-mega__name';
+        nameEl.className = 'dropdown-product-name pg-mega__name';
         nameEl.textContent = p.name ? String(p.name) : 'Product';
-        body.appendChild(nameEl);
-        var sub = getMegaLabelForProduct(p);
-        if (sub) {
-          var lab = document.createElement('span');
-          lab.className = 'pg-mega__label';
-          lab.textContent = sub;
-          body.appendChild(lab);
-        }
-        var qv = document.createElement('span');
-        qv.className = 'pg-mega__qv';
-        qv.textContent = 'View';
+        var priceEl = document.createElement('span');
+        priceEl.className = 'dropdown-product-price';
+        var priceDisp = formatDropdownPriceLine(p);
+        priceEl.textContent = priceDisp.text;
+        if (priceDisp.variant === 'muted') priceEl.classList.add('dropdown-product-price--muted');
+        if (priceDisp.variant === 'badge') priceEl.classList.add('dropdown-product-price--badge');
+        info.appendChild(nameEl);
+        info.appendChild(priceEl);
         a.appendChild(thumb);
-        a.appendChild(body);
-        a.appendChild(qv);
+        a.appendChild(info);
         gridEl.appendChild(a);
       }
+    }
+
+    function mobileAccordionSafeId(slug) {
+      var s = String(slug || 'all')
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]/g, '');
+      return s || 'all';
+    }
+
+    function fillMobileAccordionProducts(container, slug) {
+      if (!container) return;
+      container.textContent = '';
+      var limit = 8;
+      var s = String(slug || '')
+        .toLowerCase()
+        .trim();
+      var list = [];
+      if (s === 'all') {
+        if (typeof POLLYGRAM_CATALOG !== 'undefined' && Array.isArray(POLLYGRAM_CATALOG)) {
+          list = POLLYGRAM_CATALOG.slice(0, limit);
+        }
+      } else {
+        list = (megaProductsByCategory[s] || []).slice(0, limit);
+      }
+      if (!list.length) {
+        var empty = document.createElement('p');
+        empty.className = 'nav-mobile-acc__empty';
+        empty.textContent = 'No products in this category yet.';
+        container.appendChild(empty);
+        return;
+      }
+      for (var k = 0; k < list.length; k++) {
+        var p = list[k];
+        var row = document.createElement('a');
+        row.href = '#products';
+        row.className = 'nav-mobile-acc__product dropdown-product-item';
+        var pid = String(p.id || '').trim();
+        if (pid) {
+          row.setAttribute('data-mega-product', pid);
+          row.setAttribute('data-mega-category', s === 'all' ? String((p.category || '').trim()).toLowerCase() : s);
+        }
+        var thumb = document.createElement('span');
+        thumb.className = 'nav-mobile-acc__thumb dropdown-product-thumb';
+        var imgUrl = (p.image_url || '').trim();
+        if (imgUrl) {
+          var im = document.createElement('img');
+          im.className = 'dropdown-product-img';
+          im.loading = 'lazy';
+          im.decoding = 'async';
+          im.alt = p.name ? String(p.name) : '';
+          im.src = imgUrl;
+          im.setAttribute('data-fallback-src', 'assets/images/placeholder.svg');
+          im.setAttribute(
+            'onerror',
+            "typeof PollygramImg !== 'undefined' && PollygramImg.onPictureImgError(this)"
+          );
+          thumb.appendChild(im);
+        }
+        var info = document.createElement('div');
+        info.className = 'dropdown-product-info nav-mobile-acc__product-info';
+        var nm = document.createElement('span');
+        nm.className = 'dropdown-product-name nav-mobile-acc__product-name';
+        nm.textContent = p.name ? String(p.name) : 'Product';
+        var pr = document.createElement('span');
+        pr.className = 'dropdown-product-price';
+        var mobPrice = formatDropdownPriceLine(p);
+        pr.textContent = mobPrice.text;
+        if (mobPrice.variant === 'muted') pr.classList.add('dropdown-product-price--muted');
+        if (mobPrice.variant === 'badge') pr.classList.add('dropdown-product-price--badge');
+        info.appendChild(nm);
+        info.appendChild(pr);
+        row.appendChild(thumb);
+        row.appendChild(info);
+        container.appendChild(row);
+      }
+    }
+
+    function rebuildMobileNavAccordion() {
+      var root = document.getElementById('navMobileAccordion');
+      if (!root) return;
+      rebuildMegaMenuCache();
+      root.innerHTML = '';
+      var tabs = document.querySelectorAll('#pgMegaNav .tabs-inner .tab');
+      tabs.forEach(function (tab) {
+        var slug = (tab.getAttribute('data-filter') || '').trim();
+        var label = (tab.textContent || '').trim();
+        if (!slug) return;
+        var sid = mobileAccordionSafeId(slug);
+        var panelId = 'navMobAcc-' + sid;
+
+        var item = document.createElement('div');
+        item.className = 'nav-mobile-acc__item';
+        item.setAttribute('data-acc-slug', slug);
+
+        var trig = document.createElement('button');
+        trig.type = 'button';
+        trig.className = 'nav-mobile-acc__trigger category-item';
+        trig.setAttribute('aria-expanded', 'false');
+        trig.setAttribute('aria-controls', panelId);
+
+        var spanL = document.createElement('span');
+        spanL.className = 'nav-mobile-acc__label';
+        spanL.textContent = label;
+
+        var chev = document.createElement('span');
+        chev.className = 'nav-mobile-acc__chevron';
+        chev.setAttribute('aria-hidden', 'true');
+        chev.innerHTML =
+          '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+        trig.appendChild(spanL);
+        trig.appendChild(chev);
+
+        var panel = document.createElement('div');
+        panel.className = 'nav-mobile-acc__panel';
+        panel.id = panelId;
+        panel.setAttribute('role', 'region');
+        panel.setAttribute('aria-hidden', 'true');
+
+        var inner = document.createElement('div');
+        inner.className = 'nav-mobile-acc__panel-inner';
+
+        var productsEl = document.createElement('div');
+        productsEl.className = 'nav-mobile-acc__products';
+
+        var browse = document.createElement('a');
+        browse.href = '#products';
+        browse.className = 'nav-mobile-acc__browse';
+        browse.textContent = slug === 'all' ? 'View full catalogue →' : 'Shop ' + label + ' →';
+        browse.setAttribute('data-mobile-jump', slug);
+
+        inner.appendChild(productsEl);
+        inner.appendChild(browse);
+        panel.appendChild(inner);
+
+        trig.addEventListener('click', function () {
+          var wasOpen = trig.getAttribute('aria-expanded') === 'true';
+          root.querySelectorAll('.nav-mobile-acc__item').forEach(function (node) {
+            node.classList.remove('nav-mobile-acc__item--active');
+          });
+          root.querySelectorAll('.nav-mobile-acc__trigger').forEach(function (t) {
+            if (t === trig) return;
+            t.setAttribute('aria-expanded', 'false');
+            var oid = t.getAttribute('aria-controls');
+            var op = oid ? document.getElementById(oid) : null;
+            if (op) {
+              op.setAttribute('aria-hidden', 'true');
+              op.classList.remove('nav-mobile-acc__panel--open');
+            }
+          });
+          var nowOpen = !wasOpen;
+          trig.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+          panel.setAttribute('aria-hidden', nowOpen ? 'false' : 'true');
+          panel.classList.toggle('nav-mobile-acc__panel--open', nowOpen);
+          if (nowOpen) {
+            item.classList.add('nav-mobile-acc__item--active');
+            fillMobileAccordionProducts(productsEl, slug);
+          }
+        });
+
+        browse.addEventListener('click', function (e) {
+          e.preventDefault();
+          var jump = browse.getAttribute('data-mobile-jump') || 'all';
+          document.querySelectorAll('#pgMegaNav .tabs-inner .tab').forEach(function (x) {
+            x.classList.toggle('active', x.getAttribute('data-filter') === jump);
+          });
+          applyCatalogFilters();
+          scheduleSuggestUpdate();
+          setNavDrawer(false);
+          requestAnimationFrame(function () {
+            document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+
+        item.appendChild(trig);
+        item.appendChild(panel);
+        root.appendChild(item);
+      });
     }
 
     function readCategoryLabelForSlug(slug) {
@@ -1870,7 +2573,7 @@
       megaHideTimer = setTimeout(function () {
         megaHideTimer = null;
         hideMegaPanelUi();
-      }, 160);
+      }, 220);
     }
 
     function syncMegaPanelContent(slug) {
@@ -1878,16 +2581,44 @@
       var grid = document.getElementById('pgMegaGrid');
       var title = document.getElementById('pgMegaTitle');
       var eyebrow = document.getElementById('pgMegaEyebrow');
+      var descEl = document.getElementById('pgMegaDesc');
       var viewAll = document.getElementById('pgMegaViewAll');
       if (!panel || !grid || !title) return;
       megaLastOpenSlug = slug;
-      if (eyebrow) eyebrow.textContent = 'Shop';
-      title.textContent = readCategoryLabelForSlug(slug);
-      fillMegaGrid(grid, slug);
+      var s = String(slug || '')
+        .toLowerCase()
+        .trim();
+      if (eyebrow) eyebrow.textContent = s === 'all' ? 'Discover' : 'Shop';
+      title.textContent = readCategoryLabelForSlug(s === 'all' ? 'all' : slug);
+      if (descEl) {
+        if (s === 'all') {
+          descEl.textContent = 'Highlights across programmes — hover a sport for a tailored preview.';
+        } else {
+          descEl.textContent =
+            'Institutional-grade listings with stock visibility — request a quote for your school or county programme.';
+        }
+      }
+      fillMegaGrid(grid, s === 'all' ? 'all' : slug);
       if (viewAll) {
-        viewAll.setAttribute('data-mega-jump', slug);
+        viewAll.setAttribute('data-mega-jump', s === 'all' ? '' : slug);
       }
     }
+
+    /** When catalogue dropdown opens: show preview for active sport tab */
+    function primeMegaPreviewForNavDropdown() {
+      var nav = document.getElementById('pgMegaNav');
+      var panel = document.getElementById('pgMegaPanel');
+      var active = document.querySelector('#pgMegaNav .tabs-inner .tab.active');
+      var slug = (active && active.getAttribute('data-filter')) || 'all';
+      slug = String(slug).trim() || 'all';
+      syncMegaPanelContent(slug);
+      if (nav && panel) {
+        nav.classList.add('is-open');
+        panel.hidden = false;
+        panel.setAttribute('aria-hidden', 'false');
+      }
+    }
+    window.primeMegaPreviewForNavDropdown = primeMegaPreviewForNavDropdown;
 
     function showMegaPanel(slug, mode) {
       var nav = document.getElementById('pgMegaNav');
@@ -1918,6 +2649,40 @@
       megaLastOpenSlug = '';
     }
 
+    function pgEscAttrSegment(val) {
+      var s = String(val || '').trim();
+      if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') return CSS.escape(s);
+      return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+    }
+
+    /** After filtering, scroll catalogue into view (lane for that slug when present). */
+    function scrollCatalogIntoViewForTabSlug(slugRaw) {
+      var section = document.getElementById('products');
+      if (!section) return;
+      var grid = document.getElementById('productGrid');
+      var slug = String(slugRaw || '')
+        .toLowerCase()
+        .trim();
+      var target = null;
+      if (slug && slug !== 'all' && grid) {
+        try {
+          target = grid.querySelector(
+            'section.pg-cat-stage[data-pg-lane-category="' + pgEscAttrSegment(slug) + '"]'
+          );
+        } catch (err) {
+          target = null;
+        }
+      }
+      if (!target && grid) target = grid.querySelector('section.pg-cat-stage');
+      var scrollEl = target || section;
+      var reduce =
+        typeof window.matchMedia !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (scrollEl && typeof scrollEl.scrollIntoView === 'function') {
+        scrollEl.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+
     function onCategoryTabsClick(e) {
       var t = e.target.closest('.tab');
       if (!t || !e.currentTarget.contains(t)) return;
@@ -1928,20 +2693,28 @@
         });
       }
       t.classList.add('active');
-      applyCatalogFilters();
-      scheduleSuggestUpdate();
-      var slug = (t.dataset.filter || 'all').trim();
-      if (!isMegaDesktopHover()) {
-        if (slug === 'all') hideMegaPanelUi();
-        else showMegaPanel(slug, 'mobile');
+      var tabSlug = (t.getAttribute('data-filter') || '').trim();
+      var catalogueNavOpen = document.getElementById('navCatalogueDropdown')?.classList.contains('is-open');
+      if (catalogueNavOpen) {
+        var narrowCat =
+          typeof window.matchMedia !== 'undefined' && window.matchMedia('(max-width: 980px)').matches;
+        showMegaPanel(tabSlug || 'all', narrowCat ? 'mobile' : 'desktop');
       } else {
         hideMegaPanelUi();
       }
+      applyCatalogFilters();
+      scheduleSuggestUpdate();
+      if (typeof window.pgAfterCatalogueCategoryPick === 'function') window.pgAfterCatalogueCategoryPick();
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          scrollCatalogIntoViewForTabSlug(tabSlug);
+        });
+      });
     }
 
     function onMegaProductLinkClick(e) {
-      var link = e.target.closest('a.pg-mega__item');
-      if (!link || !document.getElementById('pgMegaNav')?.contains(link)) return;
+      var link = e.target.closest('a.pg-mega__item, a.nav-mobile-acc__product');
+      if (!link) return;
       e.preventDefault();
       var pid = link.getAttribute('data-mega-product');
       var cat = (link.getAttribute('data-mega-category') || '').trim();
@@ -1955,7 +2728,13 @@
       closeSearchSuggest();
       applyCatalogFilters();
       scheduleSuggestUpdate();
-      hideMegaPanelUi();
+      if (document.getElementById('navCatalogueDropdown')?.classList.contains('is-open')) {
+        if (typeof window.pgCloseNavCatalogue === 'function') window.pgCloseNavCatalogue();
+      } else {
+        hideMegaPanelUi();
+      }
+      if (typeof window.pgAfterCatalogueCategoryPick === 'function') window.pgAfterCatalogueCategoryPick();
+      if (typeof setNavDrawer === 'function') setNavDrawer(false);
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
           var sel = pid ? '[data-product-id="' + pid.replace(/"/g, '') + '"]' : '';
@@ -1982,7 +2761,12 @@
       closeSearchSuggest();
       applyCatalogFilters();
       scheduleSuggestUpdate();
-      hideMegaPanelUi();
+      if (document.getElementById('navCatalogueDropdown')?.classList.contains('is-open')) {
+        if (typeof window.pgCloseNavCatalogue === 'function') window.pgCloseNavCatalogue();
+      } else {
+        hideMegaPanelUi();
+      }
+      if (typeof window.pgAfterCatalogueCategoryPick === 'function') window.pgAfterCatalogueCategoryPick();
       document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -1993,68 +2777,112 @@
       if (megaBindingsAbort) megaBindingsAbort.abort();
       megaBindingsAbort = new AbortController();
       var sig = { signal: megaBindingsAbort.signal };
+      var railMode = nav.classList.contains('pg-mega--rail');
 
-      inner.addEventListener(
-        'pointerover',
-        function (ev) {
-          if (!isMegaDesktopHover()) return;
-          var tab = ev.target.closest ? ev.target.closest('.tab') : null;
-          if (!tab || !inner.contains(tab)) return;
-          var slug = (tab.dataset.filter || '').trim();
-          if (!slug || slug === 'all') {
+      if (!railMode) {
+        inner.addEventListener(
+          'pointerover',
+          function (ev) {
+            if (!isMegaDesktopHover()) return;
+            var tab = ev.target.closest ? ev.target.closest('.tab') : null;
+            if (!tab || !inner.contains(tab)) return;
+            var slug = (tab.dataset.filter || '').trim();
+            clearMegaHideTimer();
+            showMegaPanel(slug || 'all', 'desktop');
+          },
+          sig
+        );
+
+        inner.addEventListener(
+          'touchstart',
+          function (ev) {
+            var tab = ev.target.closest ? ev.target.closest('.tab') : null;
+            if (!tab || !inner.contains(tab)) return;
+            var slug = (tab.dataset.filter || '').trim();
+            syncMegaPanelContent(slug || 'all');
+            var mp = document.getElementById('pgMegaPanel');
+            if (mp) {
+              mp.hidden = false;
+              mp.setAttribute('aria-hidden', 'false');
+            }
+            nav.classList.add('is-open');
+          },
+          Object.assign({ passive: true }, sig)
+        );
+
+        inner.addEventListener(
+          'focusin',
+          function (ev) {
+            if (!isMegaDesktopHover()) return;
+            var tab = ev.target.closest ? ev.target.closest('.tab') : null;
+            if (!tab || !inner.contains(tab)) return;
+            var slug = (tab.dataset.filter || '').trim();
+            clearMegaHideTimer();
+            showMegaPanel(slug || 'all', 'desktop');
+          },
+          sig
+        );
+
+        inner.addEventListener(
+          'keydown',
+          function (ev) {
+            if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft' && ev.key !== 'Home' && ev.key !== 'End')
+              return;
+            var tabs = Array.prototype.slice
+              .call(inner.querySelectorAll('.tab:not([hidden])'))
+              .filter(function (b) {
+                return b.getAttribute('hidden') == null;
+              });
+            if (!tabs.length) return;
+            var i = tabs.indexOf(document.activeElement);
+            if (i < 0) return;
+            ev.preventDefault();
+            if (ev.key === 'Home') {
+              tabs[0].focus();
+              return;
+            }
+            if (ev.key === 'End') {
+              tabs[tabs.length - 1].focus();
+              return;
+            }
+            if (ev.key === 'ArrowRight') tabs[Math.min(i + 1, tabs.length - 1)].focus();
+            if (ev.key === 'ArrowLeft') tabs[Math.max(i - 1, 0)].focus();
+          },
+          sig
+        );
+
+        nav.addEventListener(
+          'pointerleave',
+          function (ev) {
+            if (!isMegaDesktopHover()) return;
+            var rel = ev.relatedTarget;
+            if (rel && nav.contains(rel)) return;
+            if (document.getElementById('navCatalogueDropdown')?.classList.contains('is-open')) return;
             scheduleHideMegaPanel();
-            return;
-          }
-          clearMegaHideTimer();
-          showMegaPanel(slug, 'desktop');
-        },
-        sig
-      );
+          },
+          sig
+        );
 
-      inner.addEventListener(
-        'focusin',
-        function (ev) {
-          if (!isMegaDesktopHover()) return;
-          var tab = ev.target.closest ? ev.target.closest('.tab') : null;
-          if (!tab || !inner.contains(tab)) return;
-          var slug = (tab.dataset.filter || '').trim();
-          if (!slug || slug === 'all') {
-            scheduleHideMegaPanel();
-            return;
-          }
-          clearMegaHideTimer();
-          showMegaPanel(slug, 'desktop');
-        },
-        sig
-      );
-
-      nav.addEventListener(
-        'pointerleave',
-        function (ev) {
-          if (!isMegaDesktopHover()) return;
-          var rel = ev.relatedTarget;
-          if (rel && nav.contains(rel)) return;
-          scheduleHideMegaPanel();
-        },
-        sig
-      );
-
-      /** Close mega when keyboard / focus leaves the whole nav (tabs + panel), after focus settles. */
-      nav.addEventListener(
-        'focusout',
-        function (ev) {
-          if (!nav.classList.contains('is-open')) return;
-          var next = ev.relatedTarget;
-          if (next && nav.contains(next)) return;
-          scheduleMegaFocusLeaveHide(nav);
-        },
-        sig
-      );
+        nav.addEventListener(
+          'focusout',
+          function (ev) {
+            if (!nav.classList.contains('is-open')) return;
+            var next = ev.relatedTarget;
+            if (next && nav.contains(next)) return;
+            scheduleMegaFocusLeaveHide(nav);
+          },
+          sig
+        );
+      }
 
       document.getElementById('pgMegaCloseBtn')?.addEventListener(
         'click',
         function () {
-          hideMegaPanelUi();
+          if (document.getElementById('navCatalogueDropdown')?.classList.contains('is-open')) {
+            if (typeof window.pgCloseNavCatalogue === 'function') window.pgCloseNavCatalogue();
+          } else {
+            hideMegaPanelUi();
+          }
         },
         sig
       );
@@ -2066,6 +2894,12 @@
         'keydown',
         function (ke) {
           if (ke.key !== 'Escape') return;
+          var catDd = document.getElementById('navCatalogueDropdown');
+          if (catDd?.classList.contains('is-open') && typeof window.pgCloseNavCatalogue === 'function') {
+            window.pgCloseNavCatalogue();
+            ke.preventDefault();
+            return;
+          }
           if (!nav.classList.contains('is-open')) return;
           hideMegaPanelUi();
         },
@@ -2074,6 +2908,7 @@
     }
 
     document.querySelector('#pgMegaNav .tabs-wrap')?.addEventListener('click', onCategoryTabsClick);
+    document.getElementById('navMobile')?.addEventListener('click', onMegaProductLinkClick);
 
     /** Title-case words for professional brand display (nav + footer lockups). */
     function titleCaseBrand(str) {
@@ -2943,6 +3778,7 @@
         rebuildSearchProductIndex();
         closeSearchSuggest();
         bindMegaMenuInteractions();
+        if (typeof rebuildMobileNavAccordion === 'function') rebuildMobileNavAccordion();
         rebuildRefineTagPillsFromCatalog();
         syncRefinePillActiveStates();
         initShopRefineBar();
@@ -2972,6 +3808,7 @@
       applyCatalogFilters();
       rebuildSearchProductIndex();
       bindMegaMenuInteractions();
+      if (typeof rebuildMobileNavAccordion === 'function') rebuildMobileNavAccordion();
       rebuildRefineTagPillsFromCatalog();
       syncRefinePillActiveStates();
       initShopRefineBar();
@@ -2995,6 +3832,33 @@
       });
     }
 
+    function categoryTabAccentClass(slug) {
+      const s = String(slug || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9-]/g, '');
+      if (s === 'all') return 'tab--cat-all';
+      const known = new Set([
+        'football',
+        'athletics',
+        'basketball',
+        'volleyball',
+        'rugby',
+        'hockey',
+        'fitness',
+        'uniforms',
+        'aquatics',
+        'wholesale',
+        'handball',
+        'badminton',
+        'table-tennis'
+      ]);
+      if (known.has(s)) return 'tab--cat-' + s;
+      let h = 0;
+      for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+      return 'tab--cat-v' + (Math.abs(h) % 6) + 1;
+    }
+
     function applyCategoriesFromConfig(data) {
       let cfg = null;
       try {
@@ -3014,14 +3878,17 @@
             .toLowerCase();
           const label = String(c.label || slug).trim();
           if (!slug) return '';
-          return `<button type="button" class="tab tab--pill" role="tab" data-filter="${escapeHtml(slug)}">${escapeHtml(label)}</button>`;
+          const acc = categoryTabAccentClass(slug);
+          return `<button type="button" class="tab tab--pill ${acc}" role="tab" data-filter="${escapeHtml(slug)}">${escapeHtml(label)}</button>`;
         })
         .filter(Boolean)
         .join('');
       inner.innerHTML =
-        '<button type="button" class="tab tab--pill active" role="tab" data-filter="all">All</button>' + btnHtml;
+        '<button type="button" class="tab tab--pill tab--cat-all active" role="tab" data-filter="all">All sports</button>' +
+        btnHtml;
       applyCatalogFilters();
       bindMegaMenuInteractions();
+      if (typeof rebuildMobileNavAccordion === 'function') rebuildMobileNavAccordion();
     }
 
     function setMetaById(domId, content) {
@@ -3102,9 +3969,6 @@
       waDigits = sanitizeWhatsAppDigits(data.whatsapp_number) || DEFAULT_WA_DIGITS;
       refreshWhatsAppLinks();
       bindTrackedWhatsAppAnchors();
-
-      document.getElementById('utilityPhoneDup').textContent =
-        document.getElementById('utilityPhone').textContent;
 
       if (data.address) document.getElementById('footerAddressLine').textContent = data.address;
       if (data.address) document.getElementById('utilityAddressSnippet').textContent = data.address;
